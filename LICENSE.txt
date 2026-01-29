@@ -1,0 +1,50 @@
+Obstruo – Proprietary Software License
+
+Copyright (c) 2026 Abdullah Shahid
+All rights reserved.
+
+IMPORTANT: PLEASE READ THIS LICENSE CAREFULLY BEFORE USING THIS SOFTWARE.
+
+1. GRANT OF LICENSE
+Permission is hereby granted to any individual to download and use Obstruo
+(the “Software”) for personal, non-commercial use only.
+
+This license does NOT grant you any rights to the source code.
+
+2. RESTRICTIONS
+You may NOT, under any circumstances:
+
+- Modify, adapt, translate, or create derivative works of the Software
+- Reverse engineer, decompile, or disassemble the Software
+- Redistribute, sublicense, rent, lease, sell, or share the Software
+- Use the Software for commercial purposes without explicit written permission
+- Circumvent, disable, or interfere with any security or protection mechanisms
+
+3. OWNERSHIP
+The Software is licensed, not sold.
+All title, ownership rights, and intellectual property rights in and to the
+Software remain with the author.
+
+4. NO WARRANTY
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+5. LIMITATION OF LIABILITY
+IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR
+OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE,
+ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+OR OTHER DEALINGS IN THE SOFTWARE.
+
+6. TERMINATION
+This license is effective until terminated.
+Your rights under this license will terminate automatically if you fail to
+comply with any of its terms. Upon termination, you must cease all use of
+the Software and delete all copies.
+
+7. FUTURE LICENSING
+The author reserves the right to change the licensing terms for future
+versions of the Software.
+
+By using Obstruo, you acknowledge that you have read, understood,
+and agreed to be bound by this license.
