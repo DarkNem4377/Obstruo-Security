@@ -1,17 +1,23 @@
 Obstruo – Proprietary Software License
 
-Copyright (c) 2026 Abdullah Shahid
+Copyright (c) 2026–present Abdullah Shahid
 All rights reserved.
 
 IMPORTANT: PLEASE READ THIS LICENSE CAREFULLY BEFORE USING THIS SOFTWARE.
 
+---
+
 1. GRANT OF LICENSE
+
 Permission is hereby granted to any individual to download and use Obstruo
 (the “Software”) for personal, non-commercial use only.
 
-This license does NOT grant you any rights to the source code.
+This license does NOT grant you any rights to the source code of the Software.
+
+---
 
 2. RESTRICTIONS
+
 You may NOT, under any circumstances:
 
 - Modify, adapt, translate, or create derivative works of the Software
@@ -19,32 +25,60 @@ You may NOT, under any circumstances:
 - Redistribute, sublicense, rent, lease, sell, or share the Software
 - Use the Software for commercial purposes without explicit written permission
 - Circumvent, disable, or interfere with any security or protection mechanisms
+- Distribute the Software through unofficial mirrors, modified installers,
+  or bundled with other software
+
+---
 
 3. OWNERSHIP
+
 The Software is licensed, not sold.
+
 All title, ownership rights, and intellectual property rights in and to the
-Software remain with the author.
+Software remain exclusively with the author.
+
+---
 
 4. NO WARRANTY
+
 THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND,
 EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
 
+---
+
 5. LIMITATION OF LIABILITY
+
 IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR
 OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT, OR OTHERWISE,
 ARISING FROM, OUT OF, OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 OR OTHER DEALINGS IN THE SOFTWARE.
 
+---
+
 6. TERMINATION
+
 This license is effective until terminated.
+
 Your rights under this license will terminate automatically if you fail to
 comply with any of its terms. Upon termination, you must cease all use of
-the Software and delete all copies.
+the Software and delete all copies in your possession or control.
+
+---
 
 7. FUTURE LICENSING
+
 The author reserves the right to change the licensing terms for future
 versions of the Software.
 
+---
+
+8. GOVERNING LAW
+
+This license shall be governed by and construed in accordance with the laws
+of the author’s country of residence, without regard to conflict of law principles.
+
+---
+
 By using Obstruo, you acknowledge that you have read, understood,
-and agreed to be bound by this license.
+and agreed to be bound by the terms of this license.
