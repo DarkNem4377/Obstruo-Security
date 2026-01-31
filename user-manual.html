@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Obstruo User Manual – Learn how to use Obstruo safely and effectively for system-level website blocking and protection.">
+  <title>Obstruo – User Manual</title>
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background: #1a1a1a;
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+      margin: 0;
+      padding: 0;
+      transition: max-height 0.3s ease-out;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #e0e0e0;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: #dc2626;
+    }
+
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      gap: 4px;
+      cursor: pointer;
+    }
+
+    .mobile-menu span {
+      width: 25px;
+      height: 3px;
+      background: #e0e0e0;
+      transition: all 0.3s;
+    }
+
+    .page-header {
+      background: linear-gradient(135deg, #1a1a1a 0%, #dc2626 100%);
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+      border-bottom: 2px solid #dc2626;
+    }
+
+    .page-header h1 {
+      margin: 0 0 1rem 0;
+      font-size: 2.5rem;
+    }
+
+    .page-header p {
+      margin: 0;
+      font-size: 1.2rem;
+      opacity: 0.95;
+    }
+
+    .notice-box {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: #1f1f1f;
+      border-left: 4px solid #dc2626;
+      border-radius: 4px;
+    }
+
+    .notice-box p {
+      margin: 0;
+      color: #e0e0e0;
+    }
+
+    .manual-wrapper {
+      max-width: 1400px;
+      margin: 2rem auto 4rem auto;
+      padding: 0 1rem;
+      display: flex;
+      gap: 2rem;
+      align-items: flex-start;
+    }
+
+    .toc-container {
+      position: sticky;
+      top: 100px;
+      width: 280px;
+      background: #1a1a1a;
+      border-radius: 8px;
+      padding: 1.5rem;
+      border: 1px solid #2a2a2a;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .toc-container h2 {
+      margin: 0 0 1rem 0;
+      font-size: 1.2rem;
+      color: #e0e0e0;
+      border-bottom: 2px solid #dc2626;
+      padding-bottom: 0.5rem;
+    }
+
+    .toc-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .toc-item {
+      margin-bottom: 0.75rem;
+    }
+
+    .toc-link {
+      display: block;
+      color: #b0b0b0;
+      text-decoration: none;
+      font-size: 0.95rem;
+      padding: 0.5rem;
+      border-radius: 4px;
+      transition: all 0.3s;
+      border-left: 3px solid transparent;
+    }
+
+    .toc-link:hover {
+      color: #dc2626;
+      background: #222;
+      border-left-color: #dc2626;
+    }
+
+    .toc-link.active {
+      color: #dc2626;
+      background: #222;
+      border-left-color: #dc2626;
+      font-weight: 600;
+    }
+
+    .accordion-container {
+      flex: 1;
+      max-width: 900px;
+    }
+
+    .accordion-item {
+      background: #1a1a1a;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      overflow: hidden;
+      transition: box-shadow 0.3s;
+      border: 1px solid #2a2a2a;
+    }
+
+    .accordion-item:hover {
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.15);
+    }
+
+    .accordion-header {
+      width: 100%;
+      text-align: left;
+      background: #1a1a1a;
+      border: none;
+      padding: 1.25rem 1.5rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.3s;
+      color: #e0e0e0;
+    }
+
+    .accordion-header:hover {
+      background: #222;
+    }
+
+    .accordion-header:focus {
+      outline: 2px solid #dc2626;
+      outline-offset: -2px;
+    }
+
+    .accordion-header::after {
+      content: '+';
+      font-size: 1.5rem;
+      color: #dc2626;
+      transition: transform 0.3s;
+    }
+
+    .accordion-header.active::after {
+      transform: rotate(45deg);
+    }
+
+    .accordion-content {
+      overflow: hidden;
+      transition: height 0.3s ease-out;
+      height: 0;
+    }
+
+    .accordion-content > div {
+      padding: 1.5rem;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    .accordion-content p {
+      margin: 0 0 1rem 0;
+      color: #c0c0c0;
+    }
+
+    .accordion-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .accordion-content ul {
+      margin: 0;
+      padding-left: 1.5rem;
+      color: #c0c0c0;
+    }
+
+    .accordion-content li {
+      margin-bottom: 0.5rem;
+    }
+
+    .accordion-content strong {
+      color: #e0e0e0;
+    }
+
+    .footer {
+      background: #111;
+      color: #b0b0b0;
+      text-align: center;
+      padding: 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid #2a2a2a;
+    }
+
+    .footer p {
+      margin: 0 0 1rem 0;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: #b0b0b0;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+      color: #dc2626;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #dc2626;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+      transition: all 0.3s;
+      z-index: 999;
+      opacity: 0;
+    }
+
+    .back-to-top:hover {
+      background: #b91c1c;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(220, 38, 38, 0.5);
+    }
+
+    .back-to-top.visible {
+      display: flex;
+      opacity: 1;
+    }
+
+    @media (max-width: 1200px) {
+      .toc-container {
+        display: none;
+      }
+
+      .manual-wrapper {
+        justify-content: center;
+      }
+
+      .accordion-container {
+        max-width: 900px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-menu {
+        display: flex;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: #1a1a1a;
+        flex-direction: column;
+        padding: 0;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        max-height: 0;
+        overflow: hidden;
+      }
+
+      .nav-links.active {
+        display: flex;
+        max-height: 500px;
+        padding: 1rem 2rem;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .page-header p {
+        font-size: 1rem;
+      }
+
+      .accordion-header {
+        font-size: 1rem;
+        padding: 1rem;
+      }
+
+      .back-to-top {
+        bottom: 1rem;
+        right: 1rem;
+        width: 45px;
+        height: 45px;
+      }
+
+      .manual-wrapper {
+        padding: 0 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <img src="images/obstruo-logo.png" alt="Obstruo Logo">
+      </a>
+
+      <div class="mobile-menu" 
+           id="mobileMenuToggle" 
+           role="button" 
+           aria-expanded="false"
+           aria-label="Toggle navigation" 
+           tabindex="0">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <ul class="nav-links" id="navLinks" role="navigation">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="user-manual.html" class="active">User Manual</a></li>
+        <li><a href="policies.html">Policies</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HEADER -->
+  <header class="page-header">
+    <h1>User Manual</h1>
+    <p>Everything you need to understand and use Obstruo safely and effectively.</p>
+  </header>
+
+  <!-- DISCLAIMER -->
+  <section class="notice-box">
+    <p>
+      <strong>Important:</strong> Obstruo is a <b>system-level website blocking application</b>.
+      It does <u>not</u> scan, crawl, or probe websites. All protection is enforced locally on your device
+      using rule-based domain blocking.
+    </p>
+    </section>
+  </div>
+
+  <!-- MANUAL CONTENT WITH TOC -->
+  <div class="manual-wrapper">
+    <!-- Table of Contents -->
+    <aside class="toc-container">
+      <h2>Contents</h2>
+      <ul class="toc-list">
+        <li class="toc-item"><a href="#content-1" class="toc-link">1. Overview</a></li>
+        <li class="toc-item"><a href="#content-2" class="toc-link">2. System Requirements</a></li>
+        <li class="toc-item"><a href="#content-3" class="toc-link">3. Installation</a></li>
+        <li class="toc-item"><a href="#content-4" class="toc-link">4. Administrator Permission</a></li>
+        <li class="toc-item"><a href="#content-5" class="toc-link">5. Core Protection</a></li>
+        <li class="toc-item"><a href="#content-6" class="toc-link">6. PIN Protection</a></li>
+        <li class="toc-item"><a href="#content-7" class="toc-link">7. Blocked Sites Management</a></li>
+        <li class="toc-item"><a href="#content-8" class="toc-link">8. Temporary Overrides</a></li>
+        <li class="toc-item"><a href="#content-9" class="toc-link">9. Logging</a></li>
+        <li class="toc-item"><a href="#content-10" class="toc-link">10. Privacy Policy Summary</a></li>
+        <li class="toc-item"><a href="#content-11" class="toc-link">11. Troubleshooting</a></li>
+        <li class="toc-item"><a href="#content-12" class="toc-link">12. Updates</a></li>
+        <li class="toc-item"><a href="#content-13" class="toc-link">13. Known Limitations</a></li>
+        <li class="toc-item"><a href="#content-14" class="toc-link">14. Support</a></li>
+        <li class="toc-item"><a href="#content-15" class="toc-link">15. Technical Details</a></li>
+      </ul>
+    </aside>
+
+    <!-- ACCORDION -->
+    <section class="accordion-container">
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-1">
+        1. Overview
+      </button>
+      <div class="accordion-content" id="content-1" role="region">
+        <div>
+          <p>
+            Obstruo is a privacy-first desktop application designed to help users block access
+            to pornographic and unsafe websites across their system.
+          </p>
+          <p>
+            It works silently in the background and applies protection to all browsers and apps
+            without tracking or monitoring user activity. Obstruo applies system-level network blocking
+            rules enforced by Windows, ensuring comprehensive protection at the network level.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-2">
+        2. System Requirements
+      </button>
+      <div class="accordion-content" id="content-2" role="region">
+        <div>
+          <ul>
+            <li>Windows 10 or Windows 11 (64-bit)</li>
+            <li>Administrator permissions required</li>
+            <li>Approximately 50 MB free disk space</li>
+            <li>Active internet connection for initial setup</li>
+            <li>Compatible with all major browsers (Chrome, Firefox, Edge, Brave, etc.)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-3">
+        3. Installation
+      </button>
+      <div class="accordion-content" id="content-3" role="region">
+        <div>
+          <p>
+            <strong>Step 1:</strong> Download the official Obstruo installer from the official website
+            or the GitHub releases page.
+          </p>
+          <p>
+            <strong>Step 2:</strong> Run the installer executable. Windows may display a SmartScreen warning
+            stating "Windows protected your PC." This is normal for new software without widespread distribution.
+            Click "More info" then "Run anyway" to proceed.
+          </p>
+          <p>
+            <strong>Step 3:</strong> Follow the installation wizard. You'll be prompted to grant administrator
+            permissions, which are required for system-level protection.
+          </p>
+          <p>
+            <strong>Step 4:</strong> Once installed, launch Obstruo and complete the initial setup by creating
+            your secure PIN.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-4">
+        4. Administrator Permission
+      </button>
+      <div class="accordion-content" id="content-4" role="region">
+        <div>
+          <p>
+            Obstruo requires administrator access each time it runs to apply system-level
+            protection rules using Windows network security features.
+          </p>
+          <p>
+            This permission is essential for the application to function and is not used for tracking,
+            data collection, or any purpose beyond applying website blocks. Windows will prompt you
+            with a User Account Control (UAC) dialog each time Obstruo launches.
+          </p>
+          <p>
+            If you deny administrator access, Obstruo cannot enforce protection and will not function properly.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-5">
+        5. Core Protection
+      </button>
+      <div class="accordion-content" id="content-5" role="region">
+        <div>
+          <p>
+            Core Protection is Obstruo's main feature that enforces blocking rules at the system level.
+            When enabled, blocked domains become inaccessible across all browsers and applications
+            system-wide.
+          </p>
+          <p>
+            The protection works by applying system-level network blocking rules enforced by Windows,
+            making blocked domains unreachable. This method is highly effective and
+            cannot be bypassed by clearing browser cache or using incognito mode.
+          </p>
+          <p>
+            To disable Core Protection, you must enter your PIN. Protection changes take effect immediately,
+            though you may need to restart your browser for changes to fully apply.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-6">
+        6. PIN Protection
+      </button>
+      <div class="accordion-content" id="content-6" role="region">
+        <div>
+          <p>
+            Sensitive actions such as disabling protection, managing blocked sites, or changing settings
+            require a secure PIN for verification.
+          </p>
+          <p>
+            Your PIN is never stored in plain text. It is protected using industry-standard cryptographic
+            hashing (SHA-256), making it impossible for anyone to retrieve your original PIN, even with
+            direct access to Obstruo's data files.
+          </p>
+          <p>
+            <strong>Setting up your PIN:</strong> During first launch, you'll be prompted to create
+            a 4-8 digit PIN. Choose something memorable but not easily guessable.
+          </p>
+          <p>
+            <strong>Forgot your PIN?</strong> If you forget your PIN, you'll need to reinstall Obstruo,
+            which will reset all settings. This security measure ensures no unauthorized access to settings.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-7">
+        7. Blocked Sites Management
+      </button>
+      <div class="accordion-content" id="content-7" role="region">
+        <div>
+          <p>
+            Obstruo uses a curated internal blocklist of known harmful websites combined with
+            user-defined custom rules for personalized protection.
+          </p>
+          <p>
+            <strong>Built-in Blocklist:</strong> Maintained and updated regularly to include
+            common pornographic and unsafe websites. This list is evaluated entirely locally on your device.
+          </p>
+          <p>
+            <strong>Custom Blocks:</strong> You can add specific domains to block through the settings panel.
+            Enter the domain (e.g., "example.com") without http:// or https://.
+          </p>
+          <p>
+            <strong>Removing Blocks:</strong> To remove a site from your custom blocklist, access the
+            blocked sites manager (PIN required) and select the entry to delete.
+          </p>
+          <p>
+            All blocked entries are processed locally and do not communicate with external servers.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-8">
+        8. Temporary Overrides
+      </button>
+      <div class="accordion-content" id="content-8" role="region">
+        <div>
+          <p>
+            In emergency situations where you need temporary access to blocked content for legitimate purposes,
+            Obstruo allows a short, time-limited pause of protection.
+          </p>
+          <p>
+            To activate a temporary override, enter your PIN and select the duration (5, 15, or 30 minutes).
+            Protection will automatically re-enable after the selected time expires.
+          </p>
+          <p>
+            A countdown timer will be visible in the application during the override period. You can manually
+            re-enable protection at any time by clicking "Resume Protection."
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-9">
+        9. Logging
+      </button>
+      <div class="accordion-content" id="content-9" role="region">
+        <div>
+          <p>
+            Obstruo maintains minimal local logs for diagnostic purposes only. These logs include
+            application startup, shutdown, and protection status changes—not your browsing history.
+          </p>
+          <p>
+            Logs are stored locally on your device and are automatically deleted after 7 days to minimize
+            data retention. They are never transmitted to external servers or shared with third parties.
+          </p>
+          <p>
+            You can manually clear logs at any time through the settings panel.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-10">
+        10. Privacy Policy Summary
+      </button>
+      <div class="accordion-content" id="content-10" role="region">
+        <div>
+          <p>
+            Obstruo is designed with privacy as a core principle. The application does not track
+            your browsing behavior, collect analytics, or transmit any personal data to external servers.
+          </p>
+          <p>
+            All blocking decisions are made locally on your device. Your PIN, blocked sites list,
+            and settings never leave your computer.
+          </p>
+          <p>
+            For complete details, please review the full Privacy Policy on the Policies page.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-11">
+        11. Troubleshooting
+      </button>
+      <div class="accordion-content" id="content-11" role="region">
+        <div>
+          <p><strong>Problem:</strong> A site is not being blocked</p>
+          <p>
+            <strong>Solution:</strong> Ensure Core Protection is enabled in the main interface.
+            Restart your browser completely (close all windows) and try again. Check if the domain
+            is in your blocked sites list. Some sites may use multiple domains—add variations if needed.
+          </p>
+          <p><strong>Problem:</strong> Obstruo won't launch</p>
+          <p>
+            <strong>Solution:</strong> Make sure you're granting administrator permissions when prompted.
+            Try right-clicking the application icon and selecting "Run as administrator."
+          </p>
+          <p><strong>Problem:</strong> Legitimate sites are being blocked</p>
+          <p>
+            <strong>Solution:</strong> Access the blocked sites manager (PIN required) and remove
+            the domain from your custom blocklist. If it's in the built-in list, contact support.
+          </p>
+          <p><strong>Problem:</strong> Protection re-enables too quickly during override</p>
+          <p>
+            <strong>Solution:</strong> Select a longer override duration (up to 30 minutes) when
+            activating the temporary pause feature.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-12">
+        12. Updates
+      </button>
+      <div class="accordion-content" id="content-12" role="region">
+        <div>
+          <p>
+            Updates are released periodically to improve functionality, security, and the built-in blocklist.
+            Updates must be installed manually to preserve user control and transparency.
+          </p>
+          <p>
+            Check for updates on the official website or GitHub releases page. Download the latest
+            installer and run it—your settings and PIN will be preserved during updates.
+          </p>
+          <p>
+            Obstruo will display a notification in the interface when a new version is available,
+            but will never auto-update without your explicit consent.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-13">
+        13. Known Limitations
+      </button>
+      <div class="accordion-content" id="content-13" role="region">
+        <div>
+          <p>
+            Obstruo v1 focuses on domain-level blocking using system-level network protection.
+            This approach is highly effective but has some limitations:
+          </p>
+          <ul>
+            <li>Cannot block specific pages or paths on allowed domains</li>
+            <li>Does not filter ads or tracking scripts</li>
+            <li>May not block content served from CDNs or dynamic URLs</li>
+            <li>Does not provide real-time content analysis or AI-based filtering</li>
+          </ul>
+          <p>
+            Advanced content analysis, ad-level filtering, and HTTPS inspection may be introduced
+            in future versions based on user feedback.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-14">
+        14. Support
+      </button>
+      <div class="accordion-content" id="content-14" role="region">
+        <div>
+          <p>
+            For help, bug reports, feature requests, or general feedback:
+          </p>
+          <ul>
+            <li><strong>GitHub Issues:</strong> Report bugs or request features on the official GitHub repository</li>
+            <li><strong>Email Support:</strong> Contact the developer through the email listed on the website</li>
+            <li><strong>Documentation:</strong> Check this user manual and the Policies page for detailed information</li>
+          </ul>
+          <p>
+            Response times may vary, but we aim to address critical issues within 48 hours.
+            Community contributions and feedback are always welcome.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-item">
+      <button class="accordion-header" aria-expanded="false" aria-controls="content-15">
+        15. Technical Details (Advanced)
+      </button>
+      <div class="accordion-content" id="content-15" role="region">
+        <div>
+          <p>
+            For users interested in the technical implementation, Obstruo uses the Windows hosts file
+            to redirect blocked domains to localhost (127.0.0.1). This is a standard network configuration
+            method supported by all operating systems.
+          </p>
+          <p>
+            <strong>Why the hosts file?</strong> It provides system-wide protection that works across all
+            applications and cannot be bypassed by browser settings or VPN configurations.
+          </p>
+          <p>
+            <strong>Security note:</strong> The hosts file is a legitimate system file used by many security
+            and parental control applications. Obstruo's modifications are transparent and can be manually
+            inspected at: <code>C:\Windows\System32\drivers\etc\hosts</code>
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top" aria-hidden="true">↑</button>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>© 2026 Obstruo</p>
+    <div class="footer-links">
+      <a href="policies.html">Policies</a>
+      <a href="https://github.com/DarkNem4377/Obstruo-Security" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Mobile menu toggle
+      const mobileMenuToggle = document.getElementById("mobileMenuToggle");
+      const navLinks = document.getElementById("navLinks");
+
+      function toggleMobileMenu() {
+        navLinks.classList.toggle("active");
+        const isActive = navLinks.classList.contains("active");
+        mobileMenuToggle.setAttribute("aria-expanded", isActive);
+
+        const spans = mobileMenuToggle.querySelectorAll("span");
+        if (isActive) {
+          spans[0].style.transform = "rotate(45deg) translate(5px, 5px)";
+          spans[1].style.opacity = "0";
+          spans[2].style.transform = "rotate(-45deg) translate(5px, -5px)";
+        } else {
+          spans.forEach(span => {
+            span.style.transform = "none";
+            span.style.opacity = "1";
+          });
+        }
+      }
+
+      mobileMenuToggle.addEventListener("click", toggleMobileMenu);
+      mobileMenuToggle.addEventListener("keydown", function(e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          toggleMobileMenu();
+        }
+      });
+
+      // Accordion functionality with dynamic height
+      const accordionHeaders = document.querySelectorAll(".accordion-header");
+      
+      accordionHeaders.forEach(header => {
+        header.addEventListener("click", function() {
+          toggleAccordion(this);
+        });
+
+        header.addEventListener("keydown", function(e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            toggleAccordion(this);
+          } else if (e.key === "ArrowDown") {
+            e.preventDefault();
+            focusNextAccordion(this);
+          } else if (e.key === "ArrowUp") {
+            e.preventDefault();
+            focusPrevAccordion(this);
+          }
+        });
+      });
+
+      function toggleAccordion(header) {
+        const content = header.nextElementSibling;
+        const isActive = header.classList.contains("active");
+
+        if (isActive) {
+          // Close accordion
+          content.style.height = '0';
+          header.classList.remove("active");
+          header.setAttribute("aria-expanded", "false");
+        } else {
+          // Open accordion
+          header.classList.add("active");
+          header.setAttribute("aria-expanded", "true");
+          
+          // Calculate and set height dynamically
+          const innerDiv = content.querySelector('div');
+          const height = innerDiv.offsetHeight;
+          content.style.height = height + 'px';
+        }
+      }
+
+      function focusNextAccordion(currentHeader) {
+        const headers = Array.from(accordionHeaders);
+        const currentIndex = headers.indexOf(currentHeader);
+        const nextIndex = (currentIndex + 1) % headers.length;
+        headers[nextIndex].focus();
+      }
+
+      function focusPrevAccordion(currentHeader) {
+        const headers = Array.from(accordionHeaders);
+        const currentIndex = headers.indexOf(currentHeader);
+        const prevIndex = (currentIndex - 1 + headers.length) % headers.length;
+        headers[prevIndex].focus();
+      }
+
+      // Auto-expand first accordion on load
+      if (accordionHeaders.length > 0) {
+        toggleAccordion(accordionHeaders[0]);
+      }
+
+      // Table of Contents functionality
+      const tocLinks = document.querySelectorAll(".toc-link");
+      const accordionItems = document.querySelectorAll(".accordion-item");
+
+      // Smooth scroll and expand accordion when TOC link clicked
+      tocLinks.forEach(link => {
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href").substring(1);
+          const targetContent = document.getElementById(targetId);
+          const targetHeader = targetContent.previousElementSibling;
+          const targetItem = targetHeader.closest(".accordion-item");
+
+          // Expand the accordion if not already open
+          if (!targetHeader.classList.contains("active")) {
+            toggleAccordion(targetHeader);
+          }
+
+          // Smooth scroll to the accordion item
+          setTimeout(() => {
+            targetItem.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+          }, 100);
+        });
+      });
+
+      // Highlight active section in TOC based on scroll position
+      function updateActiveTocLink() {
+        let currentActive = null;
+        const scrollPos = window.scrollY + 150;
+
+        accordionItems.forEach((item, index) => {
+          const rect = item.getBoundingClientRect();
+          const itemTop = rect.top + window.scrollY;
+          
+          if (scrollPos >= itemTop) {
+            currentActive = index;
+          }
+        });
+
+        tocLinks.forEach((link, index) => {
+          if (index === currentActive) {
+            link.classList.add("active");
+          } else {
+            link.classList.remove("active");
+          }
+        });
+      }
+
+      // Update TOC highlight on scroll
+      let scrollTimeout;
+      window.addEventListener("scroll", function() {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateActiveTocLink, 50);
+      });
+
+      // Initial TOC update
+      updateActiveTocLink();
+
+      // Back to top button with aria-hidden management
+      const backToTop = document.getElementById("backToTop");
+
+      window.addEventListener("scroll", function() {
+        if (window.pageYOffset > 300) {
+          backToTop.classList.add("visible");
+          backToTop.setAttribute("aria-hidden", "false");
+        } else {
+          backToTop.classList.remove("visible");
+          backToTop.setAttribute("aria-hidden", "true");
+        }
+      });
+
+      backToTop.addEventListener("click", function() {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+      });
+    });
+  </script>
+
+</body>
+</html>
