@@ -9,7 +9,6 @@
     />
     <title>Obstruo - Protect Your Digital Life</title>
     <link rel="stylesheet" href="style.css" />
-    <!-- Importing Inter font -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -33,7 +32,7 @@
           <span class="brand-name">OBSTRUO</span>
         </div>
 
-        <!-- Navigation Links -->
+        <!-- Navigation Links (desktop) -->
         <ul class="nav-links">
           <li><a href="#features">Features</a></li>
           <li><a href="#download">Download</a></li>
@@ -41,7 +40,7 @@
           <li><a href="policies.html">Policies</a></li>
         </ul>
 
-        <!-- CTA Button -->
+        <!-- CTA Button (desktop) -->
         <a href="downloads/Obstruo_Setup-1.0.0.exe" class="nav-cta" download>
           <svg
             class="download-icon"
@@ -50,15 +49,13 @@
             stroke="currentColor"
             stroke-width="2"
           >
-            <path
-              d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"
-            />
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
           </svg>
           DOWNLOAD
         </a>
 
-        <!-- Mobile Menu Toggle -->
-        <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <!-- Mobile Menu Toggle (hamburger) -->
+        <button class="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
           <span></span>
           <span></span>
           <span></span>
@@ -66,40 +63,46 @@
       </div>
     </nav>
 
+    <!-- Mobile Menu Overlay (NEW — this was completely missing) -->
+    <div class="mobile-menu" id="mobileMenu">
+      <ul class="mobile-nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#download">Download</a></li>
+        <li><a href="user-manual.html">User Manual</a></li>
+        <li><a href="policies.html">Policies</a></li>
+      </ul>
+      <a href="downloads/Obstruo_Setup-1.0.0.exe" class="mobile-cta" download>
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
+        </svg>
+        DOWNLOAD
+      </a>
+    </div>
+
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
-        <!-- Main Logo (Animated) -->
         <div class="hero-logo-container">
           <div class="hero-logo">
             <img src="images/obstruo-logo.png" alt="Obstruo Shield Logo" />
           </div>
         </div>
 
-        <!-- Headline -->
         <h1 class="hero-title">PROTECT YOUR DIGITAL LIFE</h1>
         <p class="hero-subtitle">
           Block unsafe content effortlessly — keep your family safe with
           system-wide protection.
         </p>
 
-        <!-- CTA Buttons -->
         <div class="hero-cta">
-          <a
-            href="downloads/Obstruo_Setup-1.0.0.exe"
-            class="btn btn-primary"
-            download
-          >
-            <svg
-              class="btn-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"
-              />
+          <a href="downloads/Obstruo_Setup-1.0.0.exe" class="btn btn-primary" download>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
             </svg>
             DOWNLOAD NOW
           </a>
@@ -107,14 +110,8 @@
         </div>
       </div>
 
-      <!-- Scroll Indicator -->
       <div class="scroll-indicator">
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M12 5v14M5 12l7 7 7-7" />
         </svg>
       </div>
@@ -123,15 +120,8 @@
     <!-- Mission Section -->
     <section id="mission" class="mission-section">
       <div class="container">
-        <!-- Section Badge -->
         <div class="section-badge">
-          <svg
-            class="badge-icon"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-          >
+          <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="10" />
             <circle cx="12" cy="12" r="6" />
             <circle cx="12" cy="12" r="2" />
@@ -148,18 +138,10 @@
           predators.
         </p>
 
-        <!-- Feature Cards Grid -->
         <div class="cards-grid two-column">
-          <!-- What Obstruo Does Card -->
           <div class="feature-card">
             <div class="card-header">
-              <svg
-                class="card-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 <path d="M9 12l2 2 4-4" />
               </svg>
@@ -173,16 +155,9 @@
             </ul>
           </div>
 
-          <!-- What Obstruo Never Does Card -->
           <div class="feature-card">
             <div class="card-header">
-              <svg
-                class="card-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 <line x1="15" y1="9" x2="9" y2="15" />
                 <line x1="9" y1="9" x2="15" y2="15" />
@@ -210,17 +185,9 @@
           safe online.
         </p>
 
-        <!-- Features Grid - 3 columns -->
         <div class="features-grid">
-          <!-- Feature 1: System-Wide Blocking -->
           <div class="feature-card-small">
-            <svg
-              class="feature-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
             <h3 class="feature-title">SYSTEM-WIDE BLOCKING</h3>
@@ -230,15 +197,8 @@
             </p>
           </div>
 
-          <!-- Feature 2: Whitelist Management -->
           <div class="feature-card-small">
-            <svg
-              class="feature-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <line x1="8" y1="6" x2="21" y2="6" />
               <line x1="8" y1="12" x2="21" y2="12" />
               <line x1="8" y1="18" x2="21" y2="18" />
@@ -253,15 +213,8 @@
             </p>
           </div>
 
-          <!-- Feature 3: Real-Time Activity Logs -->
           <div class="feature-card-small">
-            <svg
-              class="feature-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
             </svg>
             <h3 class="feature-title">REAL-TIME ACTIVITY LOGS</h3>
@@ -271,15 +224,8 @@
             </p>
           </div>
 
-          <!-- Feature 4: Privacy-First Design -->
           <div class="feature-card-small">
-            <svg
-              class="feature-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
               <circle cx="12" cy="12" r="3" />
             </svg>
@@ -290,15 +236,8 @@
             </p>
           </div>
 
-          <!-- Feature 5: Secure PIN Protection -->
           <div class="feature-card-small">
-            <svg
-              class="feature-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
               <path d="M7 11V7a5 5 0 0 1 10 0v4" />
             </svg>
@@ -309,15 +248,8 @@
             </p>
           </div>
 
-          <!-- Feature 6: Family Safe Mode -->
           <div class="feature-card-small">
-            <svg
-              class="feature-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
               <circle cx="9" cy="7" r="4" />
               <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
@@ -342,17 +274,9 @@
           install.
         </p>
 
-        <!-- Download Card -->
         <div class="download-card">
-          <!-- Platform Badge -->
           <div class="platform-badge">
-            <svg
-              class="badge-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
+            <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
               <line x1="8" y1="21" x2="16" y2="21" />
               <line x1="12" y1="17" x2="12" y2="21" />
@@ -360,33 +284,18 @@
             <span>Windows MVP</span>
           </div>
 
-          <!-- One-Liner Description -->
           <p class="download-one-liner">
             Obstruo blocks pornographic websites system-wide to help you and
             your family stay protected online.
           </p>
 
-          <!-- Main Download Button -->
-          <a
-            href="downloads/Obstruo_Setup-1.0.0.exe"
-            class="btn btn-primary btn-large"
-            download
-          >
-            <svg
-              class="btn-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"
-              />
+          <a href="downloads/Obstruo_Setup-1.0.0.exe" class="btn btn-primary btn-large" download>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3" />
             </svg>
             DOWNLOAD FOR WINDOWS
           </a>
 
-          <!-- Security Notice -->
           <div class="security-notice">
             <p>
               🔐 <strong>Security Notice:</strong> Windows SmartScreen may
@@ -397,18 +306,11 @@
 
           <p class="version-text">Version 1.0.0</p>
 
-          <!-- System Requirements -->
           <div class="requirements-section">
             <h3 class="requirements-title">SYSTEM REQUIREMENTS</h3>
             <div class="requirements-list">
               <div class="requirement-item">
-                <svg
-                  class="req-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg class="req-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="2" y="3" width="20" height="14" rx="2" ry="2" />
                   <line x1="8" y1="21" x2="16" y2="21" />
                   <line x1="12" y1="17" x2="12" y2="21" />
@@ -416,34 +318,18 @@
                 <span>Windows 10/11</span>
               </div>
               <div class="requirement-item">
-                <svg
-                  class="req-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg class="req-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <rect x="4" y="4" width="16" height="16" rx="2" ry="2" />
                   <rect x="9" y="9" width="6" height="6" />
-                  <line x1="9" y1="1" x2="9" y2="4" />
-                  <line x1="15" y1="1" x2="15" y2="4" />
-                  <line x1="9" y1="20" x2="9" y2="23" />
-                  <line x1="15" y1="20" x2="15" y2="23" />
-                  <line x1="20" y1="9" x2="23" y2="9" />
-                  <line x1="20" y1="14" x2="23" y2="14" />
-                  <line x1="1" y1="9" x2="4" y2="9" />
-                  <line x1="1" y1="14" x2="4" y2="14" />
+                  <line x1="9" y1="1" x2="9" y2="4" /><line x1="15" y1="1" x2="15" y2="4" />
+                  <line x1="9" y1="20" x2="9" y2="23" /><line x1="15" y1="20" x2="15" y2="23" />
+                  <line x1="20" y1="9" x2="23" y2="9" /><line x1="20" y1="14" x2="23" y2="14" />
+                  <line x1="1" y1="9" x2="4" y2="9" /><line x1="1" y1="14" x2="4" y2="14" />
                 </svg>
                 <span>64-bit processor</span>
               </div>
               <div class="requirement-item">
-                <svg
-                  class="req-icon"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                >
+                <svg class="req-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <ellipse cx="12" cy="5" rx="9" ry="3" />
                   <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
                   <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
@@ -451,22 +337,18 @@
                 <span>50 MB free space</span>
               </div>
             </div>
-            <!-- Admin Permission Note -->
             <p class="admin-note">
               🔑 <strong>Note:</strong> Requires administrator permission to
               enforce system-wide protection.
             </p>
           </div>
 
-          <!-- Quick Install -->
           <div class="install-section">
             <h3 class="install-title">QUICK INSTALL</h3>
             <div class="install-steps-container">
               <div class="install-step-box">
                 <span class="step-number">1</span>
-                <span class="step-text"
-                  >Download <strong>ObstruoSetup.exe</strong></span
-                >
+                <span class="step-text">Download <strong>ObstruoSetup.exe</strong></span>
               </div>
               <div class="install-step-box">
                 <span class="step-number">2</span>
@@ -479,41 +361,25 @@
             </div>
           </div>
 
-          <!-- Trust Badges -->
           <div class="trust-badges">
             <div class="trust-badge">
               <svg class="check-icon" viewBox="0 0 24 24" fill="currentColor">
                 <circle cx="12" cy="12" r="10" />
-                <path
-                  d="M9 12l2 2 4-4"
-                  stroke="white"
-                  stroke-width="2"
-                  fill="none"
-                />
+                <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none" />
               </svg>
               <span>No ads</span>
             </div>
             <div class="trust-badge">
               <svg class="check-icon" viewBox="0 0 24 24" fill="currentColor">
                 <circle cx="12" cy="12" r="10" />
-                <path
-                  d="M9 12l2 2 4-4"
-                  stroke="white"
-                  stroke-width="2"
-                  fill="none"
-                />
+                <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none" />
               </svg>
               <span>No tracking</span>
             </div>
             <div class="trust-badge">
               <svg class="check-icon" viewBox="0 0 24 24" fill="currentColor">
                 <circle cx="12" cy="12" r="10" />
-                <path
-                  d="M9 12l2 2 4-4"
-                  stroke="white"
-                  stroke-width="2"
-                  fill="none"
-                />
+                <path d="M9 12l2 2 4-4" stroke="white" stroke-width="2" fill="none" />
               </svg>
               <span>100% free</span>
             </div>
@@ -527,40 +393,12 @@
       <div class="container">
         <div class="contact-form-container">
           <h2 class="form-title">ISSUES OR SUGGESTIONS</h2>
-          <form
-            class="contact-form"
-            action="https://formspree.io/f/meeklkbz"
-            method="POST"
-          >
-            <input
-              type="text"
-              name="name"
-              placeholder="Name"
-              class="form-input"
-              required
-            />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              class="form-input"
-              required
-            />
-            <textarea
-              name="message"
-              placeholder="Your message..."
-              class="form-textarea"
-              rows="6"
-              required
-            ></textarea>
+          <form class="contact-form" action="https://formspree.io/f/meeklkbz" method="POST">
+            <input type="text" name="name" placeholder="Name" class="form-input" required />
+            <input type="email" name="email" placeholder="Email" class="form-input" required />
+            <textarea name="message" placeholder="Your message..." class="form-textarea" rows="6" required></textarea>
             <button type="submit" class="btn btn-primary btn-full">
-              <svg
-                class="btn-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-              >
+              <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="22" y1="2" x2="11" y2="13" />
                 <polygon points="22 2 15 22 11 13 2 9 22 2" />
               </svg>
@@ -574,7 +412,6 @@
     <!-- Footer -->
     <footer class="footer">
       <div class="footer-container">
-        <!-- Footer Brand -->
         <div class="footer-brand">
           <div class="footer-logo">
             <img src="images/obstruo-logo.png" alt="Obstruo Logo" />
@@ -583,7 +420,6 @@
           <p class="footer-tagline">Protect your digital life</p>
         </div>
 
-        <!-- Footer Links -->
         <div class="footer-links">
           <a href="#privacy">Privacy Policy</a>
           <a href="#child-safety">Child Safety</a>
@@ -591,38 +427,33 @@
           <a href="#contact">Contact</a>
         </div>
 
-        <!-- Social Icons -->
         <div class="footer-social">
-          <a href="https://mail.google.com/mail/?view=cm&to=obstruo.software@gmail.com&su=Obstruo%20Support" target="_blank" rel="noopener" class="social-icon" aria-label="Email Obstruo">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-            >
-              <path
-                d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-              />
+          <a
+            href="https://mail.google.com/mail/?view=cm&to=obstruo.software@gmail.com&su=Obstruo%20Support"
+            target="_blank" rel="noopener" class="social-icon" aria-label="Email Obstruo"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
               <polyline points="22,6 12,13 2,6" />
             </svg>
           </a>
-          <a href="https://github.com/DarkNem4377/Obstruo-Security" target="_blank" rel="noopener" class="social-icon" aria-label="Obstruo GitHub">
+          <a
+            href="https://github.com/DarkNem4377/Obstruo-Security"
+            target="_blank" rel="noopener" class="social-icon" aria-label="Obstruo GitHub"
+          >
             <svg viewBox="0 0 24 24" fill="currentColor">
-              <path
-                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
-              />
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
             </svg>
           </a>
         </div>
       </div>
 
-      <!-- Copyright -->
       <div class="footer-bottom">
         <p>&copy; 2025 Obstruo. All rights reserved.</p>
       </div>
     </footer>
 
     <!-- JavaScript -->
-    <script src="js/script.js"></script>
+    <script src="main.js"></script>
   </body>
 </html>
