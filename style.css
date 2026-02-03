@@ -19,8 +19,15 @@ html {
 }
 
 body {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
   background-color: #0a0a0a;
   color: #ffffff;
   line-height: 1.6;
@@ -144,7 +151,7 @@ section {
    ========================================== */
 
 .mobile-menu-toggle {
-  display: none;          /* hidden on desktop */
+  display: none; /* hidden on desktop */
   flex-direction: column;
   gap: 5px;
   background: none;
@@ -198,7 +205,9 @@ section {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-10px);
-  transition: opacity 0.35s ease, transform 0.35s ease;
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
 }
 
 /* visible state toggled by JS */
@@ -254,7 +263,9 @@ section {
   font-weight: 700;
   font-size: 16px;
   letter-spacing: 0.06em;
-  transition: background-color 0.25s ease, transform 0.2s ease;
+  transition:
+    background-color 0.25s ease,
+    transform 0.2s ease;
 }
 
 .mobile-cta svg {
@@ -406,22 +417,40 @@ section {
    ========================================== */
 
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50%      { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes glow-pulse {
-  0%, 100% { filter: drop-shadow(0 0 30px rgba(230, 57, 70, 0.3)); }
-  50%      { filter: drop-shadow(0 0 50px rgba(230, 57, 70, 0.6)); }
+  0%,
+  100% {
+    filter: drop-shadow(0 0 30px rgba(230, 57, 70, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 50px rgba(230, 57, 70, 0.6));
+  }
 }
 
 @keyframes bounce {
-  0%, 100% { transform: translateX(-50%) translateY(0); }
-  50%      { transform: translateX(-50%) translateY(-10px); }
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-10px);
+  }
 }
 
 @keyframes fadeInUp {
-  to { opacity: 1; transform: translateY(0); }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==========================================
@@ -674,6 +703,13 @@ section {
   padding: 18px 36px;
   font-size: 16px;
   justify-content: center;
+}
+
+.download-note {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #8a8a8a;
+  opacity: 0.85;
 }
 
 /* Security Notice */
@@ -1186,7 +1222,9 @@ section {
 
 .expandable-content {
   overflow: hidden;
-  transition: height 0.4s ease-out, opacity 0.3s;
+  transition:
+    height 0.4s ease-out,
+    opacity 0.3s;
   height: 0;
   opacity: 0;
 }
