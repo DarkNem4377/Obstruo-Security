@@ -13,6 +13,10 @@
 
   <style>
     /* ── base ── */
+    html {
+      scroll-behavior: smooth;
+    }
+    
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
@@ -658,6 +662,7 @@
   </section>
 
   <!-- MANUAL CONTENT -->
+  <main>
   <div class="manual-wrapper">
 
     <!-- Sticky TOC (desktop, hidden ≤1200px) -->
@@ -670,8 +675,8 @@
         <li class="toc-item"><a href="#content-4"  class="toc-link">4. Administrator Permission</a></li>
         <li class="toc-item"><a href="#content-5"  class="toc-link">5. Core Protection</a></li>
         <li class="toc-item"><a href="#content-6"  class="toc-link">6. PIN Protection</a></li>
-        <li class="toc-item"><a href="#content-7"  class="toc-link">7. Blocked Sites Management</a></li>
-        <li class="toc-item"><a href="#content-8"  class="toc-link">8. Temporary Overrides</a></li>
+        <li class="toc-item"><a href="#content-7"  class="toc-link">7. Session Protection & Logging</a></li>
+        <li class="toc-item"><a href="#content-8"  class="toc-link">8. Emergency Pause & Tamper Resistance</a></li>
         <li class="toc-item"><a href="#content-9"  class="toc-link">9. Logging</a></li>
         <li class="toc-item"><a href="#content-10" class="toc-link">10. Privacy Policy Summary</a></li>
         <li class="toc-item"><a href="#content-11" class="toc-link">11. Troubleshooting</a></li>
@@ -695,8 +700,8 @@
         <li class="toc-item"><a href="#content-4"  class="toc-link">4. Administrator Permission</a></li>
         <li class="toc-item"><a href="#content-5"  class="toc-link">5. Core Protection</a></li>
         <li class="toc-item"><a href="#content-6"  class="toc-link">6. PIN Protection</a></li>
-        <li class="toc-item"><a href="#content-7"  class="toc-link">7. Blocked Sites Management</a></li>
-        <li class="toc-item"><a href="#content-8"  class="toc-link">8. Temporary Overrides</a></li>
+        <li class="toc-item"><a href="#content-7"  class="toc-link">7. Session Protection & Logging</a></li>
+        <li class="toc-item"><a href="#content-8"  class="toc-link">8. Emergency Pause & Tamper Resistance</a></li>
         <li class="toc-item"><a href="#content-9"  class="toc-link">9. Logging</a></li>
         <li class="toc-item"><a href="#content-10" class="toc-link">10. Privacy Policy Summary</a></li>
         <li class="toc-item"><a href="#content-11" class="toc-link">11. Troubleshooting</a></li>
@@ -716,15 +721,9 @@
         </button>
         <div class="accordion-content" id="content-1" role="region">
           <div>
-            <p>
-              Obstruo is a privacy-first desktop application designed to help users block access
-              to pornographic and unsafe websites across their system.
-            </p>
-            <p>
-              It works silently in the background and applies protection to all browsers and apps
-              without tracking or monitoring user activity. Obstruo applies system-level network blocking
-              rules enforced by Windows, ensuring comprehensive protection at the network level.
-            </p>
+            <p>Obstruo is a privacy-first Windows desktop application designed to block access to pornographic websites at the system level. Unlike browser extensions or cloud-based filters, Obstruo operates locally on your device and applies protection across all browsers and applications. No browsing data is collected, transmitted, or analyzed externally.</p>
+            <p>Obstruo v1 works by blocking known pornographic domains using a curated, locally stored blocklist. It does not inspect page content, images, or videos, and it does not monitor user activity. All blocking decisions are deterministic and domain-based.</p>
+            <p>The application is designed with predictability, transparency, and user control in mind, making it suitable for personal use, families, and shared computers where reliable system-wide protection is required.</p>
           </div>
         </div>
       </div>
@@ -736,11 +735,13 @@
         <div class="accordion-content" id="content-2" role="region">
           <div>
             <ul>
-              <li>Windows 10 or Windows 11 (64-bit)</li>
-              <li>Administrator permissions required</li>
-              <li>Approximately 50 MB free disk space</li>
-              <li>Active internet connection for initial setup</li>
-              <li>Compatible with all major browsers (Chrome, Firefox, Edge, Brave, etc.)</li>
+              <li><strong>Operating System:</strong> Windows 10 (64-bit) or newer</li>
+              <li><strong>Architecture:</strong> x64 system recommended</li>
+              <li><strong>Disk Space:</strong> Less than 50 MB for installation</li>
+              <li><strong>Memory:</strong> Minimal usage; no special RAM requirements</li>
+              <li><strong>Permissions:</strong> Administrator privileges are required during installation and when applying or updating system-level blocking rules</li>
+              <li><strong>Internet Connection:</strong> Required only to download the installer or manually check for updates. Not required for normal operation or website blocking</li>
+              <li><strong>Browsers:</strong> Works system-wide across all browsers and applications that rely on standard Windows networking</li>
             </ul>
           </div>
         </div>
@@ -752,10 +753,21 @@
         </button>
         <div class="accordion-content" id="content-3" role="region">
           <div>
-            <p><strong>Step 1:</strong> Download the official Obstruo installer from the official website or the GitHub releases page.</p>
-            <p><strong>Step 2:</strong> Run the installer executable. Windows may display a SmartScreen warning stating "Windows protected your PC." This is normal for new software without widespread distribution. Click "More info" then "Run anyway" to proceed.</p>
-            <p><strong>Step 3:</strong> Follow the installation wizard. You'll be prompted to grant administrator permissions, which are required for system-level protection.</p>
-            <p><strong>Step 4:</strong> Once installed, launch Obstruo and complete the initial setup by creating your secure PIN.</p>
+            <p>Obstruo is distributed as a standard Windows installer (<code>.exe</code>).</p>
+            <p>Download the installer only from the official Obstruo website or GitHub release page.</p>
+            <p>After downloading, Windows may display a Microsoft Defender SmartScreen warning stating that the app is from an unknown publisher. This warning appears because Obstruo v1 is not yet digitally code-signed, not because it is malicious.</p>
+            <p><strong>To proceed with installation:</strong></p>
+            <ul>
+              <li>Click "More info" on the SmartScreen warning.</li>
+              <li>Then click "Run anyway" to start the installer.</li>
+              <li>Administrator permission is required to complete installation.</li>
+            </ul>
+            <p>Once installed, Obstruo can be launched from the Start Menu or desktop shortcut. On first launch, users will be guided through an initial setup process, including creating a PIN.</p>
+            <p><strong>Additional notes:</strong></p>
+            <ul>
+              <li>After Obstruo is downloaded and run by multiple users, Windows SmartScreen may stop showing this warning automatically.</li>
+              <li>This warning is expected for unsigned applications and does not indicate malicious behavior.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -766,9 +778,10 @@
         </button>
         <div class="accordion-content" id="content-4" role="region">
           <div>
-            <p>Obstruo requires administrator access each time it runs to apply system-level protection rules using Windows network security features.</p>
-            <p>This permission is essential for the application to function and is not used for tracking, data collection, or any purpose beyond applying website blocks. Windows will prompt you with a User Account Control (UAC) dialog each time Obstruo launches.</p>
-            <p>If you deny administrator access, Obstruo cannot enforce protection and will not function properly.</p>
+            <p>Obstruo requires administrator permission to apply system-level blocking. This is necessary because Obstruo modifies protected Windows networking configuration components to enforce blocking across all browsers and applications.</p>
+            <p>Administrator permission is requested during installation. Administrator permission is also requested when enabling, disabling, or updating core protection.</p>
+            <p>Obstruo does not continuously run with elevated privileges. Normal actions such as viewing status, reviewing logs, or navigating the interface do not require administrator permission unless system-level changes are being made.</p>
+            <p>Obstruo does not perform background privilege escalation or hidden system modifications.</p>
           </div>
         </div>
       </div>
@@ -779,9 +792,13 @@
         </button>
         <div class="accordion-content" id="content-5" role="region">
           <div>
-            <p>Core Protection is Obstruo's main feature that enforces blocking rules at the system level. When enabled, blocked domains become inaccessible across all browsers and applications system-wide.</p>
-            <p>The protection works by applying system-level network blocking rules enforced by Windows, making blocked domains unreachable. This method is highly effective and cannot be bypassed by clearing browser cache or using incognito mode.</p>
-            <p>To disable Core Protection, you must enter your PIN. Protection changes take effect immediately, though you may need to restart your browser for changes to fully apply.</p>
+            <p>Core Protection is the primary mechanism Obstruo uses to block access to pornographic websites.</p>
+            <p>Core Protection becomes active automatically once the user completes initial setup and creates a PIN.</p>
+            <p>Obstruo enforces blocking using Windows-supported networking mechanisms to prevent access to known pornographic domains system-wide.</p>
+            <p>Core Protection is deterministic and rule-based; it does not analyze page content, images, or videos.</p>
+            <p>Core Protection is designed to remain active at all times during normal operation. Protection is only temporarily paused when the user activates the Emergency Pause, which disables blocking for 15 seconds and then automatically resumes.</p>
+            <p>If Core Protection cannot be applied or encounters an error, Obstruo clearly indicates this state to the user instead of silently failing.</p>
+            <p>Attempts to bypass protection by deleting application files or modifying protected components will trigger a forced reset or restoration behavior.</p>
           </div>
         </div>
       </div>
@@ -792,38 +809,100 @@
         </button>
         <div class="accordion-content" id="content-6" role="region">
           <div>
-            <p>Sensitive actions such as disabling protection, managing blocked sites, or changing settings require a secure PIN for verification.</p>
-            <p>Your PIN is never stored in plain text. It is protected using industry-standard cryptographic hashing (SHA-256), making it impossible for anyone to retrieve your original PIN, even with direct access to Obstruo's data files.</p>
-            <p><strong>Setting up your PIN:</strong> During first launch, you'll be prompted to create a 4-6 digit PIN. Choose something memorable but not easily guessable.</p>
-            <p><strong>Forgot your PIN?</strong> If you forget your PIN, you'll need to reinstall Obstruo, which will reset all settings. This security measure ensures no unauthorized access to settings.</p>
+            <p>Obstruo requires the user to create a personal PIN during initial setup.</p>
+            <p>The PIN is used to authorize sensitive actions, such as:</p>
+            <ul>
+              <li>Temporarily pausing Core Protection via the Emergency Pause</li>
+              <li>Managing or modifying the blocked sites list</li>
+              <li>Performing factory resets or restoring Obstruo after tampering</li>
+            </ul>
+            <p><strong>Security design:</strong></p>
+            <ul>
+              <li>PINs are never stored in plaintext</li>
+              <li>Stored using hash + salt combined with Windows DPAPI (CurrentUser) encryption</li>
+              <li>Only decrypted at the persistence boundary, never kept in memory longer than necessary</li>
+            </ul>
+            <p><strong>Progressive lockout:</strong></p>
+            <ul>
+              <li>Incorrect PIN entries trigger a progressive lockout countdown, visually displayed to the user</li>
+              <li>This protects against brute-force attacks while maintaining user awareness</li>
+            </ul>
+            <p><strong>Emergency Pause usage:</strong></p>
+            <ul>
+              <li>Activating Emergency Pause always requires the correct PIN</li>
+              <li>Pauses Core Protection for 15 seconds and auto-resumes, with a 60-second cooldown before the next pause</li>
+            </ul>
+            <p>Tampering or deletion of configuration files may trigger a forced factory reset, ensuring PIN protection cannot be bypassed</p>
           </div>
         </div>
       </div>
 
       <div class="accordion-item">
         <button class="accordion-header" aria-expanded="false" aria-controls="content-7">
-          7. Blocked Sites Management
+          7. Session Protection & Logging
         </button>
         <div class="accordion-content" id="content-7" role="region">
           <div>
-            <p>Obstruo uses a curated internal blocklist of known harmful websites combined with user-defined custom rules for personalized protection.</p>
-            <p><strong>Built-in Blocklist:</strong> Maintained and updated regularly to include common pornographic and unsafe websites. This list is evaluated entirely locally on your device.</p>
-            <p><strong>Custom Blocks:</strong> You can add specific domains to block through the settings panel. Enter the domain (e.g., "example.com") without http:// or https://.</p>
-            <p><strong>Removing Blocks:</strong> To remove a site from your custom blocklist, access the blocked sites manager (PIN required) and select the entry to delete.</p>
-            <p>All blocked entries are processed locally and do not communicate with external servers.</p>
+            <p>Session Protection is separate from Core Protection and tracks user activity during the current session.</p>
+            <p>It provides real-time status monitoring, including:</p>
+            <ul>
+              <li>Domain block events</li>
+              <li>Emergency Pause activations</li>
+              <li>PIN attempts and lockouts</li>
+            </ul>
+            <p><strong>Logging:</strong></p>
+            <ul>
+              <li>All relevant events are logged in a hybrid log system</li>
+              <li>Logs are kept locally, respecting user privacy</li>
+              <li>Logs are automatically cleared every 24 hours, minimizing persistent sensitive data</li>
+            </ul>
+            <p>Emergency Pause events are clearly logged, including start time, duration, and cooldown state.</p>
+            <p><strong>Tamper detection:</strong></p>
+            <ul>
+              <li>Attempts to modify logs or bypass session tracking are detected</li>
+              <li>Tampering may trigger warnings or a forced session reset</li>
+            </ul>
+            <p><strong>User visibility:</strong></p>
+            <ul>
+              <li>Logs are accessible via the UI, with clear timestamps and event types</li>
+              <li>Provides transparency while maintaining security</li>
+            </ul>
           </div>
         </div>
       </div>
 
       <div class="accordion-item">
         <button class="accordion-header" aria-expanded="false" aria-controls="content-8">
-          8. Temporary Overrides
+          8. Emergency Pause & Tamper Resistance
         </button>
         <div class="accordion-content" id="content-8" role="region">
           <div>
-            <p>In emergency situations where you need temporary access to blocked content for legitimate purposes, Obstruo allows a short, time-limited pause of protection.</p>
-            <p>To activate a temporary override, enter your PIN and select the duration (5, 15, or 30 minutes). Protection will automatically re-enable after the selected time expires.</p>
-            <p>A countdown timer will be visible in the application during the override period. You can manually re-enable protection at any time by clicking "Resume Protection."</p>
+            <p>Emergency Pause is a PIN-protected temporary suspension of Core Protection.</p>
+            <p><strong>Key points:</strong></p>
+            <ul>
+              <li>Activates for 15 seconds when the user provides the correct PIN.</li>
+              <li>After 15 seconds, Core Protection automatically resumes.</li>
+              <li>60-second cooldown prevents immediate reactivation.</li>
+            </ul>
+            <p><strong>Visual feedback:</strong></p>
+            <ul>
+              <li>The UI clearly indicates when Core Protection is paused.</li>
+              <li>Countdown timers show both pause duration and cooldown period.</li>
+            </ul>
+            <p><strong>Tamper resistance:</strong></p>
+            <ul>
+              <li>Attempts to bypass Core Protection (e.g., deleting files, modifying protected components) trigger forced reset or restoration behavior.</li>
+              <li>Obstruo monitors critical components and reacts to prevent circumvention.</li>
+            </ul>
+            <p><strong>Self-blocking protection:</strong></p>
+            <ul>
+              <li>The app warns if a user attempts to block critical Obstruo files or directories.</li>
+            </ul>
+            <p><strong>Error handling:</strong></p>
+            <ul>
+              <li>If Core Protection fails to engage, Obstruo alerts the user instead of silently failing.</li>
+              <li>The Emergency Pause remains unavailable until normal operation is restored.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -834,9 +913,18 @@
         </button>
         <div class="accordion-content" id="content-9" role="region">
           <div>
-            <p>Obstruo maintains minimal local logs for diagnostic purposes only. These logs include application startup, shutdown, and protection status changes—not your browsing history.</p>
-            <p>Logs are stored locally on your device and are automatically deleted after 7 days to minimize data retention. They are never transmitted to external servers or shared with third parties.</p>
-            <p>You can manually clear logs at any time through the settings panel.</p>
+            <p>This section refers to persistent diagnostic logs, separate from session-level activity tracking.</p>
+            <p>Obstruo maintains a minimal local log for diagnostic and transparency purposes.</p>
+            <p>Logged events are limited to application-level actions such as:</p>
+            <ul>
+              <li>application startup and shutdown</li>
+              <li>core protection status changes</li>
+              <li>errors or failure states</li>
+            </ul>
+            <p>Obstruo does not log browsing history, visited websites, page content, or user activity.</p>
+            <p>Logs are stored locally on the user's device and are never transmitted externally.</p>
+            <p>Logged data is automatically deleted within 24 hours to minimize data exposure.</p>
+            <p>Logs exist solely to help users understand application behavior and to assist with troubleshooting.</p>
           </div>
         </div>
       </div>
@@ -847,9 +935,13 @@
         </button>
         <div class="accordion-content" id="content-10" role="region">
           <div>
-            <p>Obstruo is designed with privacy as a core principle. The application does not track your browsing behavior, collect analytics, or transmit any personal data to external servers.</p>
-            <p>All blocking decisions are made locally on your device. Your PIN, blocked sites list, and settings never leave your computer.</p>
-            <p>For complete details, please review the full Privacy Policy on the Policies page.</p>
+            <p>Obstruo is designed to operate entirely offline after installation.</p>
+            <p>The application does not collect, transmit, or sell any personal data.</p>
+            <p>Obstruo does not monitor browsing behavior, visited websites, search queries, or online activity.</p>
+            <p>All blocking decisions are made locally using a curated blocklist stored on the user's device.</p>
+            <p>Application settings, logs, and sensitive state are stored locally and protected using Windows-provided security mechanisms.</p>
+            <p>Obstruo does not include analytics, telemetry, tracking libraries, or third-party data collection services.</p>
+            <p>No data is sent to Obstruo servers or any external service during normal operation.</p>
           </div>
         </div>
       </div>
@@ -860,14 +952,38 @@
         </button>
         <div class="accordion-content" id="content-11" role="region">
           <div>
-            <p><strong>Problem:</strong> A site is not being blocked</p>
-            <p><strong>Solution:</strong> Ensure Core Protection is enabled in the main interface. Restart your browser completely (close all windows) and try again. Check if the domain is in your blocked sites list. Some sites may use multiple domains—add variations if needed.</p>
-            <p><strong>Problem:</strong> Obstruo won't launch</p>
-            <p><strong>Solution:</strong> Make sure you're granting administrator permissions when prompted. Try right-clicking the application icon and selecting "Run as administrator."</p>
-            <p><strong>Problem:</strong> Legitimate sites are being blocked</p>
-            <p><strong>Solution:</strong> Access the blocked sites manager (PIN required) and remove the domain from your custom blocklist. If it's in the built-in list, contact support.</p>
-            <p><strong>Problem:</strong> Protection re-enables too quickly during override</p>
-            <p><strong>Solution:</strong> Select a longer override duration (up to 30 minutes) when activating the temporary pause feature.</p>
+            <p><strong>Websites are not being blocked</strong></p>
+            <ul>
+              <li>Ensure Obstruo is running and Core Protection is active.</li>
+              <li>Confirm the website is a domain-based pornographic site (page-level filtering is not supported in v1).</li>
+              <li>Restart the browser to clear cached DNS results.</li>
+            </ul>
+            <p><strong>Obstruo fails to apply Core Protection</strong></p>
+            <ul>
+              <li>Make sure the application is run with administrator permission when prompted.</li>
+              <li>Check that no other security or filtering software is interfering with Windows networking behavior.</li>
+              <li>If an error state is shown, follow on-screen instructions rather than attempting manual fixes.</li>
+            </ul>
+            <p><strong>SmartScreen or security warning appears</strong></p>
+            <ul>
+              <li>This is expected for unsigned applications.</li>
+              <li>Click "More info" → "Run anyway" if you trust the source of the installer.</li>
+            </ul>
+            <p><strong>Application does not start or behaves unexpectedly</strong></p>
+            <ul>
+              <li>Restart the application.</li>
+              <li>If the issue persists, restart the system and try again.</li>
+            </ul>
+            <p><strong>Protection appears to be bypassed</strong></p>
+            <ul>
+              <li>Obstruo is designed to detect tampering and may trigger a forced reset if critical files are altered.</li>
+              <li>Reinstalling Obstruo will restore default protection behavior.</li>
+            </ul>
+            <p><strong>Do not</strong></p>
+            <ul>
+              <li>Manually edit the hosts file unless explicitly instructed.</li>
+              <li>Disable Windows security features to make Obstruo work.</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -878,9 +994,13 @@
         </button>
         <div class="accordion-content" id="content-12" role="region">
           <div>
-            <p>Updates are released periodically to improve functionality, security, and the built-in blocklist. Updates must be installed manually to preserve user control and transparency.</p>
-            <p>Check for updates on the official website or GitHub releases page. Download the latest installer and run it—your settings and PIN will be preserved during updates.</p>
-            <p>Obstruo will display a notification in the interface when a new version is available, but will never auto-update without your explicit consent.</p>
+            <p>Obstruo does not automatically update itself.</p>
+            <p>All updates are manually downloaded and installed by the user.</p>
+            <p>Update notifications are not fetched automatically from the internet.</p>
+            <p>Obstruo does not contact external servers to check for new versions.</p>
+            <p>Installing an update may require administrator permission.</p>
+            <p>User settings and configuration are preserved during updates unless otherwise stated in release notes.</p>
+            <p>Users are encouraged to download updates only from official Obstruo channels.</p>
           </div>
         </div>
       </div>
@@ -891,14 +1011,13 @@
         </button>
         <div class="accordion-content" id="content-13" role="region">
           <div>
-            <p>Obstruo v1 focuses on domain-level blocking using system-level network protection. This approach is highly effective but has some limitations:</p>
-            <ul>
-              <li>Cannot block specific pages or paths on allowed domains</li>
-              <li>Does not filter ads or tracking scripts</li>
-              <li>May not block content served from CDNs or dynamic URLs</li>
-              <li>Does not provide real-time content analysis or AI-based filtering</li>
-            </ul>
-            <p>Advanced content analysis, ad-level filtering, and HTTPS inspection may be introduced in future versions based on user feedback.</p>
+            <p>Obstruo v1 blocks access at the domain level only.</p>
+            <p>It does not filter individual pages, URLs, or content within a website.</p>
+            <p>Obstruo does not analyze images, videos, text, or media content.</p>
+            <p>The application does not provide ad blocking or tracker blocking.</p>
+            <p>Obstruo does not categorize or filter non-pornographic content.</p>
+            <p>Blocking effectiveness depends on the accuracy and coverage of the curated blocklist.</p>
+            <p>Some websites using uncommon networking methods or embedded content may not be fully blocked.</p>
           </div>
         </div>
       </div>
@@ -909,13 +1028,12 @@
         </button>
         <div class="accordion-content" id="content-14" role="region">
           <div>
-            <p>For help, bug reports, feature requests, or general feedback:</p>
-            <ul>
-              <li><strong>GitHub Issues:</strong> Report bugs or request features on the official GitHub repository</li>
-              <li><strong>Email Support:</strong> Contact the developer through the email listed on the website</li>
-              <li><strong>Documentation:</strong> Check this user manual and the Policies page for detailed information</li>
-            </ul>
-            <p>Response times may vary, but we aim to address critical issues within 48 hours. Community contributions and feedback are always welcome.</p>
+            <p>Obstruo support is provided through official project channels.</p>
+            <p>Users can report bugs, issues, or security concerns via the official GitHub repository.</p>
+            <p>Documentation and updates are published on the official Obstruo website.</p>
+            <p>Support is provided on a best-effort basis.</p>
+            <p>Obstruo does not offer live chat, phone support, or real-time assistance.</p>
+            <p>Users are encouraged to include clear details and steps to reproduce issues when requesting support.</p>
           </div>
         </div>
       </div>
@@ -926,15 +1044,20 @@
         </button>
         <div class="accordion-content" id="content-15" role="region">
           <div>
-            <p>For users interested in the technical implementation, Obstruo uses the Windows hosts file to redirect blocked domains to localhost (127.0.0.1). This is a standard network configuration method supported by all operating systems.</p>
-            <p><strong>Why the hosts file?</strong> It provides system-wide protection that works across all applications and cannot be bypassed by browser settings or VPN configurations.</p>
-            <p><strong>Security note:</strong> The hosts file is a legitimate system file used by many security and parental control applications. Obstruo's modifications are transparent and can be manually inspected at: <code>C:\Windows\System32\drivers\etc\hosts</code></p>
+            <p>Obstruo enforces blocking by applying system-level DNS resolution rules using Windows-supported mechanisms, including controlled hosts-based redirection to non-routable local addresses.</p>
+            <p>This approach ensures system-wide protection across all browsers and applications that rely on standard Windows DNS resolution.</p>
+            <p>Blocking rules are derived from a curated blocklist stored locally on the user's device.</p>
+            <p>Application configuration and sensitive state are stored locally and protected using Windows-provided security mechanisms.</p>
+            <p>Obstruo applies system-level changes only when necessary and avoids persistent elevated execution.</p>
+            <p>If a failure occurs while applying protection, Obstruo is designed to surface the error clearly rather than silently failing.</p>
+            <p>Safeguards are in place to prevent partial or inconsistent protection states.</p>
           </div>
         </div>
       </div>
 
     </section>
   </div>
+  </main>
 
   <!-- BACK TO TOP -->
   <button class="back-to-top" id="backToTop" aria-label="Back to top" aria-hidden="true">↑</button>
