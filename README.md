@@ -30,7 +30,7 @@ Obstruo operates at the operating system level, applying restrictions across **a
 
 ---
 
-## ✨ Features (v1)
+## ✨ Features (v1.1.0)
 
 - 🚫 System-wide website blocking using a curated blocklist  
 - ➕ Manual site blocking with whitelist support  
@@ -50,18 +50,32 @@ Obstruo operates at the operating system level, applying restrictions across **a
 
 ---
 
-## 🛑 Microsoft Defender Notice
+## 🛑 Microsoft Defender SmartScreen Notice
 
-Because Obstruo is a **new, unsigned Windows application**, Microsoft Defender or SmartScreen may initially display a warning.
+Because Obstruo is a **new, unsigned Windows application**, Microsoft Defender SmartScreen will display a warning on first install.
 
-This is expected behavior for early-stage independent software.
+**This is normal and expected behavior for new independent software.**
 
 ### How to proceed safely:
-1. When prompted, click **“More info”**
-2. Select **“Run anyway”**
+
+When you see this warning:
+
+![SmartScreen Warning 1](readme-assets/smartscreen-warning-1.png)
+
+1. Click **"More info"**
+
+![SmartScreen Warning 2](readme-assets/smartscreen-warning-2.png)
+
+2. Click **"Run anyway"**
+
 3. (Optional) Verify that the installer was downloaded directly from the official website above
 
-Obstruo does **not** include malware, telemetry, or background network activity.  
+**Obstruo contains:**
+- ✅ No malware
+- ✅ No telemetry  
+- ✅ No tracking
+- ✅ No background network activity
+
 Code signing will be introduced in a future release once distribution stabilizes.
 
 ---
@@ -71,6 +85,7 @@ Code signing will be introduced in a future release once distribution stabilizes
 Obstruo is designed with **safety, resilience, and predictable failure behavior** in mind.
 
 That said, this is an early public release and may still contain bugs or edge cases.  
+
 If you encounter crashes, unexpected behavior, or security concerns, please report them via **GitHub Issues**.
 
 ---
@@ -87,7 +102,7 @@ Obstruo is **proprietary software**.
 
 ## ⚠️ Disclaimer
 
-Obstruo is provided **“as is”**, without warranty of any kind.
+Obstruo is provided **"as is"**, without warranty of any kind.
 
 It is intended as a **protective and supportive tool**, not a replacement for parental supervision, education, or personal responsibility.
 
@@ -95,6 +110,6 @@ It is intended as a **protective and supportive tool**, not a replacement for pa
 
 ## 🚧 Project Status
 
-Obstruo **v1.0 is released** and under active development.
+Obstruo **v1.1.0 is released** and under active development.
 
 Future versions may include expanded protection modes, additional controls, performance improvements, and UI refinements.
