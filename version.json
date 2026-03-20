@@ -1,5 +1,6 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "downloadUrl": "https://github.com/DarkNem4377/Obstruo-Security/releases/download/v1.2.0/Obstruo-Setup.exe",
-  "changelog": "Proper update system, improved Settings UI, bug fixes."
+  "changelog": "Proper update system, improved Settings UI, bug fixes.",
+  "sha256": "21D22C61F3A045F6FE9CCB9E1063FCAA73926DC3DF7CC748C164723B92CA8E1C"
 }
