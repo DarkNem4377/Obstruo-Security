@@ -40,8 +40,8 @@
           <li><a href="policies.html">Policies</a></li>
         </ul>
 
-        <!-- CTA Button (desktop) -->
-        <a href="downloads/Obstruo-Setup-1.1.0.exe" class="nav-cta" download>
+        <!-- CTA Button (desktop) — href filled dynamically -->
+        <a href="#" id="nav-download-btn" class="nav-cta" download>
           <svg
             class="download-icon"
             viewBox="0 0 24 24"
@@ -56,7 +56,7 @@
           DOWNLOAD
         </a>
 
-        <!-- Mobile Menu Toggle (hamburger) -->
+        <!-- Mobile Menu Toggle -->
         <button
           class="mobile-menu-toggle"
           aria-label="Toggle menu"
@@ -69,7 +69,7 @@
       </div>
     </nav>
 
-    <!-- Mobile Menu Overlay (NEW — this was completely missing) -->
+    <!-- Mobile Menu Overlay -->
     <div class="mobile-menu" id="mobileMenu">
       <ul class="mobile-nav-links">
         <li><a href="#features">Features</a></li>
@@ -77,7 +77,8 @@
         <li><a href="user-manual.html">User Manual</a></li>
         <li><a href="policies.html">Policies</a></li>
       </ul>
-      <a href="downloads/Obstruo-Setup-1.1.0.exe" class="mobile-cta" download>
+      <!-- href filled dynamically -->
+      <a href="#" id="mobile-download-btn" class="mobile-cta" download>
         <svg
           viewBox="0 0 24 24"
           fill="none"
@@ -108,11 +109,8 @@
         </p>
 
         <div class="hero-cta">
-          <a
-            href="downloads/Obstruo-Setup-1.1.0.exe"
-            class="btn btn-primary"
-            download
-          >
+          <!-- href filled dynamically -->
+          <a href="#" id="hero-download-btn" class="btn btn-primary" download>
             <svg
               class="btn-icon"
               viewBox="0 0 24 24"
@@ -374,11 +372,8 @@
             your family stay protected online.
           </p>
 
-          <a
-            href="downloads/Obstruo-Setup-1.1.0.exe"
-            class="btn btn-primary btn-large"
-            download
-          >
+          <!-- href and version text filled dynamically -->
+          <a href="#" id="main-download-btn" class="btn btn-primary btn-large" download>
             <svg
               class="btn-icon"
               viewBox="0 0 24 24"
@@ -393,7 +388,6 @@
             DOWNLOAD FOR WINDOWS
           </a>
 
-          <!-- NEW: Desktop Only Note -->
           <p
             class="download-note"
             style="margin-top: 0.75rem; font-size: 0.875rem; opacity: 0.8"
@@ -409,7 +403,8 @@
             </p>
           </div>
 
-          <p class="version-text">Version 1.1.0</p>
+          <!-- Version number filled dynamically -->
+          <p class="version-text" id="version-text">Loading version…</p>
 
           <div class="requirements-section">
             <h3 class="requirements-title">SYSTEM REQUIREMENTS</h3>
@@ -642,5 +637,62 @@
 
     <!-- JavaScript -->
     <script src="main.js"></script>
+
+    <!--
+      Dynamic download link script.
+      Fetches version.json and wires up all download buttons automatically.
+      From now on you never need to touch index.html when releasing a new version —
+      just update version.json and everything here updates itself.
+    -->
+    <script>
+      (function () {
+        const VERSION_JSON =
+          "https://darknem4377.github.io/Obstruo-Security/version.json";
+
+        // IDs of every download button / link on the page
+        const DOWNLOAD_BTN_IDS = [
+          "nav-download-btn",
+          "mobile-download-btn",
+          "hero-download-btn",
+          "main-download-btn",
+        ];
+
+        fetch(VERSION_JSON + "?t=" + Date.now())
+          .then(function (res) {
+            if (!res.ok) throw new Error("HTTP " + res.status);
+            return res.json();
+          })
+          .then(function (data) {
+            var url     = data.downloadUrl;
+            var version = data.version;
+
+            // Basic safety check — must be HTTPS from a trusted domain
+            if (
+              !url ||
+              !url.startsWith("https://") ||
+              (!url.includes("github.com") && !url.includes("githubusercontent.com"))
+            ) {
+              console.warn("Obstruo: download URL failed safety check.");
+              return;
+            }
+
+            // Wire up all download buttons
+            DOWNLOAD_BTN_IDS.forEach(function (id) {
+              var el = document.getElementById(id);
+              if (el) el.href = url;
+            });
+
+            // Update the visible version text
+            var versionEl = document.getElementById("version-text");
+            if (versionEl && version) {
+              versionEl.textContent = "Version " + version;
+            }
+          })
+          .catch(function (err) {
+            // Silently fail — buttons stay as href="#" which is safe
+            console.warn("Obstruo: could not load version.json —", err.message);
+          });
+      })();
+    </script>
   </body>
 </html>
