@@ -373,7 +373,12 @@
           </p>
 
           <!-- href and version text filled dynamically -->
-          <a href="#" id="main-download-btn" class="btn btn-primary btn-large" download>
+          <a
+            href="#"
+            id="main-download-btn"
+            class="btn btn-primary btn-large"
+            download
+          >
             <svg
               class="btn-icon"
               viewBox="0 0 24 24"
@@ -663,14 +668,15 @@
             return res.json();
           })
           .then(function (data) {
-            var url     = data.downloadUrl;
+            var url = data.downloadUrl;
             var version = data.version;
 
             // Basic safety check — must be HTTPS from a trusted domain
             if (
               !url ||
               !url.startsWith("https://") ||
-              (!url.includes("github.com") && !url.includes("githubusercontent.com"))
+              (!url.includes("github.com") &&
+                !url.includes("githubusercontent.com"))
             ) {
               console.warn("Obstruo: download URL failed safety check.");
               return;
