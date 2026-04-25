@@ -1,3 +1,5 @@
+![Welcome to Obstruo](assets/welcome-banner.png)
+
 🌐 **Official Website & Download**  
 https://darknem4377.github.io/Obstruo-Security/
 
