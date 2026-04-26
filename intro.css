@@ -1,0 +1,149 @@
+/* =======================================================
+   OBSTRUO — INTRO SCREEN CSS
+   GPU / Performance Optimizations Applied:
+   - canvas promoted to own compositor layer (will-change + translateZ)
+   - Animated elements (corners, status, enter-text, flash) use
+     will-change: opacity/transform so GPU handles the animation
+   - contain: strict on non-layout elements limits paint invalidation
+   - blink animation uses opacity only (GPU composited, no repaint)
+   - All transitions use opacity/transform only (compositor-only props)
+======================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --red:      #ff1a1a;
+    --red-glow: rgba(255, 26, 26, 0.6);
+    --red-dim:  rgba(255, 26, 26, 0.15);
+    --silver:   #c0c0c0;
+    --black:    #000000;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    background: var(--black);
+    overflow: hidden;
+    cursor: none;
+}
+
+/* ── Canvas — own GPU compositor layer ─────────────── */
+#intro-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: block;
+    /* Promoted to GPU layer — compositor handles all canvas repaints */
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* ── Hidden logo for pixel sampling ─────────────────── */
+#logo-source {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 1px;
+    height: 1px;
+}
+
+/* ── HUD Corners ─────────────────────────────────────── */
+.corner {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    z-index: 10;
+    opacity: 0;
+    /* GPU-composited opacity transition */
+    will-change: opacity;
+    transition: opacity 0.8s ease;
+    /* Isolate paint — corners never affect layout */
+    contain: layout style;
+}
+.corner::before,
+.corner::after {
+    content: '';
+    position: absolute;
+    background: var(--red);
+}
+.corner::before { width: 100%; height: 1.5px; top: 0; left: 0; }
+.corner::after  { width: 1.5px; height: 100%; top: 0; left: 0; }
+
+.corner.top-left     { top: 24px; left: 24px; }
+.corner.top-right    { top: 24px; right: 24px;   transform: scaleX(-1); }
+.corner.bottom-left  { bottom: 24px; left: 24px;  transform: scaleY(-1); }
+.corner.bottom-right { bottom: 24px; right: 24px; transform: scale(-1); }
+
+.corner.visible { opacity: 1; }
+
+/* ── Status line ─────────────────────────────────────── */
+#status-line {
+    position: fixed;
+    top: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--red);
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    z-index: 10;
+    opacity: 0;
+    white-space: nowrap;
+    /* Compositor-only transition */
+    will-change: opacity;
+    transition: opacity 0.6s ease;
+    contain: layout style;
+}
+#status-line.visible { opacity: 1; }
+
+/* ── Enter prompt ────────────────────────────────────── */
+#enter-text {
+    position: fixed;
+    bottom: 48px;
+    width: 100%;
+    text-align: center;
+    color: rgba(255, 255, 255, 0);
+    font-family: 'Orbitron', monospace;
+    font-size: 12px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    z-index: 10;
+    pointer-events: none;
+    /* GPU-composited: opacity animation never triggers repaint */
+    will-change: opacity;
+    transition: color 1.2s ease;
+    contain: layout style;
+}
+
+/* opacity-only blink — compositor handles this, zero CPU cost */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.15; }
+}
+
+#enter-text.visible {
+    color: rgba(255, 255, 255, 0.7);
+    animation: blink 2.4s ease-in-out infinite;
+}
+
+/* ── Flash overlay ───────────────────────────────────── */
+#flash-overlay {
+    position: fixed;
+    inset: 0;
+    background: #ffffff;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    /* GSAP animates opacity — GPU composited */
+    will-change: opacity;
+    transform: translateZ(0);
+}
