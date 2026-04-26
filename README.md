@@ -111,6 +111,6 @@ It is intended as a **protective and supportive tool**, not a replacement for pa
 
 ## 🚧 Project Status
 
-Obstruo **v1.1.0 is released** and under active development.
+Obstruo **v1.2.0 is released** and under active development.
 
 Future versions may include expanded protection modes, additional controls, performance improvements, and UI refinements.
