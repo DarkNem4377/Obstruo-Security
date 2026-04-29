@@ -24,10 +24,18 @@
     return 4000;
   }
 
+  /* ── Responsive logo size ───────────────────────────── */
+  // Caps at 340px on desktop; scales to 72% of shorter dimension on mobile
+  // so the logo never overflows on portrait phones
+  function getLogoSize() {
+    const shorter = Math.min(window.innerWidth, window.innerHeight);
+    return Math.round(Math.min(340, shorter * 0.72));
+  }
+
   /* ── Config ─────────────────────────────────────────── */
   const CFG = {
     PARTICLE_COUNT:   getParticleCount(),
-    LOGO_SIZE:        340,
+    LOGO_SIZE:        getLogoSize(),
     FREE_ROAM_SECS:   6,
     MORPH_DURATION:   2.6,
     DRAG:             0.97,
@@ -445,8 +453,9 @@
 
   /* ── Init ───────────────────────────────────────────── */
   function init() {
-    cx = W / 2;
-    cy = H / 2;
+    // FIX: cx/cy are already set correctly by resize() above.
+    // Do NOT re-assign them here — W/H may be undefined at this point,
+    // producing NaN which canvas silently maps to 0 → top-left bug.
 
     setTimeout(function () {
       corners.forEach(function (c) { c.classList.add("visible"); });
@@ -471,6 +480,8 @@
     } else {
       img.onload  = onReady;
       img.onerror = function () {
+        // FIX: Log a helpful error so path/CORS issues are easy to spot
+        console.error("[Obstruo] Logo failed to load. Check: (1) path is Images/obstruo-logo.png relative to index.html, (2) filename casing matches exactly, (3) crossorigin='anonymous' is set on the <img> tag.");
         requestAnimationFrame(function (ts) { lastTime = ts; loop(ts); });
       };
     }
