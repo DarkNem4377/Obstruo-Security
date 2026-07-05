@@ -1,4 +1,4 @@
-![Welcome to Obstruo](readme-assets/welcome-banner.png)
+![Welcome to Obstruo](readme-assets/Under-Construction.png)
 
 # 🛡️ Obstruo
 
