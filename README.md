@@ -1,116 +1,36 @@
 ![Welcome to Obstruo](readme-assets/welcome-banner.png)
-🌐 **Official Website & Download**  
-https://darknem4377.github.io/Obstruo-Security/
-
-⬇ **Direct Download (Windows)**  
-https://darknem4377.github.io/Obstruo-Security/#download
-
----
 
 # 🛡️ Obstruo
 
-**Obstruo** is a privacy-first, system-wide website blocking application for Windows, built to help individuals and families protect themselves from harmful online content — without surveillance, tracking, or cloud dependency.
-
-Obstruo operates at the operating system level, applying restrictions across **all browsers and apps**, while keeping full control local to your device.
-
----
-
-## 🎯 Core Principles
-
-- 🔒 **Privacy-First**  
-  No data collection. No telemetry. No tracking.
-
-- 🖥️ **System-Wide Protection**  
-  Blocking applies across all browsers and applications.
-
-- 🏠 **Local-Only Control**  
-  All rules, logs, and settings stay on your machine.
-
-- 🧠 **Intentional Design**  
-  Simple UI. Clear signals. No dark patterns.
+> ## 🚧 Project Notice
+>
+> The official Obstruo website has been taken offline and is currently being rebuilt from the ground up.
+>
+> As a result, **downloads are temporarily unavailable** while the new website and distribution platform are being developed.
+>
+> There is **no estimated release date** at this time. Development is ongoing, and the website will return once it is ready.
+>
+> Thank you for your patience and support.
 
 ---
 
-## ✨ Features (v1.1.0)
+## Privacy-First Protection for Windows
 
-- 🚫 System-wide website blocking using a curated blocklist  
-- ➕ Manual site blocking with whitelist support  
-- 🔐 PIN-protected controls to prevent unauthorized changes  
-- 🟢 Session-based protection status and safety indicators  
-- ⏸️ Emergency pause with automatic re-enable  
-- 🧾 Lightweight local logging with automatic cleanup  
-- 🎨 Clean, distraction-free Windows desktop interface  
+**Obstruo** is a privacy-first, system-wide website blocking application for Windows, designed to help individuals and families protect themselves from harmful online content without telemetry, tracking, cloud dependency, or unnecessary data collection.
 
----
-
-## 🖥️ Platform Support
-
-- ✅ **Windows 10 / 11**
-- 🧩 Native desktop application  
-- ❌ Not a browser extension
-
----
-
-## 🛑 Microsoft Defender SmartScreen Notice
-
-Because Obstruo is a **new, unsigned Windows application**, Microsoft Defender SmartScreen will display a warning on first install.
-
-**This is normal and expected behavior for new independent software.**
-
-### How to proceed safely:
-
-When you see this warning:
-
-![SmartScreen Warning 1](readme-assets/smartscreen-warning-1.png)
-
-1. Click **"More info"**
-
-![SmartScreen Warning 2](readme-assets/smartscreen-warning-2.png)
-
-2. Click **"Run anyway"**
-
-3. (Optional) Verify that the installer was downloaded directly from the official website above
-
-**Obstruo contains:**
-- ✅ No malware
-- ✅ No telemetry  
-- ✅ No tracking
-- ✅ No background network activity
-
-Code signing will be introduced in a future release once distribution stabilizes.
-
----
-
-## 🔐 Security & Stability
-
-Obstruo is designed with **safety, resilience, and predictable failure behavior** in mind.
-
-That said, this is an early public release and may still contain bugs or edge cases.  
-
-If you encounter crashes, unexpected behavior, or security concerns, please report them via **GitHub Issues**.
-
----
-
-## 📜 License
-
-Obstruo is **proprietary software**.
-
-- 🔒 Source code is not open-source  
-- 🚫 Redistribution, modification, or reverse-engineering is not permitted  
-- 📄 See `LICENSE.txt` for full terms  
-
----
-
-## ⚠️ Disclaimer
-
-Obstruo is provided **"as is"**, without warranty of any kind.
-
-It is intended as a **protective and supportive tool**, not a replacement for parental supervision, education, or personal responsibility.
-
----
+Unlike browser extensions, Obstruo is designed to operate at the operating system level, providing protection across supported browsers and desktop applications while keeping control local to the user's device.
 
 ## 🚧 Project Status
 
-Obstruo **v1.2.0 is released** and under active development.
+Obstruo is currently under active redevelopment.
 
-Future versions may include expanded protection modes, additional controls, performance improvements, and UI refinements.
+Current priorities include:
+
+* Rebuilding the official website
+* Improving the application's architecture
+* Enhancing performance and reliability
+* Refining the user interface
+* Expanding blocklist management capabilities
+* Preparing future public releases
+
+The project remains active, but public downloads are temporarily unavailable until the next release is ready.
