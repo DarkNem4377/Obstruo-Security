@@ -1,0 +1,49 @@
+name: 🐛 Bug report
+description: Something in Obstruo isn't working as expected.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: >-
+        Thanks for taking the time to report a problem. **If this is a
+        security vulnerability, do not file it here** — use the private
+        [security report form](https://github.com/DarkNem4377/Obstruo-Security/security/advisories/new)
+        instead.
+  - type: input
+    id: version
+    attributes:
+      label: Obstruo version
+      description: Shown in the dashboard / installer.
+      placeholder: "v1.0"
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 24H2"
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. …
+        2. …
+        3. …
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else?
+      description: >-
+        Other filtering/VPN/antivirus software installed, whether the machine
+        uses LAN mode, relevant log excerpts, screenshots, etc.

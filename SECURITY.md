@@ -11,10 +11,12 @@ component, no account, and no server to talk to.
 If you discover a vulnerability, a privacy issue, or behavior that could
 compromise user safety, please report it responsibly:
 
-- **Preferred (private):** email **obstruo.software@gmail.com** with the
-  details.
-- Alternatively, open a GitHub Issue labeled **Security** — but please do
-  **not** include working exploit details in a public issue before review.
+- **Preferred (private):** use GitHub's confidential
+  [security report form](https://github.com/DarkNem4377/Obstruo-Security/security/advisories/new)
+  (Security tab → "Report a vulnerability").
+- Alternatively, email **obstruo.software@gmail.com** with the details.
+- Please do **not** post working exploit details in a public issue before
+  review.
 
 All reports are reviewed in good faith, and reasonable efforts will be made to
 investigate and address valid issues.

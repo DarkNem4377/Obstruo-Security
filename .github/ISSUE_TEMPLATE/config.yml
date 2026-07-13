@@ -1,0 +1,7 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 🔐 Report a security vulnerability (private)
+    url: https://github.com/DarkNem4377/Obstruo-Security/security/advisories/new
+    about: >-
+      Please report vulnerabilities privately here instead of opening a public
+      issue. See SECURITY.md for details.
