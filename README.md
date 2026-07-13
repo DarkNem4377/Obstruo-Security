@@ -54,6 +54,10 @@ resolves domain names — not just one browser.
 * [Filtering limitations](docs/FILTERING-LIMITATIONS.md) — the threat model
   and the honest boundaries of DNS-layer filtering.
 * [Recovery](docs/RECOVERY.md) — credential recovery and last-resort removal.
+* [Privacy policy](docs/PRIVACY-POLICY.md) *(draft)* — what data exists, where
+  it lives, and what (nothing) leaves your device.
+* [End User License Agreement](docs/EULA.md) *(draft)* — the terms shown at
+  install time.
 
 ## 🚧 Project Status
 

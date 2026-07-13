@@ -28,7 +28,8 @@ investigate and address valid issues.
 - **Local-only by design.** No user data is collected, transmitted, or stored
   remotely. No telemetry, analytics, or background reporting. The only
   outbound request the software ever makes is fetching a blocklist feed **if
-  the administrator configures one** (HTTPS required).
+  the administrator configures one** (HTTPS required). Full details in the
+  [privacy policy](docs/PRIVACY-POLICY.md).
 - **Encrypted at rest.** Credentials, blocklists, and block history are stored
   in a SQLCipher-encrypted database keyed with a DPAPI key held under the
   SYSTEM account, in a folder locked to SYSTEM + Administrators.
