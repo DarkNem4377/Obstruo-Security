@@ -1,4 +1,4 @@
-![Welcome to Obstruo](readme-assets/Under-Construction.png)
+![Obstruo Security — first public build coming soon](readme-assets/coming-soon-banner.png)
 
 # 🛡️ Obstruo
 
