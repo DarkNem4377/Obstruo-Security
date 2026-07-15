@@ -10,16 +10,21 @@
 
 ---
 
-> ## 🚧 First public build — coming soon
+> ## 🧪 First public build — out now, in testing
 >
-> Obstruo has been rebuilt from the ground up. **There are currently no
-> downloads** — older builds have been withdrawn and should not be used.
-> The first public release will be the new architecture, and it will be
-> **free during early access**: no license key, no trial timer, no locked
-> "premium" tier.
+> Obstruo has been rebuilt from the ground up, and the first public build
+> (**v1.0.0**) is **[available for download](https://github.com/DarkNem4377/Obstruo-Security/releases/latest)**
+> — currently in its **testing and debugging phase**. It is **free during
+> early access**: no license key, no trial timer, no locked "premium" tier.
+> Older builds have been withdrawn and should not be used.
 >
-> **Want to know the moment it ships?** Click **Watch → Custom → Releases**
-> at the top of this page.
+> Found a bug or something odd? **[Open an issue](https://github.com/DarkNem4377/Obstruo-Security/issues)**
+> — tester feedback directly shapes the stable release. To hear about new
+> builds, click **Watch → Custom → Releases** at the top of this page.
+>
+> *The download is not yet code-signed, so Windows SmartScreen will warn on
+> first run — verify the SHA-256 published on the release page, then choose
+> **More info → Run anyway**.*
 
 ---
 
@@ -34,7 +39,7 @@ And unlike most filters, Obstruo **fails closed**: crash it, kill it, cut the
 power — the filter does not unlock. Most filters fail open. Obstruo is built
 the other way.
 
-## What's coming in the first public build
+## What's in the first public build
 
 | | |
 |---|---|
@@ -97,20 +102,21 @@ friction, and every attack/response we design for — is published in
 * [End User License Agreement](docs/EULA.md) *(draft)* — the terms shown at
   install time.
 
-## 🚧 Project status
+## 🧪 Project status
 
-**Current version: v1.0 (in development, not yet released).**
+**Current version: [v1.0.0](https://github.com/DarkNem4377/Obstruo-Security/releases/latest) — development complete, now in testing and debugging.**
 
-Current priorities:
+The architecture is built and shipped; this phase is about proving it in the
+real world. Current priorities:
 
-* Finishing and hardening the new application architecture
-* Launching the official website and distribution
+* Gathering tester feedback and fixing reported bugs
+* Hardening install / upgrade / uninstall paths across Windows editions
 * Refining the dashboard and setup experience
 * Expanding blocklist management and feed syncing
-* Code signing for public distribution
+* Code signing for public distribution (removes the SmartScreen warning)
 
-Requirements at release: **Windows 10 / 11 (64-bit)** · administrator rights
-for one-time install · no internet account of any kind.
+Requirements: **Windows 10 / 11 (64-bit)** · administrator rights for
+one-time install · no internet account of any kind.
 
 ## 📄 License
 
