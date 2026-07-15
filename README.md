@@ -14,8 +14,10 @@
 >
 > Obstruo has been rebuilt from the ground up, and the first public build
 > (**v1.0.0**) is **[available for download](https://github.com/DarkNem4377/Obstruo-Security/releases/latest)**
-> — currently in its **testing and debugging phase**. It is **free during
-> early access**: no license key, no trial timer, no locked "premium" tier.
+> — currently in its **testing and debugging phase**. It is **free for
+> everyone, and the core product will stay free**: no license key, no trial
+> timer, no locked "premium" tier. If expanded features arrive someday they
+> may form a paid tier — but what's free today stays free.
 > Older builds have been withdrawn and should not be used.
 >
 > Found a bug or something odd? **[Open an issue](https://github.com/DarkNem4377/Obstruo-Security/issues)**
