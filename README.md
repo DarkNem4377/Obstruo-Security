@@ -42,18 +42,7 @@ And unlike most filters, Obstruo **fails closed**: crash it, kill it, cut the
 power — the filter does not unlock. Most filters fail open. Obstruo is built
 the other way.
 
-## What's in the first public build
-
-| | |
-|---|---|
-| **System-wide DNS filtering** | A Windows Service becomes the machine's resolver. Blocked domains never resolve — for every browser and every app, including private/incognito windows. |
-| **5,900+ domains blocked from the first minute** | A curated blocklist is active the moment installation completes. Add your own domains any time; removing anything requires your credentials. |
-| **Fail-closed watchdog** | If the service stops — crash, kill, power loss — nothing opens when the guard goes down. Normal DNS returns only through a verified recovery path. |
-| **Encrypted-DNS bypass blocking** | Firewall rules close known DNS-over-HTTPS routes, and enforced browser policies (Chrome, Edge, Firefox) disable secure-DNS overrides. The local resolver stays the only door. |
-| **Credential-gated control** | Pausing, allow-listing, settings, and uninstall all require the PIN or password you set — with an escalating lockout on wrong guesses that survives service restarts. Windows Hello supported where hardware allows. |
-| **Encrypted local data** | Blocklist, logs, and credential hashes live in a SQLCipher (AES-256) database keyed to the machine. A copied database file is unreadable anywhere else. |
-| **One-time recovery code** | Shown exactly once at setup. Lose your PIN, password, *and* the code, and there is no back door — deliberately. |
-| **Quiet by design** | No branded block pages, no popups. A blocked site simply never loads. |
+![What's in the first public build — system-wide DNS filtering, 5,900+ domains blocked from the first minute, fail-closed watchdog, encrypted-DNS bypass blocking, credential-gated control, encrypted local data, one-time recovery code, quiet by design](readme-assets/first-build.png)
 
 ## The guarantee
 
@@ -69,15 +58,7 @@ Data leaving your computer — **the complete list**:
 
 That is the complete list.
 
-## Two readers. One product.
-
-**The parent** — you want the machine to refuse the material, quietly,
-without a dashboard your child can find or a cloud account logging what they
-searched. Install once. Set the credentials. Close the lid.
-
-**The self-binder** — you want a fail-closed commitment device on your own
-machine, one that future you cannot trivially undo in a weak moment. You want
-to know exactly what it does — and that it keeps doing it when tested.
+![Two readers. One product. — The parent: you want the machine to refuse the material, quietly, without a dashboard your child can find or a cloud account logging what they searched. The self-binder: you want a fail-closed commitment device on your own machine that future you cannot trivially undo in a weak moment](readme-assets/two-readers-one-product.png)
 
 ## Honest about its limits
 
