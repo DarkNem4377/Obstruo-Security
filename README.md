@@ -19,7 +19,9 @@
 > tier, and no paid tier coming later.
 > Older builds have been withdrawn and should not be used.
 >
-> Found a bug or something odd? **[Open an issue](https://github.com/DarkNem4377/Obstruo-Security/issues)**
+> Hit a snag? The **[troubleshooting guide](docs/TROUBLESHOOTING.md)** covers the
+> SmartScreen warning, "no internet" cases, lockout, and recovery. Still stuck or
+> found a bug? **[Open an issue](https://github.com/DarkNem4377/Obstruo-Security/issues)**
 > — tester feedback directly shapes the stable release. To hear about new
 > builds, click **Watch → Custom → Releases** at the top of this page.
 >
@@ -97,6 +99,8 @@ friction, and every attack/response we design for — is published in
   vulnerability.
 * [Filtering limitations](docs/FILTERING-LIMITATIONS.md) — what DNS-layer
   filtering can and cannot catch.
+* [Troubleshooting](docs/TROUBLESHOOTING.md) — SmartScreen, "no internet"
+  and fail-closed cases, whitelisting, lockout, and how to report a bug.
 * [Recovery](docs/RECOVERY.md) — credential recovery and last-resort removal.
 * [Privacy policy](docs/PRIVACY-POLICY.md) *(draft)* — what data exists,
   where it lives, and what (nothing) leaves your device.
