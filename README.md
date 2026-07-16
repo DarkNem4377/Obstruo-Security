@@ -1,4 +1,4 @@
-![Obstruo Security — first public build coming soon](readme-assets/coming-soon-banner.png)
+![Obstruo Security — blocked before it loads](readme-assets/welcome-banner.png)
 
 # 🛡️ Obstruo Security
 
