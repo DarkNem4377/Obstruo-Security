@@ -64,8 +64,8 @@ Obstruo does **not**:
 
 - **Inspect page content.** Filtering is by domain. What loads inside an allowed site is out of scope.
 - **Surveil.** No screenshots, no keylogging, no message reading. The only record is which domains were blocked, and when — encrypted, local.
-- **Protect other devices.** Phones, tablets, consoles, and other computers on the network need their own controls.
-- **Phone home.** There is no server to phone. The single network contact beyond DNS resolution itself is an anonymous update check against GitHub.
+- **Protect other devices.** Phones, tablets, consoles, and other computers on the network need their own controls. (An optional, off-by-default LAN mode lets routed devices use Obstruo as their DNS server on a private network, but this is opt-in and not the core guarantee.)
+- **Phone home.** There is no server to phone, no account, no telemetry. Obstruo makes no automatic network contact beyond DNS resolution itself — it contains no self-update or update-check mechanism. New versions ship as GitHub releases you choose to download and install.
 - **Defeat a determined administrator.** See §1B. Anyone selling you a local filter that claims this is selling snake oil.
 
 ---

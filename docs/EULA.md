@@ -133,7 +133,7 @@ You shall not, and shall not permit any third party to:
 
 8.2 The Software makes outbound network connections only from the Device and only for: (a) DNS resolution — forwarding queries for non-blocked domains to the upstream DNS resolvers the Device or network already uses (with a public fallback resolver if none is available), exactly as normal name resolution does; and (b) blocklist feed updates — if, and only if, the Administrator configures a blocklist feed URL, periodically downloading that list over HTTPS from the host the Administrator specifies, which exposes the Device's IP address and standard request metadata to that host. This version of the Software contains no automatic self-update mechanism and does not transmit any data to DarkNem4377.
 
-8.3 Full details are set out in the Obstruo Security Privacy Policy (PRIVACY-POLICY.txt, distributed with the Software and published at [PRIVACY POLICY URL]), which is incorporated into this Agreement by reference.
+8.3 Full details are set out in the Obstruo Security Privacy Policy (PRIVACY-POLICY.txt, distributed with the Software and published at https://github.com/DarkNem4377/Obstruo-Security/blob/main/docs/PRIVACY-POLICY.md), which is incorporated into this Agreement by reference.
 
 
 ## 9. UPDATES
