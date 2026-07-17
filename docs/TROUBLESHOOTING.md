@@ -148,9 +148,9 @@ with:
 - **Windows edition + version** (e.g. Windows 11 Home 24H2) and whether you were
   on an **admin** or **standard** account.
 - **What you did → what you expected → what happened.**
-- The relevant **service log**: the newest `ObstruoService-*.log` in
-  `C:\ProgramData\Obstruo\logs` (that folder is admin-only — copy it from an
-  elevated prompt). The logs never contain your PIN, password, or the encryption
-  key.
+- The relevant **service log**: the newest `service-*.log` (named
+  `service-YYYYMMDD.log`) in `C:\ProgramData\Obstruo\logs` (that folder is
+  admin-only — copy it from an elevated prompt). The logs never contain your
+  PIN, password, or the encryption key.
 
 Tester feedback directly shapes the stable release.
