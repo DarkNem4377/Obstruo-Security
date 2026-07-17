@@ -24,6 +24,10 @@ stop a determined, technical admin — that's out of scope by design.
   - DoH provider IPs blocked on TCP+UDP 443,
   - DoT/DoQ blocked globally on TCP+UDP 853,
   - Chrome, Edge, and Firefox DoH disabled via enterprise policy.
+- **Classic DNS locked to Obstruo:** outbound plain DNS on UDP+TCP port 53 is
+  blocked to every address except the service's own upstream, so a hardcoded
+  public resolver (e.g. `nslookup example 8.8.8.8`) can no longer sidestep the
+  filter. Loopback is exempt, so local resolution is unaffected.
 - **Fail-closed:** if the proxy can't run, name resolution fails rather than
   falling back to an unfiltered resolver.
 - **Data + config locked** to SYSTEM/Administrators (SQLCipher DB, DPAPI key,

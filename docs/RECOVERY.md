@@ -62,6 +62,15 @@ shutdown /r /t 0
 Notes:
 
 - Step 2 is the one that restores internet — do it even if later steps fail.
+  Obstruo pins DNS on **every** adapter, including ones that were disconnected
+  or virtual at install time, so if internet is still broken after restoring
+  your connected adapters, list all of them with
+  `netsh interface show interface` and repeat step 2 for each.
+- The `ObstruoWatchdogRecovery` scheduled task (step 6) is a **transient**
+  install-recovery task: the installer registers it just before the point of no
+  return and deletes it automatically once the install succeeds. On a healthy,
+  fully-installed machine it does **not** exist, so `schtasks /Delete` there is
+  a harmless no-op — its absence is expected, not a fault.
 - The database (`C:\ProgramData\Obstruo\obstruo.db`) is SQLCipher-encrypted
   with a DPAPI-SYSTEM key; deleting it destroys the block history and the
   credential hashes. There is no way to read it without SYSTEM access on the
