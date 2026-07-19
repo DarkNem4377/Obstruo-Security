@@ -13,7 +13,7 @@
 > ## 🧪 First public build — out now, in testing
 >
 > Obstruo has been rebuilt from the ground up, and the latest build
-> (**v1.0.1**) is **[available for download](https://github.com/DarkNem4377/Obstruo-Security/releases/latest)**
+> (**v1.0.2**) is **[available for download](https://github.com/DarkNem4377/Obstruo-Security/releases/latest)**
 > — currently in its **testing and debugging phase**. It is **free for
 > everyone, forever**: no license key, no trial timer, no locked "premium"
 > tier, and no paid tier coming later.
@@ -90,7 +90,7 @@ friction, and every attack/response we design for — is published in
 
 ## 🧪 Project status
 
-**Current version: [v1.0.1](https://github.com/DarkNem4377/Obstruo-Security/releases/latest) — development complete, now in testing and debugging.**
+**Current version: [v1.0.2](https://github.com/DarkNem4377/Obstruo-Security/releases/latest) — development complete, now in testing and debugging.**
 
 The architecture is built and shipped; this phase is about proving it in the
 real world. Current priorities:
