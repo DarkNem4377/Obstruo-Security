@@ -17,7 +17,7 @@ SmartScreen has no reputation for it.
 
 1. Verify the download first: compare the SHA-256 printed on the
    [release page](https://github.com/DarkNem4377/Obstruo-Security/releases/latest)
-   against your file — in PowerShell: `Get-FileHash .\Obstruo-v1.0.2-win-x64.zip`.
+   against your file — in PowerShell: `Get-FileHash .\Obstruo-v1.0.3-win-x64.zip`.
 2. If it matches, click **More info → Run anyway**.
 
 If the hash does **not** match, do not run it — re-download and report it.

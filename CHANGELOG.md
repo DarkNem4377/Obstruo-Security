@@ -1,3 +1,25 @@
+# Obstruo Security v1.0.3
+
+**Tester-feedback release.** Fixes the "Wi-Fi connected but no internet" failure mode found in round-4 testing, adds whitelist visibility and a whitelist-integrity guard, and makes the dashboard honest — every number and status it shows now comes from the running service.
+
+## 🛠️ Fixed
+
+- **Upstream DNS resilience.** The proxy forwarded only to the *first* backed-up adapter's DNS servers, frozen at service start — after a network change it could keep forwarding to unreachable resolvers forever, so every lookup failed closed and Windows showed "No Internet, Secured". The upstream list is now the union of **all** adapters' backed-up servers plus Cloudflare, and it is rebuilt automatically on every network change.
+- **Outage alerting.** When every upstream stops responding, the service now logs critically and raises a dashboard alert explaining why the internet is down (and logs recovery) instead of failing silently.
+- **Service alerts are visible.** The dashboard's alert banner was an empty placeholder — tamper alerts, port-53 conflicts, proxy restarts, and outage alerts never actually rendered. They now appear in a dismissible banner.
+
+## ✨ Added
+
+- **View the whitelist.** A new "View (PIN)" button shows every whitelisted domain with its added date, expiry, and reason — with per-entry removal (credential-gated).
+- **Whitelist integrity guard.** A domain that matches the system blocklist (including brand-family variants and wildcard descendants) can no longer be whitelisted; conflicting rows are also swept at startup and when categories are re-enabled.
+- **Honest dashboard tiles.** Placeholder tiles for features that don't exist are replaced by a live **Upstream DNS health** tile and the exact **build version + commit**. Blocklist rule counts are now queried live from the database instead of hardcoded text.
+
+Package SHA-256: `3a49b9dee64a38d4e6a0b7722aea4f1fd7141935dd1e8d781807430bca2e7b2a` · build `1.0.3+93c8ceb`
+
+To verify this build, run the bundled `Verify-Obstruo-v1.0.3-G1.ps1` from an elevated PowerShell after installing; step 0 confirms you are actually testing v1.0.3 before any filtering check runs.
+
+---
+
 # Obstruo Security v1.0.2
 
 **Service-startup hotfix.** The original v1.0.1 package could not start its protection stack: a dependency-injection cycle (`TamperDetector → IpcServer → UninstallService → TamperDetector`) crashed the service worker on launch, so the DNS proxy never bound port 53 and **no filtering ran at all**. v1.0.2 ships the fix plus the hardening that followed it.
