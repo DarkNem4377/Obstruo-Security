@@ -1,3 +1,19 @@
+# Obstruo Security v1.0.2
+
+**Service-startup hotfix.** The original v1.0.1 package could not start its protection stack: a dependency-injection cycle (`TamperDetector → IpcServer → UninstallService → TamperDetector`) crashed the service worker on launch, so the DNS proxy never bound port 53 and **no filtering ran at all**. v1.0.2 ships the fix plus the hardening that followed it.
+
+## 🛠️ Fixed
+
+- **Service starts.** Broke the constructor-injection cycle (`UninstallService` now takes the tamper detector lazily — it only needs it at uninstall). A new test builds the real service container with full validation on every CI run, so a cycle can never ship again.
+- **Version stamp.** Binaries now report the true release version plus build commit (v1.0.1 self-reported `1.0.0+<commit>`).
+- **Stale LAN rules swept on upgrade.** A v1.0.0 install (LAN mode on by default) left `Obstruo-LAN-DNS-*` inbound allow rules behind; they are now removed on startup whenever LAN mode is off.
+- **Fail-closed startup guard.** An unexpected startup error no longer stops the service silently — it logs, raises a dashboard alert, and holds the machine fail-closed instead of leaving DNS pinned to a dead resolver with no explanation.
+- **Verifier gates on build identity.** The bundled G.1 verifier now refuses to run (exit 99) if the installed binary's version doesn't match the release it ships with — a stale install can no longer produce a plausible-looking report.
+
+To verify this build, run the bundled `Verify-Obstruo-v1.0.2-G1.ps1` from an elevated PowerShell after installing; step 0 confirms you are actually testing v1.0.2 before any filtering check runs.
+
+---
+
 # Obstruo Security v1.0.1
 
 **Security & coverage hotfix** following the 2026-07-17 five-report DNS audit. This release closes every non-Obstruo DNS path, expands blocklist coverage, and reconciles the build with its own documentation. No breaking changes — existing installs upgrade in place (the blocklist and new categories are seeded automatically).
