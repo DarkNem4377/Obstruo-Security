@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="Obstruo.Installer/Obstruo.Installer.csproj" Id="ea25f4a0-bf84-4001-a047-ad027efe9d82" />
+  <Project Path="Obstruo.Service/Obstruo.Service.csproj" />
+  <Project Path="Obstruo.Shared/Obstruo.Shared.csproj" />
+  <Project Path="Obstruo.Tests/Obstruo.Tests.csproj" />
+  <Project Path="Obstruo.UI/Obstruo.UI.csproj" />
+  <Project Path="Obstruo.Watchdog/Obstruo.Watchdog.csproj" Id="16a91b03-2d9a-4ca0-a2fb-fbc610681f4f" />
+</Solution>

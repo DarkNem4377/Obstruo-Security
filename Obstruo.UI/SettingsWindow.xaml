@@ -1,0 +1,267 @@
+<Window x:Class="Obstruo.UI.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Settings"
+        Icon="/Resources/obstruo.ico"
+        Width="560" Height="680"
+        MinWidth="560" MinHeight="520"
+        MaxWidth="560"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+    <Window.Resources>
+        <Style x:Key="PrimaryBtn" TargetType="Button">
+            <Setter Property="Foreground"      Value="#F8F8FF"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height"          Value="40"/>
+            <Setter Property="FontSize"        Value="13"/>
+            <Setter Property="FontWeight"      Value="SemiBold"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.4"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="FontFamily"  Value="Segoe UI"/>
+            <Setter Property="FontSize"    Value="10"/>
+            <Setter Property="FontWeight"  Value="Bold"/>
+            <Setter Property="Foreground"  Value="#8B8BA7"/>
+            <Setter Property="Margin"      Value="0,0,0,6"/>
+        </Style>
+
+        <Style x:Key="SectionHeader" TargetType="TextBlock">
+            <Setter Property="FontFamily"  Value="Segoe UI"/>
+            <Setter Property="FontSize"    Value="12"/>
+            <Setter Property="FontWeight"  Value="Bold"/>
+            <Setter Property="Foreground"  Value="#B0A8FF"/>
+            <Setter Property="Margin"      Value="0,18,0,10"/>
+        </Style>
+
+        <Style x:Key="EntryBox" TargetType="TextBox">
+            <Setter Property="FontFamily"                Value="Segoe UI"/>
+            <Setter Property="FontSize"                  Value="13"/>
+            <Setter Property="Foreground"                Value="#F8F8FF"/>
+            <Setter Property="Background"                Value="#12121E"/>
+            <Setter Property="BorderBrush"               Value="#1E1E32"/>
+            <Setter Property="BorderThickness"           Value="1"/>
+            <Setter Property="Padding"                   Value="10,8"/>
+            <Setter Property="VerticalContentAlignment"  Value="Center"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border Background="#0D0D14" BorderBrush="#1E1E32" BorderThickness="1" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title bar -->
+            <Border Grid.Row="0" Background="#12121E" CornerRadius="10,10,0,0"
+                    MouseLeftButtonDown="DragBar_MouseLeftButtonDown">
+                <Grid Height="44">
+                    <TextBlock Text="SETTINGS" FontFamily="Segoe UI" FontSize="12"
+                               FontWeight="Bold" Foreground="#B0A8FF"
+                               VerticalAlignment="Center" Margin="18,0,0,0"/>
+                    <Button x:Name="CloseBtn" Content="✕" Width="44" Height="44"
+                            HorizontalAlignment="Right" FontSize="13"
+                            Foreground="#6870a0" Background="Transparent" BorderThickness="0"
+                            Cursor="Hand" Click="CloseBtn_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- Scrollable body -->
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Padding="24,4,24,4">
+                <StackPanel Margin="0,12,0,12">
+
+                    <!-- Categories -->
+                    <TextBlock Text="BLOCK CATEGORIES" Style="{StaticResource SectionHeader}" Margin="0,0,0,10"/>
+                    <TextBlock TextWrapping="Wrap" FontFamily="Segoe UI" FontSize="11"
+                               Foreground="#8B8BA7" Margin="0,0,0,10"
+                               Text="Turn a category off to stop blocking its domains. Takes effect on the next lookup."/>
+                    <ItemsControl x:Name="CategoriesList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border Background="#0A0F1A" BorderBrush="#1B1F2C" BorderThickness="1"
+                                        CornerRadius="6" Padding="12,8" Margin="0,0,0,6">
+                                    <CheckBox Content="{Binding Name}" IsChecked="{Binding Enabled, Mode=TwoWay}"
+                                              Foreground="#E8EAF0" FontFamily="Segoe UI" FontSize="12"
+                                              VerticalContentAlignment="Center"/>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Blocklist feed -->
+                    <TextBlock Text="BLOCKLIST FEED" Style="{StaticResource SectionHeader}"/>
+                    <TextBlock Text="FEED URL (HTTPS)" Style="{StaticResource FieldLabel}"/>
+                    <TextBox x:Name="BlocklistUrlBox" Style="{StaticResource EntryBox}"/>
+                    <Button x:Name="SyncBtn" Content="Save URL &amp; Sync Now"
+                            Style="{StaticResource PrimaryBtn}" Background="#3F2D9B"
+                            HorizontalAlignment="Left" Width="180" Margin="0,10,0,0"
+                            Click="SyncBtn_Click"/>
+
+                    <!-- Protection -->
+                    <TextBlock Text="EMERGENCY PAUSE" Style="{StaticResource SectionHeader}"/>
+                    <TextBlock Text="MAX PAUSE (MINUTES, 1–240)" Style="{StaticResource FieldLabel}"/>
+                    <TextBox x:Name="MaxPauseBox" Style="{StaticResource EntryBox}"/>
+                    <TextBlock Text="COOLDOWN AFTER PAUSE (MINUTES, 0–10080)" Style="{StaticResource FieldLabel}" Margin="0,12,0,6"/>
+                    <TextBox x:Name="CooldownBox" Style="{StaticResource EntryBox}"/>
+
+                    <!-- Logs -->
+                    <TextBlock Text="LOGS" Style="{StaticResource SectionHeader}"/>
+                    <TextBlock Text="RETENTION (HOURS, 1–8760)" Style="{StaticResource FieldLabel}"/>
+                    <TextBox x:Name="RetentionBox" Style="{StaticResource EntryBox}"/>
+                    <TextBlock Text="DAILY CLEANUP TIME (HH:MM)" Style="{StaticResource FieldLabel}" Margin="0,12,0,6"/>
+                    <TextBox x:Name="CleanupTimeBox" Style="{StaticResource EntryBox}"/>
+
+                    <!-- Display -->
+                    <TextBlock Text="DISPLAY" Style="{StaticResource SectionHeader}"/>
+                    <TextBlock Text="THEME" Style="{StaticResource FieldLabel}"/>
+                    <ComboBox x:Name="ThemeCombo" FontFamily="Segoe UI" FontSize="13" Height="34"
+                              Foreground="#0D0D14">
+                        <ComboBoxItem Content="dark"/>
+                        <ComboBoxItem Content="light"/>
+                    </ComboBox>
+                    <Border Background="#0A0F1A" BorderBrush="#1B1F2C" BorderThickness="1"
+                            CornerRadius="6" Padding="12,8" Margin="0,10,0,0">
+                        <CheckBox x:Name="MaskCustomCheck"
+                                  Content="Mask custom domains in the dashboard"
+                                  Foreground="#E8EAF0" FontFamily="Segoe UI" FontSize="12"
+                                  VerticalContentAlignment="Center"/>
+                    </Border>
+                    <Border Background="#0A0F1A" BorderBrush="#1B1F2C" BorderThickness="1"
+                            CornerRadius="6" Padding="12,8" Margin="0,8,0,0">
+                        <StackPanel>
+                            <CheckBox x:Name="LanModeCheck"
+                                      Content="Filter DNS for other devices on this network (LAN mode)"
+                                      Foreground="#E8EAF0" FontFamily="Segoe UI" FontSize="12"
+                                      VerticalContentAlignment="Center"/>
+                            <TextBlock Text="Off by default. Opens an inbound DNS port on private networks so routed devices can use Obstruo. Applies on next service restart."
+                                       Foreground="#6870a0" FontFamily="Segoe UI" FontSize="11"
+                                       TextWrapping="Wrap" Margin="26,4,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- SafeSearch -->
+                    <TextBlock Text="SAFESEARCH" Style="{StaticResource SectionHeader}"/>
+                    <Border Background="#0A0F1A" BorderBrush="#1B1F2C" BorderThickness="1"
+                            CornerRadius="6" Padding="12,10">
+                        <StackPanel>
+                            <CheckBox x:Name="SafeSearchGoogleCheck" Content="Enforce Google SafeSearch"
+                                      Foreground="#E8EAF0" FontFamily="Segoe UI" FontSize="12"
+                                      VerticalContentAlignment="Center"/>
+                            <CheckBox x:Name="SafeSearchYouTubeCheck" Content="Enforce YouTube Restricted Mode"
+                                      Foreground="#E8EAF0" FontFamily="Segoe UI" FontSize="12"
+                                      VerticalContentAlignment="Center" Margin="0,8,0,0"/>
+                            <CheckBox x:Name="SafeSearchBingCheck" Content="Enforce Bing SafeSearch"
+                                      Foreground="#E8EAF0" FontFamily="Segoe UI" FontSize="12"
+                                      VerticalContentAlignment="Center" Margin="0,8,0,0"/>
+                            <TextBlock Text="YOUTUBE LEVEL" Style="{StaticResource FieldLabel}" Margin="0,12,0,6"/>
+                            <ComboBox x:Name="YouTubeLevelCombo" FontFamily="Segoe UI" FontSize="13" Height="34"
+                                      Foreground="#0D0D14">
+                                <ComboBoxItem Content="Moderate"/>
+                                <ComboBoxItem Content="Strict"/>
+                            </ComboBox>
+                            <TextBlock Text="On by default. DuckDuckGo has no DNS SafeSearch mechanism, so it cannot be enforced."
+                                       Foreground="#6870a0" FontFamily="Segoe UI" FontSize="11"
+                                       TextWrapping="Wrap" Margin="0,6,0,0"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Advanced -->
+                    <TextBlock Text="ADVANCED" Style="{StaticResource SectionHeader}"/>
+                    <TextBlock Text="METRICS REFRESH (SECONDS, 5–3600)" Style="{StaticResource FieldLabel}"/>
+                    <TextBox x:Name="MetricsBox" Style="{StaticResource EntryBox}"/>
+
+                    <!-- Export -->
+                    <TextBlock Text="EXPORT" Style="{StaticResource SectionHeader}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="110"/>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox x:Name="ExportFormatCombo" Grid.Column="0" Height="34"
+                                  Foreground="#0D0D14" VerticalAlignment="Center">
+                            <ComboBoxItem Content="CSV"/>
+                            <ComboBoxItem Content="JSON"/>
+                        </ComboBox>
+                        <Button x:Name="ExportBtn" Grid.Column="2" Content="Export activity log…"
+                                Style="{StaticResource PrimaryBtn}" Background="#1E1E32"
+                                Click="ExportBtn_Click"/>
+                    </Grid>
+                    <TextBlock Text="Requires your PIN or password below. Saves the last 30 days of blocked events."
+                               Foreground="#6870a0" FontFamily="Segoe UI" FontSize="11"
+                               TextWrapping="Wrap" Margin="0,6,0,0"/>
+
+                </StackPanel>
+            </ScrollViewer>
+
+            <!-- Footer: credential + save -->
+            <Border Grid.Row="2" Background="#0A0A12" BorderBrush="#1E1E32" BorderThickness="0,1,0,0"
+                    CornerRadius="0,0,10,10">
+                <StackPanel Margin="24,16,24,18">
+                    <TextBlock Text="PIN OR PASSWORD (REQUIRED TO SAVE)" Style="{StaticResource FieldLabel}"/>
+                    <Border Background="#12121E" BorderBrush="#1E1E32" BorderThickness="1" CornerRadius="6">
+                        <PasswordBox x:Name="CredentialBox" FontFamily="Segoe UI" FontSize="14"
+                                     Foreground="#F8F8FF" Background="Transparent" BorderThickness="0"
+                                     Padding="12,10" VerticalContentAlignment="Center"/>
+                    </Border>
+
+                    <TextBlock x:Name="ErrorText" Visibility="Collapsed" TextWrapping="Wrap"
+                               FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold"
+                               Foreground="#EF4444" Margin="2,10,0,0"/>
+                    <TextBlock x:Name="StatusText" Visibility="Collapsed" TextWrapping="Wrap"
+                               FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold"
+                               Foreground="#10B981" Margin="2,10,0,0"/>
+
+                    <Grid Margin="0,14,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="12"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="CancelBtn" Grid.Column="0" Content="Close"
+                                Style="{StaticResource PrimaryBtn}" Background="#1E1E32"
+                                Click="CancelBtn_Click"/>
+                        <Button x:Name="SaveBtn" Grid.Column="2" Content="Save Settings"
+                                Style="{StaticResource PrimaryBtn}" Background="#3F2D9B"
+                                Click="SaveBtn_Click"/>
+                    </Grid>
+
+                    <TextBlock x:Name="BuildInfoText" FontFamily="Segoe UI" FontSize="11"
+                               Foreground="#6870a0" HorizontalAlignment="Center"
+                               Margin="0,14,0,0" Text=""/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

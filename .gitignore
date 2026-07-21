@@ -1,0 +1,18 @@
+# Build output
+bin/
+obj/
+publish/
+
+# Release packages (produced by scripts/publish.ps1 — attach to the GitHub
+# release, never commit the ~300 MB asset)
+Obstruo-*-win-x64.zip
+Obstruo-*-win-x64.zip.sha256
+
+# IDE / tooling
+.vs/
+*.user
+*.suo
+
+# Windows folder metadata
+desktop.ini
+Thumbs.db

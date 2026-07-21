@@ -1,0 +1,50 @@
+﻿<Window x:Class="Obstruo.Installer.SplashWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Obstruo Security"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Width="900" Height="540"
+        Background="#01050C">
+
+    <Grid>
+        <Image Source="pack://application:,,,/Obstruo.Installer;component/welcome-banner.png"
+       Stretch="UniformToFill"/>
+
+        <!-- Gold loading bar -->
+        <Border x:Name="LoadingTrack"
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                Margin="60,0,60,48"
+                Height="3"
+                Width="780"
+                Background="#1a1008"
+                CornerRadius="2">
+            <Border x:Name="LoadingFill"
+                    HorizontalAlignment="Left"
+                    Height="3"
+                    Width="0"
+                    Background="#D4AA7C"
+                    CornerRadius="2">
+                <Border.Triggers>
+                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard Completed="LoadingComplete">
+                                <DoubleAnimation
+                                    Storyboard.TargetName="LoadingFill"
+                                    Storyboard.TargetProperty="Width"
+                                    From="0" To="780"
+                                    Duration="0:0:2.5">
+                                    <DoubleAnimation.EasingFunction>
+                                        <CubicEase EasingMode="EaseInOut"/>
+                                    </DoubleAnimation.EasingFunction>
+                                </DoubleAnimation>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </Border.Triggers>
+            </Border>
+        </Border>
+    </Grid>
+</Window>

@@ -1,0 +1,40 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net10.0-windows10.0.17763.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<ApplicationManifest>app.manifest</ApplicationManifest>
+		<ApplicationIcon>Resources\obstruo.ico</ApplicationIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Fonts\tabler-icons.ttf" />
+	  <None Remove="Resources\obstruo-logo.png" />
+	  <None Remove="Resources\welcome-banner.png" />
+	  <None Remove="Resources\obstruo.ico" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- The UI never touches the database or hashes credentials (auth refactor
+		     B moved all of that into the service over IPC). Only Hosting is kept,
+		     for DI + logging. -->
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.9" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Obstruo.Shared\Obstruo.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Resource Include="Fonts\tabler-icons.ttf">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	  </Resource>
+	  <Resource Include="Resources\obstruo-logo.png" />
+	  <Resource Include="Resources\welcome-banner.png" />
+	  <Resource Include="Resources\obstruo.ico" />
+	</ItemGroup>
+
+</Project>

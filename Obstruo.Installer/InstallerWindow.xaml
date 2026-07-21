@@ -1,0 +1,438 @@
+﻿<Window x:Class="Obstruo.Installer.InstallerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Obstruo Security — Installer"
+        Height="620" Width="920"
+        MinHeight="620" MinWidth="920"
+        WindowStartupLocation="CenterScreen"
+        Background="{StaticResource BrushBg}"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        ResizeMode="NoResize">
+
+    <Border BorderBrush="{StaticResource BrushBorder}"
+            BorderThickness="1"
+            CornerRadius="8">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- ══ TITLE BAR ══════════════════════════════════════════════════ -->
+            <Border Grid.Row="0"
+                    Background="#FF050A14"
+                    CornerRadius="8 8 0 0"
+                    MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <Grid Margin="20 14 20 14">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Logo + name -->
+                    <StackPanel Grid.Column="0"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center">
+                        <Image Source="obstruo-logo.png"
+                               Width="28" Height="28"
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               Margin="0 0 10 0"/>
+                        <TextBlock Text="OBSTRUO SECURITY"
+                                   FontFamily="{StaticResource FontPrimary}"
+                                   FontSize="13"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource BrushTextPrimary}"
+                                   VerticalAlignment="Center"/>
+                        <Border Background="#22D4AA7C"
+                                BorderBrush="#44D4AA7C"
+                                BorderThickness="1"
+                                CornerRadius="3"
+                                Margin="12 0 0 0"
+                                Padding="6 2">
+                            <TextBlock Text="INSTALLER"
+                                       FontFamily="{StaticResource FontPrimary}"
+                                       FontSize="9"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource BrushGold}"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Version -->
+                    <TextBlock Grid.Column="1"
+                               Text="v1.0.0"
+                               FontFamily="{StaticResource FontPrimary}"
+                               FontSize="12"
+                               Foreground="{StaticResource BrushTextMuted}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+
+                    <!-- Close -->
+                    <Button Grid.Column="2"
+                            x:Name="BtnClose"
+                            Content="✕"
+                            Click="BtnClose_Click"
+                            Width="32" Height="32"
+                            FontSize="12">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background"      Value="Transparent"/>
+                                <Setter Property="Foreground"      Value="{StaticResource BrushTextMuted}"/>
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Cursor"          Value="Hand"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border Background="{TemplateBinding Background}"
+                                                    CornerRadius="4"
+                                                    Width="32" Height="32">
+                                                <ContentPresenter HorizontalAlignment="Center"
+                                                                  VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#FFFF4C6A"/>
+                                                    <Setter Property="Foreground" Value="White"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                </Grid>
+            </Border>
+
+            <!-- Gold accent line -->
+            <Rectangle Grid.Row="0"
+                       Height="1"
+                       Fill="{StaticResource BrushGold}"
+                       Opacity="0.25"
+                       VerticalAlignment="Bottom"/>
+
+            <!-- ══ MAIN CONTENT ═══════════════════════════════════════════════ -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="280"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- ── LEFT PANEL ─────────────────────────────────────────── -->
+                <Border Grid.Column="0"
+                        Background="#FF030710"
+                        BorderBrush="{StaticResource BrushBorder}"
+                        BorderThickness="0 0 1 0">
+                    <Grid>
+                        <!-- Violet glow -->
+                        <Ellipse Width="300" Height="300"
+                                 VerticalAlignment="Top"
+                                 HorizontalAlignment="Center"
+                                 Margin="0 -80 0 0"
+                                 Opacity="0.06">
+                            <Ellipse.Fill>
+                                <RadialGradientBrush>
+                                    <GradientStop Color="#FF6A5CFF" Offset="0"/>
+                                    <GradientStop Color="Transparent" Offset="1"/>
+                                </RadialGradientBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <StackPanel VerticalAlignment="Center"
+                                    HorizontalAlignment="Center"
+                                    Margin="32 0">
+
+                            <Image Source="obstruo-logo.png"
+                                   Width="110" Height="110"
+                                   RenderOptions.BitmapScalingMode="HighQuality"
+                                   HorizontalAlignment="Center"
+                                   Margin="0 0 0 24"/>
+
+                            <TextBlock Text="OBSTRUO"
+                                       FontFamily="{StaticResource FontPrimary}"
+                                       FontSize="22"
+                                       FontWeight="Bold"
+                                       Foreground="{StaticResource BrushTextPrimary}"
+                                       HorizontalAlignment="Center"
+                                       Margin="0 0 0 4"/>
+
+                            <TextBlock Text="SECURITY"
+                                       FontFamily="{StaticResource FontPrimary}"
+                                       FontSize="13"
+                                       FontWeight="SemiBold"
+                                       Foreground="{StaticResource BrushGold}"
+                                       HorizontalAlignment="Center"
+                                       Margin="0 0 0 32"/>
+
+                            <Rectangle Height="1"
+                                       Fill="{StaticResource BrushGold}"
+                                       Opacity="0.3"
+                                       Margin="0 0 0 28"/>
+
+                            <!-- Feature bullets -->
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 14">
+                                    <Ellipse Width="6" Height="6"
+                                             Fill="{StaticResource BrushViolet}"
+                                             VerticalAlignment="Center"
+                                             Margin="0 0 10 0"/>
+                                    <TextBlock Text="DNS-layer content filtering"
+                                               FontFamily="{StaticResource FontPrimary}"
+                                               FontSize="12"
+                                               Foreground="{StaticResource BrushTextMuted}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 14">
+                                    <Ellipse Width="6" Height="6"
+                                             Fill="{StaticResource BrushViolet}"
+                                             VerticalAlignment="Center"
+                                             Margin="0 0 10 0"/>
+                                    <TextBlock Text="Fail-closed protection"
+                                               FontFamily="{StaticResource FontPrimary}"
+                                               FontSize="12"
+                                               Foreground="{StaticResource BrushTextMuted}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0 0 0 14">
+                                    <Ellipse Width="6" Height="6"
+                                             Fill="{StaticResource BrushViolet}"
+                                             VerticalAlignment="Center"
+                                             Margin="0 0 10 0"/>
+                                    <TextBlock Text="Encrypted local database"
+                                               FontFamily="{StaticResource FontPrimary}"
+                                               FontSize="12"
+                                               Foreground="{StaticResource BrushTextMuted}"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Width="6" Height="6"
+                                             Fill="{StaticResource BrushViolet}"
+                                             VerticalAlignment="Center"
+                                             Margin="0 0 10 0"/>
+                                    <TextBlock Text="No cloud. No telemetry."
+                                               FontFamily="{StaticResource FontPrimary}"
+                                               FontSize="12"
+                                               Foreground="{StaticResource BrushTextMuted}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+
+                <!-- ── RIGHT PANEL ────────────────────────────────────────── -->
+                <Grid Grid.Column="1" Margin="48 40 48 32">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="32"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <StackPanel Grid.Row="0">
+                        <TextBlock x:Name="TxtHeading"
+                                   Text="Ready to Install"
+                                   FontFamily="{StaticResource FontPrimary}"
+                                   FontSize="24"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource BrushTextPrimary}"/>
+                        <TextBlock x:Name="TxtSubheading"
+                                   Text="Obstruo Security will be installed on this machine."
+                                   FontFamily="{StaticResource FontPrimary}"
+                                   FontSize="13"
+                                   Foreground="{StaticResource BrushTextMuted}"
+                                   Margin="0 6 0 0"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <!-- Step list -->
+                    <ItemsControl Grid.Row="2"
+                                  x:Name="StepList">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0 0 0 10">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="24"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0"
+                                               Text="{Binding Icon}"
+                                               FontSize="13"
+                                               Foreground="{Binding IconColor}"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock Grid.Column="1"
+                                               Text="{Binding Label}"
+                                               FontFamily="{StaticResource FontPrimary}"
+                                               FontSize="12"
+                                               Foreground="{Binding LabelColor}"
+                                               VerticalAlignment="Center"
+                                               TextWrapping="Wrap"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <!-- Log area -->
+                    <Border Grid.Row="3"
+                            Background="#FF050A14"
+                            BorderBrush="{StaticResource BrushBorder}"
+                            BorderThickness="1"
+                            CornerRadius="4"
+                            Margin="0 20 0 0">
+                        <ScrollViewer x:Name="LogScroller"
+                                      VerticalScrollBarVisibility="Auto"
+                                      Padding="14 10">
+                            <TextBlock x:Name="TxtLog"
+                                       FontFamily="Consolas"
+                                       FontSize="11"
+                                       Foreground="{StaticResource BrushTextMuted}"
+                                       TextWrapping="Wrap"/>
+                        </ScrollViewer>
+                    </Border>
+
+                    <!-- Progress bar -->
+                    <Grid Grid.Row="4" Margin="0 16 0 0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ProgressBar Grid.Column="0"
+                                     x:Name="ProgressBar"
+                                     Style="{StaticResource InstallerProgressBar}"
+                                     Minimum="0" Maximum="8" Value="0"
+                                     VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1"
+                                   x:Name="TxtProgressPct"
+                                   Text="0%"
+                                   FontFamily="{StaticResource FontPrimary}"
+                                   FontSize="11"
+                                   Foreground="{StaticResource BrushTextMuted}"
+                                   Margin="12 0 0 0"
+                                   VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <!-- Buttons -->
+                    <Grid Grid.Row="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="12"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   x:Name="TxtStatus"
+                                   Text=""
+                                   FontFamily="{StaticResource FontPrimary}"
+                                   FontSize="12"
+                                   Foreground="{StaticResource BrushTextMuted}"
+                                   VerticalAlignment="Center"
+                                   TextWrapping="Wrap"/>
+                        <Button Grid.Column="1"
+                                x:Name="BtnCancel"
+                                Content="Cancel"
+                                Style="{StaticResource ButtonGhost}"
+                                Click="BtnCancel_Click"/>
+                        <Button Grid.Column="3"
+                                x:Name="BtnInstall"
+                                Content="Install"
+                                Style="{StaticResource ButtonPrimary}"
+                                Click="BtnInstall_Click"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+
+            <!-- ══ EULA OVERLAY ═══════════════════════════════════════════════ -->
+            <!-- Covers the main content row until the license is accepted.
+                 Shown at launch; collapsed by code-behind on Accept.          -->
+            <Border Grid.Row="1"
+                    x:Name="EulaOverlay"
+                    Background="{StaticResource BrushBg}"
+                    Visibility="Visible">
+                <Grid Margin="48 40 48 32">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="24"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Header -->
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Text="License Agreement"
+                                   FontFamily="{StaticResource FontPrimary}"
+                                   FontSize="24"
+                                   FontWeight="SemiBold"
+                                   Foreground="{StaticResource BrushTextPrimary}"/>
+                        <TextBlock Text="Please review the End User License Agreement. You must accept it to install Obstruo Security."
+                                   FontFamily="{StaticResource FontPrimary}"
+                                   FontSize="13"
+                                   Foreground="{StaticResource BrushTextMuted}"
+                                   Margin="0 6 0 0"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <!-- EULA text -->
+                    <Border Grid.Row="2"
+                            Background="#FF050A14"
+                            BorderBrush="{StaticResource BrushBorder}"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                        <ScrollViewer VerticalScrollBarVisibility="Auto"
+                                      Padding="18 14">
+                            <TextBlock x:Name="TxtEula"
+                                       Text="Loading license agreement..."
+                                       FontFamily="Consolas"
+                                       FontSize="11.5"
+                                       LineHeight="18"
+                                       Foreground="{StaticResource BrushTextMuted}"
+                                       TextWrapping="Wrap"/>
+                        </ScrollViewer>
+                    </Border>
+
+                    <!-- Agree checkbox -->
+                    <CheckBox Grid.Row="3"
+                              x:Name="ChkAgree"
+                              Margin="0 16 0 0"
+                              Checked="ChkAgree_Changed"
+                              Unchecked="ChkAgree_Changed"
+                              VerticalContentAlignment="Center"
+                              Cursor="Hand">
+                        <TextBlock Text="I have read and agree to the End User License Agreement."
+                                   FontFamily="{StaticResource FontPrimary}"
+                                   FontSize="12.5"
+                                   Foreground="{StaticResource BrushTextPrimary}"
+                                   TextWrapping="Wrap"/>
+                    </CheckBox>
+
+                    <!-- Buttons -->
+                    <Grid Grid.Row="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="12"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="1"
+                                x:Name="BtnDecline"
+                                Content="Decline"
+                                Style="{StaticResource ButtonGhost}"
+                                Click="BtnDecline_Click"/>
+                        <Button Grid.Column="3"
+                                x:Name="BtnAccept"
+                                Content="Accept &amp; Continue"
+                                Style="{StaticResource ButtonPrimary}"
+                                IsEnabled="False"
+                                Click="BtnAccept_Click"/>
+                    </Grid>
+                </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

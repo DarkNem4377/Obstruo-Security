@@ -1,0 +1,59 @@
+﻿<Window x:Class="Obstruo.UI.SplashWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Obstruo Security"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        Width="1260" Height="840"
+        Background="#01050C">
+
+    <Window.Resources>
+        <Storyboard x:Key="FadeOut" Completed="FadeOut_Completed">
+            <DoubleAnimation
+                Storyboard.TargetName="Root"
+                Storyboard.TargetProperty="Opacity"
+                From="1" To="0"
+                Duration="0:0:0.7">
+                <DoubleAnimation.EasingFunction>
+                    <CubicEase EasingMode="EaseInOut"/>
+                </DoubleAnimation.EasingFunction>
+            </DoubleAnimation>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid x:Name="Root">
+
+        <Image Source="pack://application:,,,/Obstruo.UI;component/Resources/welcome-banner.png"
+               Stretch="UniformToFill"/>
+
+        <TextBlock x:Name="HintText"
+                   Text="CLICK ANYWHERE OR PRESS ANY KEY TO ENTER"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,0,32"
+                   FontFamily="Segoe UI"
+                   FontSize="11"
+                   FontWeight="Bold"
+                   Foreground="#D4AA7C">
+            <TextBlock.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                            <DoubleAnimation
+                                Storyboard.TargetName="HintText"
+                                Storyboard.TargetProperty="Opacity"
+                                From="0.35" To="1.0"
+                                Duration="0:0:1">
+                                <DoubleAnimation.EasingFunction>
+                                    <SineEase EasingMode="EaseInOut"/>
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </TextBlock.Triggers>
+        </TextBlock>
+
+    </Grid>
+</Window>

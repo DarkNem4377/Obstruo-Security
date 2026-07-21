@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UseWPF>true</UseWPF>
+		<ApplicationManifest>installer.manifest</ApplicationManifest>
+		<AssemblyName>Obstruo.Installer</AssemblyName>
+		<RootNamespace>Obstruo.Installer</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Resource Include="obstruo-logo.png" />
+		<Resource Include="welcome-banner.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\EULA.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="THIRD-PARTY-NOTICES.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<!-- Privacy Policy ships alongside the installer as a readable file. -->
+		<Content Include="Resources\PRIVACY-POLICY.txt" Link="PRIVACY-POLICY.txt">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Obstruo.Shared\Obstruo.Shared.csproj" />
+	</ItemGroup>
+
+</Project>

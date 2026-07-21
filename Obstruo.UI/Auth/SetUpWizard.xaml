@@ -1,0 +1,460 @@
+﻿<Window x:Class="Obstruo.UI.Auth.SetupWizard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Obstruo Security — Setup"
+        Icon="/Resources/obstruo.ico"
+        Width="460" Height="540"
+        MinWidth="460" MinHeight="540"
+        MaxWidth="460"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Loaded="Window_Loaded">
+
+    <Window.Resources>
+
+        <SolidColorBrush x:Key="BgBrush"       Color="#0D0D14"/>
+        <SolidColorBrush x:Key="SurfaceBrush"  Color="#12121E"/>
+        <SolidColorBrush x:Key="BorderBrush2"  Color="#1E1E32"/>
+        <SolidColorBrush x:Key="AccentBrush"   Color="#7C3AED"/>
+        <SolidColorBrush x:Key="TextPrimary"   Color="#F8F8FF"/>
+        <SolidColorBrush x:Key="TextSecondary" Color="#8B8BA7"/>
+        <SolidColorBrush x:Key="ErrorBrush"    Color="#EF4444"/>
+        <SolidColorBrush x:Key="WarnBrush"     Color="#F59E0B"/>
+        <SolidColorBrush x:Key="SuccessBrush"  Color="#10B981"/>
+
+        <!-- Eye icons (Material Design visibility / visibility_off) -->
+        <Geometry x:Key="EyeGeo">M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M12,4.5C17,4.5 21.27,7.61 23,12C21.27,16.39 17,19.5 12,19.5C7,19.5 2.73,16.39 1,12C2.73,7.61 7,4.5 12,4.5Z</Geometry>
+        <Geometry x:Key="EyeOffGeo">M11.83,9L15,12.16C15,12.11 15,12.05 15,12A3,3 0 0,0 12,9C11.94,9 11.89,9 11.83,9M7.53,9.8L9.08,11.35C9.03,11.56 9,11.77 9,12A3,3 0 0,0 12,15C12.22,15 12.44,14.97 12.65,14.92L14.2,16.47C13.53,16.8 12.79,17 12,17A5,5 0 0,1 7,12C7,11.21 7.2,10.47 7.53,9.8M2,4.27L4.28,6.55L4.73,7C3.08,8.3 1.78,10 1,12C2.73,16.39 7,19.5 12,19.5C13.55,19.5 15.03,19.2 16.38,18.66L16.81,19.08L19.73,22L21,20.73L3.27,3M12,7A5,5 0 0,1 17,12C17,12.64 16.87,13.26 16.64,13.82L19.57,16.75C21.07,15.5 22.27,13.86 23,12C21.27,7.61 17,4.5 12,4.5C10.6,4.5 9.26,4.75 8,5.2L10.17,7.35C10.74,7.13 11.35,7 12,7Z</Geometry>
+
+        <Style x:Key="PrimaryBtn" TargetType="Button">
+            <Setter Property="Background"      Value="#7C3AED"/>
+            <Setter Property="Foreground"      Value="#F8F8FF"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height"          Value="40"/>
+            <Setter Property="FontSize"        Value="13"/>
+            <Setter Property="FontWeight"      Value="SemiBold"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#6D28D9"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Background" Value="#2A1A4E"/>
+                                <Setter Property="Foreground" Value="#4B4B6B"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="GhostBtn" TargetType="Button">
+            <Setter Property="Background"      Value="Transparent"/>
+            <Setter Property="Foreground"      Value="#8B8BA7"/>
+            <Setter Property="BorderBrush"     Value="#1E1E32"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height"          Value="40"/>
+            <Setter Property="FontSize"        Value="13"/>
+            <Setter Property="Cursor"          Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="6">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Foreground" Value="#F8F8FF"/>
+                                <Setter Property="BorderBrush" Value="#8B8BA7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="FieldLabel" TargetType="TextBlock">
+            <Setter Property="Foreground"  Value="#8B8BA7"/>
+            <Setter Property="FontSize"    Value="11"/>
+            <Setter Property="FontWeight"  Value="SemiBold"/>
+            <Setter Property="Margin"      Value="0,0,0,6"/>
+        </Style>
+
+        <!-- Right padding leaves room for the eye button overlay -->
+        <Style x:Key="InputPwd" TargetType="PasswordBox">
+            <Setter Property="Background"               Value="#12121E"/>
+            <Setter Property="Foreground"               Value="#F8F8FF"/>
+            <Setter Property="CaretBrush"               Value="#F8F8FF"/>
+            <Setter Property="BorderBrush"              Value="#1E1E32"/>
+            <Setter Property="BorderThickness"          Value="1"/>
+            <Setter Property="Height"                   Value="40"/>
+            <Setter Property="FontSize"                 Value="14"/>
+            <Setter Property="Padding"                  Value="10,0,40,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <!-- Plain-text twin shown while revealed — must match InputPwd exactly -->
+        <Style x:Key="InputTxt" TargetType="TextBox">
+            <Setter Property="Background"               Value="#12121E"/>
+            <Setter Property="Foreground"               Value="#F8F8FF"/>
+            <Setter Property="CaretBrush"               Value="#F8F8FF"/>
+            <Setter Property="BorderBrush"              Value="#1E1E32"/>
+            <Setter Property="BorderThickness"          Value="1"/>
+            <Setter Property="Height"                   Value="40"/>
+            <Setter Property="FontSize"                 Value="14"/>
+            <Setter Property="Padding"                  Value="10,0,40,0"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+        </Style>
+
+        <Style x:Key="EyeBtn" TargetType="Button">
+            <Setter Property="Background"          Value="Transparent"/>
+            <Setter Property="BorderThickness"     Value="0"/>
+            <Setter Property="Width"               Value="36"/>
+            <Setter Property="Height"              Value="40"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="Cursor"              Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="0 6 6 0">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="EyeIcon" TargetType="Path">
+            <Setter Property="Fill"    Value="#8B8BA7"/>
+            <Setter Property="Width"   Value="18"/>
+            <Setter Property="Height"  Value="18"/>
+            <Setter Property="Stretch" Value="Uniform"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Border Background="{StaticResource BgBrush}"
+            CornerRadius="12"
+            BorderBrush="#1E1E32"
+            BorderThickness="1">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="36"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Drag bar -->
+            <Border Grid.Row="0"
+                    Background="Transparent"
+                    MouseLeftButtonDown="DragBar_MouseLeftButtonDown">
+                <TextBlock Text="OBSTRUO SECURITY — SETUP"
+                           Foreground="#4B4B6B"
+                           FontSize="10"
+                           FontWeight="SemiBold"
+                           VerticalAlignment="Center"
+                           Margin="16,0,0,0"/>
+            </Border>
+
+            <!-- Step indicator -->
+            <StackPanel Grid.Row="1"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Center"
+                        Margin="0,4,0,16">
+                <Ellipse x:Name="Dot1" Width="8" Height="8" Fill="#7C3AED" Margin="4,0"/>
+                <Ellipse x:Name="Dot2" Width="8" Height="8" Fill="#1E1E32" Margin="4,0"/>
+                <Ellipse x:Name="Dot3" Width="8" Height="8" Fill="#1E1E32" Margin="4,0"/>
+                <Ellipse x:Name="Dot4" Width="8" Height="8" Fill="#1E1E32" Margin="4,0"/>
+                <Ellipse x:Name="Dot5" Width="8" Height="8" Fill="#1E1E32" Margin="4,0"/>
+            </StackPanel>
+
+            <!-- Step panels -->
+            <ScrollViewer Grid.Row="2"
+                          VerticalScrollBarVisibility="Auto"
+                          HorizontalScrollBarVisibility="Disabled">
+                <Grid Margin="36,0,36,0">
+
+                    <!-- Step 1: Welcome -->
+                    <StackPanel x:Name="Step1" Visibility="Visible">
+                        <TextBlock Text="Welcome"
+                                   Foreground="#F8F8FF"
+                                   FontSize="22" FontWeight="Bold"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Let's configure Obstruo Security. This takes about two minutes."
+                                   Foreground="#8B8BA7"
+                                   FontSize="13"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,24"/>
+                        <TextBlock Text="You will set up:"
+                                   Foreground="#F8F8FF"
+                                   FontSize="13"
+                                   Margin="0,0,0,10"/>
+                        <StackPanel Margin="0,0,0,24">
+                            <TextBlock Text="  ·  A PIN (4–8 digits)"
+                                       Foreground="#8B8BA7" FontSize="13" Margin="0,0,0,4"/>
+                            <TextBlock Text="  ·  A password (required backup)"
+                                       Foreground="#8B8BA7" FontSize="13" Margin="0,0,0,4"/>
+                            <TextBlock Text="  ·  A one-time recovery code"
+                                       Foreground="#8B8BA7" FontSize="13"/>
+                        </StackPanel>
+                        <Border Background="#1A1200"
+                                BorderBrush="#F59E0B"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="14,12">
+                            <StackPanel>
+                                <TextBlock Text="⚠  Read before continuing"
+                                           Foreground="#F59E0B"
+                                           FontWeight="Bold"
+                                           FontSize="13"
+                                           Margin="0,0,0,8"/>
+                                <TextBlock TextWrapping="Wrap"
+                                           Foreground="#F59E0B"
+                                           FontSize="12">
+                                    Your recovery code will be shown <Bold>once</Bold> and never again. If you lose it and forget your PIN and password, the only option is a clean reinstall. Save it somewhere safe before continuing.
+                                </TextBlock>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Step 2: PIN -->
+                    <StackPanel x:Name="Step2" Visibility="Collapsed">
+                        <TextBlock Text="Create your PIN"
+                                   Foreground="#F8F8FF"
+                                   FontSize="22" FontWeight="Bold"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="4 to 8 digits. Used to unlock the dashboard and authorize all sensitive actions."
+                                   Foreground="#8B8BA7"
+                                   FontSize="13"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,28"/>
+
+                        <TextBlock Text="PIN" Style="{StaticResource FieldLabel}"/>
+                        <Grid Margin="0,0,0,16">
+                            <PasswordBox x:Name="PinEntry"
+                                         Style="{StaticResource InputPwd}"
+                                         MaxLength="8"
+                                         PasswordChanged="RevealField_PasswordChanged"/>
+                            <TextBox x:Name="PinEntryPlain"
+                                     Style="{StaticResource InputTxt}"
+                                     MaxLength="8"
+                                     Visibility="Collapsed"
+                                     TextChanged="RevealField_TextChanged"/>
+                            <Button x:Name="PinEntryEye"
+                                    Style="{StaticResource EyeBtn}"
+                                    Click="EyeBtn_Click">
+                                <Path x:Name="PinEntryEyeIcon"
+                                      Style="{StaticResource EyeIcon}"
+                                      Data="{StaticResource EyeGeo}"/>
+                            </Button>
+                        </Grid>
+
+                        <TextBlock Text="CONFIRM PIN" Style="{StaticResource FieldLabel}"/>
+                        <Grid Margin="0,0,0,8">
+                            <PasswordBox x:Name="PinConfirm"
+                                         Style="{StaticResource InputPwd}"
+                                         MaxLength="8"
+                                         PasswordChanged="RevealField_PasswordChanged"/>
+                            <TextBox x:Name="PinConfirmPlain"
+                                     Style="{StaticResource InputTxt}"
+                                     MaxLength="8"
+                                     Visibility="Collapsed"
+                                     TextChanged="RevealField_TextChanged"/>
+                            <Button x:Name="PinConfirmEye"
+                                    Style="{StaticResource EyeBtn}"
+                                    Click="EyeBtn_Click">
+                                <Path x:Name="PinConfirmEyeIcon"
+                                      Style="{StaticResource EyeIcon}"
+                                      Data="{StaticResource EyeGeo}"/>
+                            </Button>
+                        </Grid>
+
+                        <TextBlock x:Name="PinError"
+                                   Visibility="Collapsed"
+                                   Foreground="{StaticResource ErrorBrush}"
+                                   FontSize="12"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <!-- Step 3: Password -->
+                    <StackPanel x:Name="Step3" Visibility="Collapsed">
+                        <TextBlock Text="Create a password"
+                                   Foreground="#F8F8FF"
+                                   FontSize="22" FontWeight="Bold"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Required backup method. Alphanumeric, minimum 6 characters. Along with your PIN, this can unlock the dashboard."
+                                   Foreground="#8B8BA7"
+                                   FontSize="13"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,28"/>
+
+                        <TextBlock Text="PASSWORD" Style="{StaticResource FieldLabel}"/>
+                        <Grid Margin="0,0,0,16">
+                            <PasswordBox x:Name="PwdEntry"
+                                         Style="{StaticResource InputPwd}"
+                                         PasswordChanged="RevealField_PasswordChanged"/>
+                            <TextBox x:Name="PwdEntryPlain"
+                                     Style="{StaticResource InputTxt}"
+                                     Visibility="Collapsed"
+                                     TextChanged="RevealField_TextChanged"/>
+                            <Button x:Name="PwdEntryEye"
+                                    Style="{StaticResource EyeBtn}"
+                                    Click="EyeBtn_Click">
+                                <Path x:Name="PwdEntryEyeIcon"
+                                      Style="{StaticResource EyeIcon}"
+                                      Data="{StaticResource EyeGeo}"/>
+                            </Button>
+                        </Grid>
+
+                        <TextBlock Text="CONFIRM PASSWORD" Style="{StaticResource FieldLabel}"/>
+                        <Grid Margin="0,0,0,8">
+                            <PasswordBox x:Name="PwdConfirm"
+                                         Style="{StaticResource InputPwd}"
+                                         PasswordChanged="RevealField_PasswordChanged"/>
+                            <TextBox x:Name="PwdConfirmPlain"
+                                     Style="{StaticResource InputTxt}"
+                                     Visibility="Collapsed"
+                                     TextChanged="RevealField_TextChanged"/>
+                            <Button x:Name="PwdConfirmEye"
+                                    Style="{StaticResource EyeBtn}"
+                                    Click="EyeBtn_Click">
+                                <Path x:Name="PwdConfirmEyeIcon"
+                                      Style="{StaticResource EyeIcon}"
+                                      Data="{StaticResource EyeGeo}"/>
+                            </Button>
+                        </Grid>
+
+                        <TextBlock x:Name="PwdError"
+                                   Visibility="Collapsed"
+                                   Foreground="{StaticResource ErrorBrush}"
+                                   FontSize="12"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <!-- Step 4: Recovery code -->
+                    <StackPanel x:Name="Step4" Visibility="Collapsed">
+                        <TextBlock Text="Your recovery code"
+                                   Foreground="#F8F8FF"
+                                   FontSize="22" FontWeight="Bold"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Save this somewhere safe. It will never be shown again."
+                                   Foreground="#8B8BA7"
+                                   FontSize="13"
+                                   TextWrapping="Wrap"
+                                   Margin="0,0,0,20"/>
+                        <Border Background="#0A0A14"
+                                BorderBrush="#1E1E32"
+                                BorderThickness="1"
+                                CornerRadius="8"
+                                Padding="16,14"
+                                Margin="0,0,0,10">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock x:Name="RecoveryCodeDisplay"
+                                           Grid.Column="0"
+                                           FontFamily="Consolas"
+                                           FontSize="18"
+                                           FontWeight="Bold"
+                                           Foreground="#7C3AED"
+                                           VerticalAlignment="Center"
+                                           TextWrapping="Wrap"/>
+                                <Button Grid.Column="1"
+                                        Content="Copy"
+                                        Style="{StaticResource GhostBtn}"
+                                        Width="60" Height="32"
+                                        Margin="12,0,0,0"
+                                        Click="CopyCodeBtn_Click"/>
+                            </Grid>
+                        </Border>
+                        <TextBlock x:Name="CopyConfirmText"
+                                   Visibility="Collapsed"
+                                   Foreground="{StaticResource SuccessBrush}"
+                                   FontSize="12"
+                                   Text="✓ Copied to clipboard"
+                                   Margin="0,0,0,12"/>
+                        <CheckBox x:Name="SavedConfirmCheck"
+                                  Margin="0,12,0,0"
+                                  Foreground="#F8F8FF"
+                                  FontSize="13"
+                                  Checked="SavedCheck_Changed"
+                                  Unchecked="SavedCheck_Changed">
+                            I have saved my recovery code in a safe place
+                        </CheckBox>
+                        <TextBlock x:Name="RecoveryError"
+                                   Visibility="Collapsed"
+                                   Foreground="{StaticResource ErrorBrush}"
+                                   FontSize="12"
+                                   Margin="0,8,0,0"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+
+                    <!-- Step 5: Done -->
+                    <StackPanel x:Name="Step5"
+                                Visibility="Collapsed"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0,40,0,0">
+                        <TextBlock Text="✓"
+                                   Foreground="#10B981"
+                                   FontSize="48"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,16"/>
+                        <TextBlock Text="Setup complete"
+                                   Foreground="#F8F8FF"
+                                   FontSize="22" FontWeight="Bold"
+                                   HorizontalAlignment="Center"
+                                   Margin="0,0,0,10"/>
+                        <TextBlock Text="Obstruo Security is active and your credentials are configured. You can change them later from Settings."
+                                   Foreground="#8B8BA7"
+                                   FontSize="13"
+                                   TextWrapping="Wrap"
+                                   TextAlignment="Center"/>
+                    </StackPanel>
+
+                </Grid>
+            </ScrollViewer>
+
+            <!-- Navigation buttons -->
+            <Grid Grid.Row="3" Margin="36,16,36,28">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="12"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="BackBtn"
+                        Grid.Column="0"
+                        Content="Back"
+                        Style="{StaticResource GhostBtn}"
+                        Visibility="Collapsed"
+                        Click="BackBtn_Click"/>
+                <Button x:Name="NextBtn"
+                        Grid.Column="2"
+                        Content="Begin Setup →"
+                        Style="{StaticResource PrimaryBtn}"
+                        Click="NextBtn_Click"/>
+            </Grid>
+
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,44 @@
+<Project>
+
+  <!--
+    Stamps the building git commit into every assembly's
+    AssemblyInformationalVersion (finding L3 — "show the build commit in the
+    dashboard" / identify which build is actually running). .NET appends
+    SourceRevisionId to InformationalVersion as "<version>+<id>", so a shipped
+    binary self-reports its commit.
+
+    CI/publish can override with -p:SourceRevisionId=<sha>; otherwise this reads
+    the working tree's HEAD. Failure is non-fatal: a build outside a git checkout
+    just gets no suffix.
+  -->
+  <PropertyGroup>
+    <IncludeSourceRevisionInInformationalVersion>true</IncludeSourceRevisionInInformationalVersion>
+
+    <!--
+      Product version for every assembly. MUST match Obstruo.Shared.ObstruoVersion.Current
+      (guarded by ObstruoVersionTests.AssemblyVersion_MatchesVersionConstant). Without
+      this the SDK defaults to 1.0.0, which is why v1.0.1 shipped stamped "1.0.0+<commit>".
+    -->
+    <Version>1.0.4</Version>
+  </PropertyGroup>
+
+  <!--
+    Must run before the SDK folds SourceRevisionId into InformationalVersion.
+    That happens in AddSourceRevisionToInformationalVersion, so hook it directly.
+  -->
+  <Target Name="ObstruoStampGitCommit"
+          BeforeTargets="AddSourceRevisionToInformationalVersion;GetAssemblyVersion"
+          Condition="'$(SourceRevisionId)' == ''">
+    <Exec Command="git rev-parse --short HEAD"
+          ConsoleToMSBuild="true"
+          ContinueOnError="true"
+          StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="ObstruoGitCommit" />
+      <Output TaskParameter="ExitCode" PropertyName="ObstruoGitExit" />
+    </Exec>
+    <PropertyGroup Condition="'$(ObstruoGitExit)' == '0' and '$(ObstruoGitCommit)' != ''">
+      <SourceRevisionId>$(ObstruoGitCommit)</SourceRevisionId>
+    </PropertyGroup>
+  </Target>
+
+</Project>

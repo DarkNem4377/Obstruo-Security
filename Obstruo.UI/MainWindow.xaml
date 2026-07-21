@@ -1,0 +1,927 @@
+﻿<Window x:Class="Obstruo.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="clr-namespace:Obstruo.UI"
+        Title="Obstruo Security"
+        Icon="/Resources/obstruo.ico"
+        WindowStyle="None"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
+        MinWidth="1000" MinHeight="700"
+        Width="1280" Height="860"
+        Background="#01050C"
+        Loaded="Window_Loaded">
+
+    <Window.Resources>
+        <FontFamily x:Key="TablerIcons">pack://application:,,,/Obstruo.UI;component/Fonts/#tabler-icons</FontFamily>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="58"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ═══════════════════════════════════════════════════════
+             TITLEBAR
+        ═══════════════════════════════════════════════════════ -->
+        <Border Grid.Row="0"
+                x:Name="TitleBar"
+                Background="#000104"
+                BorderBrush="#1B1F2C"
+                BorderThickness="0,0,0,0.5"
+                MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0"
+                            Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="22,0,0,0">
+                    <Image Source="pack://application:,,,/Obstruo.UI;component/Resources/obstruo-logo.png"
+                           Height="32" Width="32"
+                           RenderOptions.BitmapScalingMode="HighQuality"
+                           VerticalAlignment="Center"/>
+                    <Border Width="1" Height="28" Background="#1B1F2C" Margin="14,0,14,0"/>
+                    <StackPanel Orientation="Vertical" VerticalAlignment="Center">
+                        <TextBlock Text="OBSTRUO SECURITY" FontFamily="Segoe UI" FontSize="15" FontWeight="Bold" Foreground="#FFFFFF"/>
+                        <TextBlock Text="PROTECTION DASHBOARD" FontFamily="Segoe UI" FontSize="9" FontWeight="Bold" Foreground="#8A6A4A"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,8,0">
+
+                    <Border x:Name="ThreatLevelChip" Background="#100900" BorderBrush="#3a2800" BorderThickness="1"
+                            CornerRadius="99" Padding="14,5,14,5" Margin="0,0,8,0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <StackPanel x:Name="ThreatBars" Orientation="Horizontal" VerticalAlignment="Bottom" Margin="0,0,8,0">
+                                <Border x:Name="TBar1" Width="3" Height="5"  Background="#D4AA7C" CornerRadius="1" Margin="0,0,2,0"/>
+                                <Border x:Name="TBar2" Width="3" Height="8"  Background="#D4AA7C" CornerRadius="1" Margin="0,0,2,0"/>
+                                <Border x:Name="TBar3" Width="3" Height="11" Background="#D4AA7C" CornerRadius="1" Margin="0,0,2,0"/>
+                                <Border x:Name="TBar4" Width="3" Height="8"  Background="#D4AA7C" CornerRadius="1" Margin="0,0,2,0" Opacity="0.35"/>
+                                <Border x:Name="TBar5" Width="3" Height="5"  Background="#D4AA7C" CornerRadius="1" Opacity="0.2"/>
+                            </StackPanel>
+                            <TextBlock x:Name="ThreatLevelText" Text="UNKNOWN" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#8890b8" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="ProtectionChip" Background="#08050e" BorderBrush="#4a3820" BorderThickness="1"
+                            CornerRadius="99" Padding="14,6,14,6" Margin="0,0,8,0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Ellipse x:Name="ProtectionDot" Width="7" Height="7" Fill="#C49A6C" Margin="0,0,7,0">
+                                <Ellipse.Triggers>
+                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                        <BeginStoryboard>
+                                            <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                                <DoubleAnimation Storyboard.TargetName="ProtectionDot"
+                                                                 Storyboard.TargetProperty="Opacity"
+                                                                 From="1.0" To="0.15" Duration="0:0:1.25"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </Ellipse.Triggers>
+                            </Ellipse>
+                            <TextBlock x:Name="ProtectionStateText" Text="Unknown" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#C49A6C" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1"
+                            CornerRadius="99" Padding="14,6,14,6" Margin="0,0,8,0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="&#xEB97;" FontFamily="{StaticResource TablerIcons}" FontSize="13" Foreground="#4B46D1" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="UptimeText" Text="00:00:00" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#8890b8" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="StopBtn" Background="#1a0404" BorderBrush="#7a1a1a" BorderThickness="1"
+                            CornerRadius="99" Padding="14,6,14,6" Margin="0,0,8,0" Cursor="Hand"
+                            MouseLeftButtonUp="StopBtn_Click">
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard RepeatBehavior="Forever" AutoReverse="True">
+                                        <DoubleAnimation Storyboard.TargetName="StopBtn" Storyboard.TargetProperty="Opacity"
+                                                         From="1.0" To="0.55" Duration="0:0:1.5"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock x:Name="StopBtnIcon" Text="&#xECBA;" FontFamily="{StaticResource TablerIcons}" FontSize="13" Foreground="#ff8080" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <TextBlock x:Name="StopBtnText" Text="Stop Protection" FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold" Foreground="#ff8080" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="SettingsBtn" Background="#0A0F1A" BorderBrush="#1B1F2C" BorderThickness="1"
+                            CornerRadius="99" Padding="14,6,14,6" Margin="0,0,8,0" Cursor="Hand"
+                            MouseLeftButtonUp="SettingsBtn_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="&#xEA9D;" FontFamily="{StaticResource TablerIcons}" FontSize="13" Foreground="#8890b8" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Settings" FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold" Foreground="#8890b8" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Border x:Name="UninstallBtn" Background="#12060A" BorderBrush="#3D0808" BorderThickness="1"
+                            CornerRadius="99" Padding="14,6,14,6" Margin="0,0,12,0" Cursor="Hand"
+                            MouseLeftButtonUp="UninstallBtn_Click">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <TextBlock Text="&#xEB41;" FontFamily="{StaticResource TablerIcons}" FontSize="13" Foreground="#C0556A" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                            <TextBlock Text="Uninstall" FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold" Foreground="#C0556A" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+
+                    <Button x:Name="BtnMinimize" Content="─" Width="40" Height="32" FontSize="12"
+                            Foreground="#6870a0" Background="Transparent" BorderThickness="0"
+                            Cursor="Hand" Click="BtnMinimize_Click"/>
+                    <Button x:Name="BtnMaximize" Content="☐" Width="40" Height="32" FontSize="12"
+                            Foreground="#6870a0" Background="Transparent" BorderThickness="0"
+                            Cursor="Hand" Click="BtnMaximize_Click"/>
+                    <Button x:Name="BtnClose" Content="✕" Width="40" Height="32" FontSize="12"
+                            Foreground="#6870a0" Background="Transparent" BorderThickness="0"
+                            Cursor="Hand" Click="BtnClose_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ═══════════════════════════════════════════════════════
+             GOLD DECORATIVE LINE
+        ═══════════════════════════════════════════════════════ -->
+        <Border Grid.Row="1">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="Transparent" Offset="0"/>
+                    <GradientStop Color="#4a3820"     Offset="0.2"/>
+                    <GradientStop Color="#8A6A4A"     Offset="0.5"/>
+                    <GradientStop Color="#4a3820"     Offset="0.8"/>
+                    <GradientStop Color="Transparent" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+
+        <!-- ═══════════════════════════════════════════════════════
+             THREAT INTELLIGENCE BAR — honest states only
+        ═══════════════════════════════════════════════════════ -->
+        <Border Grid.Row="2" Background="#030810" BorderBrush="#0f1528" BorderThickness="0,0,0,0.5">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Column="0" BorderBrush="#0f1528" BorderThickness="0,0,0.5,0" Padding="20,12">
+                    <StackPanel>
+                        <TextBlock Text="UPSTREAM DNS" FontFamily="Segoe UI" FontSize="9" FontWeight="Bold" Foreground="#3a4060" Margin="0,0,0,5"/>
+                        <TextBlock x:Name="DnsHealthText" Text="Waiting for service..." FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#8890b8" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="DnsHealthSub" Text="Health of the resolvers Obstruo forwards to" FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold" Foreground="#3a4060" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="1" BorderBrush="#0f1528" BorderThickness="0,0,0.5,0" Padding="20,12">
+                    <StackPanel>
+                        <TextBlock Text="TREND ANALYSIS" FontFamily="Segoe UI" FontSize="9" FontWeight="Bold" Foreground="#3a4060" Margin="0,0,0,5"/>
+                        <TextBlock Text="Building baseline — stats accumulate as you browse" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#8890b8" TextWrapping="Wrap"/>
+                        <TextBlock Text="No 24h comparison yet" FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold" Foreground="#3a4060" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="2" BorderBrush="#0f1528" BorderThickness="0,0,0.5,0" Padding="20,12">
+                    <StackPanel>
+                        <TextBlock Text="BLOCKLIST STATUS" FontFamily="Segoe UI" FontSize="9" FontWeight="Bold" Foreground="#3a4060" Margin="0,0,0,5"/>
+                        <TextBlock Text="Charlie-Beta4377 · Loaded" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#60c888" TextWrapping="Wrap"/>
+                        <TextBlock x:Name="TileRulesText" Text="Loading rule count..." FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold" Foreground="#6870a0" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <Border Grid.Column="3" Padding="20,12">
+                    <StackPanel>
+                        <TextBlock Text="BUILD" FontFamily="Segoe UI" FontSize="9" FontWeight="Bold" Foreground="#3a4060" Margin="0,0,0,5"/>
+                        <TextBlock x:Name="BuildVersionText" Text="—" FontFamily="Cascadia Code" FontSize="12" FontWeight="Bold" Foreground="#8890b8" TextWrapping="Wrap"/>
+                        <TextBlock Text="Version + commit this dashboard was built from" FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold" Foreground="#3a4060" Margin="0,5,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+        </Border>
+
+        <!-- ═══════════════════════════════════════════════════════
+             SERVICE ALERT BANNER — filled and shown from code-behind
+        ═══════════════════════════════════════════════════════ -->
+        <Border Grid.Row="3" x:Name="AlertBanner" Visibility="Collapsed"
+                BorderThickness="0,0,0,1" Padding="22,10">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" x:Name="AlertText"
+                           FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"
+                           TextWrapping="Wrap" VerticalAlignment="Center"/>
+                <Button Grid.Column="1" Content="✕" FontSize="12" Width="28" Height="24"
+                        Foreground="#6870a0" Background="Transparent" BorderThickness="0"
+                        Cursor="Hand" VerticalAlignment="Center" Margin="12,0,0,0"
+                        Click="DismissAlert_Click"/>
+            </Grid>
+        </Border>
+
+        <!-- ═══════════════════════════════════════════════════════
+             BODY — two column layout
+        ═══════════════════════════════════════════════════════ -->
+        <Grid Grid.Row="4" x:Name="ContentArea">
+            <Grid.Background>
+                <DrawingBrush TileMode="Tile" Viewport="0,0,40,40" ViewportUnits="Absolute" Opacity="0.32">
+                    <DrawingBrush.Drawing>
+                        <DrawingGroup>
+                            <GeometryDrawing Brush="#01050C">
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry Rect="0,0,40,40"/>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing>
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="#1B1F2C" Thickness="0.5"/>
+                                </GeometryDrawing.Pen>
+                                <GeometryDrawing.Geometry>
+                                    <LineGeometry StartPoint="0,0" EndPoint="40,0"/>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                            <GeometryDrawing>
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="#1B1F2C" Thickness="0.5"/>
+                                </GeometryDrawing.Pen>
+                                <GeometryDrawing.Geometry>
+                                    <LineGeometry StartPoint="0,0" EndPoint="0,40"/>
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Grid.Background>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- ═══ LEFT COLUMN ═══ -->
+            <Border Grid.Column="0" BorderBrush="#0d1120" BorderThickness="0,0,0.5,0">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+
+                        <!-- ── PROTECTION SUMMARY ── -->
+                        <Border BorderBrush="#0a0f1a" BorderThickness="0,0,0,0.5" Padding="22,20,22,18" Background="#07101d">
+                            <StackPanel>
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                                    <TextBlock Text="&#xEA6D;" FontFamily="{StaticResource TablerIcons}" FontSize="13" Foreground="#6A5CFF" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="PROTECTION SUMMARY" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#8890b8" VerticalAlignment="Center"/>
+                                </StackPanel>
+
+                                <Border Background="#040c18" BorderBrush="#1e2540" BorderThickness="1" CornerRadius="10" Padding="0,18,0,16" Margin="0,0,0,14">
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock x:Name="TotalBlocksText" Text="0" FontFamily="Segoe UI" FontSize="54" FontWeight="Bold" Foreground="#D4AA7C" HorizontalAlignment="Center"/>
+                                        <TextBlock Text="THREATS BLOCKED TODAY" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#8890b8" HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                                        <TextBlock Text="Fail-closed — nothing slips through" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" Foreground="#3a4060" HorizontalAlignment="Center" Margin="0,4,0,0"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Grid Margin="0,0,0,18">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="8" Padding="14,13,14,11" Margin="0,0,4,0">
+                                        <StackPanel>
+                                            <TextBlock x:Name="WeekBlocksText" Text="0" FontFamily="Segoe UI" FontSize="26" FontWeight="Bold" Foreground="#c0c8e8"/>
+                                            <TextBlock Text="Blocked this week" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" Foreground="#8890b8" Margin="0,5,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="1" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="8" Padding="14,13,14,11" Margin="4,0,4,0">
+                                        <StackPanel>
+                                            <TextBlock x:Name="RuleCountText" Text="—" FontFamily="Segoe UI" FontSize="26" FontWeight="Bold" Foreground="#c0c8e8"/>
+                                            <TextBlock Text="Blocklist rules" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" Foreground="#8890b8" Margin="0,5,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="2" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="8" Padding="14,13,14,11" Margin="4,0,0,0">
+                                        <StackPanel>
+                                            <TextBlock Text="0" FontFamily="Segoe UI" FontSize="26" FontWeight="Bold" Foreground="#60c888"/>
+                                            <TextBlock Text="Slipped through" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" Foreground="#8890b8" Margin="0,5,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+
+                                <!-- Category bars — real counts start at 0 -->
+                                <StackPanel>
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="82"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="32"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Adult" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#c0c8e8" VerticalAlignment="Center"/>
+                                        <Border Grid.Column="1" Height="4" Background="#0d1120" CornerRadius="2" VerticalAlignment="Center">
+                                            <Border x:Name="BarFillAdult" HorizontalAlignment="Left" Width="0" Height="4" Background="#4B46D1" CornerRadius="2"/>
+                                        </Border>
+                                        <TextBlock x:Name="CatCountAdult" Grid.Column="2" Text="0" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#c0c8e8" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="82"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="32"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Malware" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#c0c8e8" VerticalAlignment="Center"/>
+                                        <Border Grid.Column="1" Height="4" Background="#0d1120" CornerRadius="2" VerticalAlignment="Center">
+                                            <Border x:Name="BarFillMalware" HorizontalAlignment="Left" Width="0" Height="4" Background="#4B46D1" CornerRadius="2"/>
+                                        </Border>
+                                        <TextBlock x:Name="CatCountMalware" Grid.Column="2" Text="0" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#c0c8e8" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="82"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="32"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Bypass" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#c0c8e8" VerticalAlignment="Center"/>
+                                        <Border Grid.Column="1" Height="4" Background="#0d1120" CornerRadius="2" VerticalAlignment="Center">
+                                            <Border x:Name="BarFillBypass" HorizontalAlignment="Left" Width="0" Height="4" Background="#4B46D1" CornerRadius="2"/>
+                                        </Border>
+                                        <TextBlock x:Name="CatCountBypass" Grid.Column="2" Text="0" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#c0c8e8" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <Grid Margin="0,0,0,10">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="82"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="32"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Chat" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#c0c8e8" VerticalAlignment="Center"/>
+                                        <Border Grid.Column="1" Height="4" Background="#0d1120" CornerRadius="2" VerticalAlignment="Center">
+                                            <Border x:Name="BarFillChat" HorizontalAlignment="Left" Width="0" Height="4" Background="#4B46D1" CornerRadius="2"/>
+                                        </Border>
+                                        <TextBlock x:Name="CatCountChat" Grid.Column="2" Text="0" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#c0c8e8" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="82"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="32"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Grid.Column="0" Text="Games" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#c0c8e8" VerticalAlignment="Center"/>
+                                        <Border Grid.Column="1" Height="4" Background="#0d1120" CornerRadius="2" VerticalAlignment="Center">
+                                            <Border x:Name="BarFillGames" HorizontalAlignment="Left" Width="0" Height="4" Background="#4B46D1" CornerRadius="2"/>
+                                        </Border>
+                                        <TextBlock x:Name="CatCountGames" Grid.Column="2" Text="0" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#c0c8e8" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </StackPanel>
+
+                                <!-- Hourly chart with empty state -->
+                                <Border Height="72" Background="#040c18" CornerRadius="4" Margin="0,14,0,0" ClipToBounds="True">
+                                    <Grid>
+                                        <ui:HourlyChartVisual x:Name="HourlyChart"/>
+                                        <TextBlock x:Name="ChartEmptyText"
+                                                   Text="Stats will build up as you browse"
+                                                   FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold"
+                                                   Foreground="#3a4060"
+                                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Blocklist health -->
+                                <Border Background="#050e08" BorderBrush="#1a4028" BorderThickness="1" CornerRadius="8" Padding="13,10" Margin="0,14,0,0">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="&#xEA6C;" FontFamily="{StaticResource TablerIcons}" FontSize="16" Foreground="#40a868" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                        <StackPanel>
+                                            <TextBlock Text="Charlie-Beta4377 · Active" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#60c888"/>
+                                            <TextBlock x:Name="HealthRulesText" Text="Loading rule count..." FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" Foreground="#6870a0" Margin="0,2,0,0"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+
+                            </StackPanel>
+                        </Border>
+
+                        <!-- ── TOP BLOCKED DOMAINS ── -->
+                        <Border BorderBrush="#0a0f1a" BorderThickness="0,0,0,0.5" Padding="22,20,22,18">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                                    <TextBlock Text="&#xEB4D;" FontFamily="{StaticResource TablerIcons}" FontSize="13" Foreground="#6A5CFF" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="TOP BLOCKED TODAY" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#8890b8" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Border x:Name="TopDomainsEmpty" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="7" Padding="12,16">
+                                    <TextBlock Text="No blocked domains recorded yet."
+                                               FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"
+                                               Foreground="#3a4060" HorizontalAlignment="Center"/>
+                                </Border>
+                                <ItemsControl x:Name="TopDomainsList" Visibility="Collapsed">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="7" Padding="12,8" Margin="0,0,0,6">
+                                                <Grid>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="24"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                    </Grid.ColumnDefinitions>
+                                                    <TextBlock Grid.Column="0" Text="{Binding Rank}" FontFamily="Cascadia Code" FontSize="11" FontWeight="Bold" Foreground="#3a4060" VerticalAlignment="Center"/>
+                                                    <TextBlock Grid.Column="1" Text="{Binding Domain}" FontFamily="Cascadia Code" FontSize="12" FontWeight="Bold" Foreground="#d8dcf0" VerticalAlignment="Center" TextTrimming="CharacterEllipsis"/>
+                                                    <Border Grid.Column="2" Background="{Binding CategoryBadgeBg}" CornerRadius="4" Padding="8,3" Margin="8,0,10,0" VerticalAlignment="Center">
+                                                        <TextBlock Text="{Binding CategoryLabel}" FontFamily="Segoe UI" FontSize="10" FontWeight="Bold" Foreground="{Binding CategoryTextBrush}"/>
+                                                    </Border>
+                                                    <TextBlock Grid.Column="3" Text="{Binding Hits}" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#D4AA7C" VerticalAlignment="Center"/>
+                                                </Grid>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- ── SAFESEARCH + WHITELIST ── -->
+                        <Border Padding="22,20,22,18">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                                    <TextBlock Text="&#xEB6E;" FontFamily="{StaticResource TablerIcons}" FontSize="13" Foreground="#6A5CFF" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="SAFESEARCH + WHITELIST" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#8890b8" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Border Grid.Row="0" Grid.Column="0" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="8" Padding="13,11" Margin="0,0,4,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse x:Name="SafeSearchGoogleDot" Width="8" Height="8" Fill="#2a2e42" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="Google" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#d0d4e8" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                            <TextBlock x:Name="SafeSearchGoogleStatus" Text="Not active" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#3a4060" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Row="0" Grid.Column="1" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="8" Padding="13,11" Margin="4,0,0,8">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse x:Name="SafeSearchYouTubeDot" Width="8" Height="8" Fill="#2a2e42" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="YouTube" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#d0d4e8" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                            <TextBlock x:Name="SafeSearchYouTubeStatus" Text="Not active" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#3a4060" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Row="1" Grid.Column="0" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="8" Padding="13,11" Margin="0,0,4,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse x:Name="SafeSearchBingDot" Width="8" Height="8" Fill="#2a2e42" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="Bing" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#d0d4e8" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                            <TextBlock x:Name="SafeSearchBingStatus" Text="Not active" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#3a4060" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Row="1" Grid.Column="1" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="8" Padding="13,11" Margin="4,0,0,0">
+                                        <StackPanel Orientation="Horizontal">
+                                            <Ellipse Width="8" Height="8" Fill="#2a2e42" Margin="0,0,10,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="DuckDuckGo" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#d0d4e8" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                                            <TextBlock Text="Not supported" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#3a4060" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                                <Grid Margin="0,14,0,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="7" Margin="0,0,8,0">
+                                        <Grid>
+                                            <TextBox x:Name="WhitelistInput" FontFamily="Cascadia Code" FontSize="12" FontWeight="SemiBold"
+                                                     Foreground="#d8dcf0" CaretBrush="#d8dcf0" Background="Transparent" BorderThickness="0"
+                                                     Padding="12,9" VerticalContentAlignment="Center"
+                                                     KeyDown="WhitelistInput_KeyDown"
+                                                     TextChanged="WhitelistInput_TextChanged"/>
+                                            <TextBlock x:Name="WhitelistInputHint" Text="Add domain to whitelist..."
+                                                       FontFamily="Cascadia Code" FontSize="12" FontWeight="SemiBold"
+                                                       Foreground="#3a4060" Margin="12,0,0,0" VerticalAlignment="Center"
+                                                       IsHitTestVisible="False"/>
+                                        </Grid>
+                                    </Border>
+                                    <Border Grid.Column="1" Background="#06041a" BorderBrush="#3F2D9B" BorderThickness="1" CornerRadius="7" Padding="14,9" Cursor="Hand" Margin="0,0,8,0"
+                                            MouseLeftButtonUp="WhitelistAdd_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="&#xEB11;" FontFamily="{StaticResource TablerIcons}" FontSize="12" Foreground="#b0a8ff" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="Add (PIN)" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#b0a8ff" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="2" Background="#050e08" BorderBrush="#1a4028" BorderThickness="1" CornerRadius="7" Padding="14,9" Cursor="Hand"
+                                            MouseLeftButtonUp="WhitelistView_Click">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="&#xEA9A;" FontFamily="{StaticResource TablerIcons}" FontSize="12" Foreground="#60c888" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="View (PIN)" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#60c888" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+            <!-- ═══ RIGHT COLUMN ═══ -->
+            <Border Grid.Column="1">
+                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                    <StackPanel>
+
+                        <!-- ── ACTIVITY LOG ── -->
+                        <Border BorderBrush="#0a0f1a" BorderThickness="0,0,0,0.5" Background="#07101d">
+                            <StackPanel>
+
+                                <!-- Header -->
+                                <Border BorderBrush="#0a0f1a" BorderThickness="0,0,0,0.5" Padding="8,7">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                            <TextBlock Text="TIME" FontFamily="Segoe UI" FontSize="9" FontWeight="Bold" Foreground="#3a4060" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="DOMAIN" FontFamily="Segoe UI" FontSize="9" FontWeight="Bold" Foreground="#3a4060" Margin="0,0,12,0" VerticalAlignment="Center"/>
+                                            <TextBlock Text="CATEGORY" FontFamily="Segoe UI" FontSize="9" FontWeight="Bold" Foreground="#3a4060" VerticalAlignment="Center"/>
+                                        </StackPanel>
+                                        <Border Grid.Column="1" Background="#06041a" BorderBrush="#3F2D9B" BorderThickness="1" CornerRadius="99" Padding="8,3" Cursor="Hand">
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="&#xEA7F;" FontFamily="{StaticResource TablerIcons}" FontSize="11" Foreground="#b0a8ff" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Auto-scroll" FontFamily="Segoe UI" FontSize="10" FontWeight="Bold" Foreground="#b0a8ff" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                </Border>
+
+                                <!-- Empty state — replaces demo rows -->
+                                <Border x:Name="EmptyState" Padding="8,28" Visibility="Visible">
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock Text="&#xEA6D;" FontFamily="{StaticResource TablerIcons}" FontSize="22" Foreground="#3a4060" HorizontalAlignment="Center" Margin="0,0,0,8"/>
+                                        <TextBlock Text="Protection is active — blocked domains will appear here in real time."
+                                                   FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"
+                                                   Foreground="#5a6288" TextWrapping="Wrap" TextAlignment="Center"
+                                                   MaxWidth="360"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Live feed -->
+                                <ListView x:Name="LiveFeed"
+                                          Visibility="Collapsed"
+                                          BorderThickness="0"
+                                          Background="Transparent"
+                                          HorizontalContentAlignment="Stretch"
+                                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                          SelectionChanged="LiveFeed_SelectionChanged">
+                                    <ListView.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ListView.ItemsPanel>
+                                    <ListView.ItemContainerStyle>
+                                        <Style TargetType="ListViewItem">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="Padding"         Value="8,9"/>
+                                            <Setter Property="Margin"          Value="0"/>
+                                            <Setter Property="BorderBrush"     Value="#0a0f1a"/>
+                                            <Setter Property="BorderThickness" Value="0,0,0,0.5"/>
+                                            <Setter Property="Background"      Value="Transparent"/>
+                                            <Setter Property="Cursor"          Value="Hand"/>
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="ListViewItem">
+                                                        <Border Background="{TemplateBinding Background}"
+                                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                                Padding="{TemplateBinding Padding}">
+                                                            <ContentPresenter/>
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="Background" Value="#0a1020"/>
+                                                            </Trigger>
+                                                            <Trigger Property="IsSelected" Value="True">
+                                                                <Setter Property="Background" Value="#0d1528"/>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </ListView.ItemContainerStyle>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="58"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <StackPanel Grid.Column="0">
+                                                    <TextBlock Text="{Binding Time}" FontFamily="Cascadia Code" FontSize="10" FontWeight="SemiBold" Foreground="#7880a8"/>
+                                                    <TextBlock Text="{Binding RelativeTime}" FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold" Foreground="#3a4060" Margin="0,3,0,0"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="1" Margin="8,0,0,0">
+                                                    <TextBlock Text="{Binding Domain}" FontFamily="Cascadia Code" FontSize="12" FontWeight="Bold" Foreground="#d8dcf0"/>
+                                                    <TextBlock Text="{Binding DeviceName}" FontFamily="Segoe UI" FontSize="10" FontWeight="SemiBold" Foreground="#4a5070" Margin="0,3,0,0"/>
+                                                </StackPanel>
+                                                <StackPanel Grid.Column="2" HorizontalAlignment="Right">
+                                                    <Border Background="{Binding CategoryBadgeBg}" CornerRadius="4" Padding="8,3" Margin="0,0,0,4">
+                                                        <TextBlock Text="{Binding CategoryLabel}" FontFamily="Segoe UI" FontSize="10" FontWeight="Bold" Foreground="{Binding CategoryTextBrush}"/>
+                                                    </Border>
+                                                    <Border Background="{Binding SeverityBadgeBg}" CornerRadius="3" Padding="6,2">
+                                                        <TextBlock Text="{Binding SeverityLabel}" FontFamily="Segoe UI" FontSize="9" FontWeight="Bold" Foreground="{Binding SeverityTextBrush}"/>
+                                                    </Border>
+                                                </StackPanel>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+
+                                <!-- Hidden placeholders -->
+                                <Border    x:Name="FeedCountBadge"  Visibility="Collapsed"/>
+                                <TextBlock x:Name="FeedCountText"   Visibility="Collapsed"/>
+                                <Ellipse   x:Name="ConnectionDot"   Visibility="Collapsed"/>
+                                <TextBlock x:Name="ConnectionText"  Visibility="Collapsed"/>
+                                <StackPanel x:Name="LanIpPanel"     Visibility="Collapsed"/>
+                                <TextBlock x:Name="LanIpText"       Visibility="Collapsed"/>
+                                <TextBlock x:Name="LanIpNoneText"   Visibility="Collapsed"/>
+
+                                <!-- Filter tags -->
+                                <Border Padding="8,12">
+                                    <WrapPanel Orientation="Horizontal">
+                                        <Border x:Name="FilterTagAll" Tag="All" Background="#3F2D9B" BorderBrush="#6A5CFF" BorderThickness="1" CornerRadius="99" Padding="12,5" Margin="0,0,5,5" Cursor="Hand" MouseLeftButtonDown="FilterTag_Click">
+                                            <TextBlock x:Name="FilterTagAllText" Text="All" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#e0dcff"/>
+                                        </Border>
+                                        <Border x:Name="FilterTagAdult" Tag="Adult" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="99" Padding="12,5" Margin="0,0,5,5" Cursor="Hand" MouseLeftButtonDown="FilterTag_Click">
+                                            <TextBlock x:Name="FilterTagAdultText" Text="Adult" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#7880a8"/>
+                                        </Border>
+                                        <Border x:Name="FilterTagChat" Tag="Chat" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="99" Padding="12,5" Margin="0,0,5,5" Cursor="Hand" MouseLeftButtonDown="FilterTag_Click">
+                                            <TextBlock x:Name="FilterTagChatText" Text="Chat" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#7880a8"/>
+                                        </Border>
+                                        <Border x:Name="FilterTagGames" Tag="Games" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="99" Padding="12,5" Margin="0,0,5,5" Cursor="Hand" MouseLeftButtonDown="FilterTag_Click">
+                                            <TextBlock x:Name="FilterTagGamesText" Text="Games" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#7880a8"/>
+                                        </Border>
+                                        <Border x:Name="FilterTagAI" Tag="AI" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="99" Padding="12,5" Margin="0,0,5,5" Cursor="Hand" MouseLeftButtonDown="FilterTag_Click">
+                                            <TextBlock x:Name="FilterTagAIText" Text="AI" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#7880a8"/>
+                                        </Border>
+                                        <Border x:Name="FilterTagBypass" Tag="Bypass" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="99" Padding="12,5" Margin="0,0,5,5" Cursor="Hand" MouseLeftButtonDown="FilterTag_Click">
+                                            <TextBlock x:Name="FilterTagBypassText" Text="Bypass" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#7880a8"/>
+                                        </Border>
+                                        <Border x:Name="FilterTagMalware" Tag="Malware" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="99" Padding="12,5" Margin="0,0,5,5" Cursor="Hand" MouseLeftButtonDown="FilterTag_Click">
+                                            <TextBlock x:Name="FilterTagMalwareText" Text="Malware" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#7880a8"/>
+                                        </Border>
+                                    </WrapPanel>
+                                </Border>
+
+                            </StackPanel>
+                        </Border>
+
+                        <!-- ── BYPASS ATTEMPTS ── -->
+                        <Border BorderBrush="#0a0f1a" BorderThickness="0,0,0,0.5" Padding="22,20,22,18">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,14">
+                                    <TextBlock Text="&#xEA06;" FontFamily="{StaticResource TablerIcons}" FontSize="13" Foreground="#6A5CFF" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                    <TextBlock Text="BYPASS ATTEMPTS" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#8890b8" VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <Grid Margin="0,0,0,14">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Border Grid.Column="0" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="8" Padding="12,13,12,11" Margin="0,0,4,0">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock x:Name="BypassAttemptsText" Text="0" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold" Foreground="#D4AA7C" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Attempts today" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" Foreground="#8890b8" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="1" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="8" Padding="12,13,12,11" Margin="4,0,4,0">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock x:Name="BypassBlockedText" Text="0" FontFamily="Segoe UI" FontSize="24" FontWeight="Bold" Foreground="#60c888" HorizontalAlignment="Center"/>
+                                            <TextBlock Text="Blocked" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" Foreground="#8890b8" HorizontalAlignment="Center" Margin="0,5,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                    <Border Grid.Column="2" Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="8" Padding="12,13,12,11" Margin="4,0,0,0">
+                                        <StackPanel HorizontalAlignment="Center">
+                                            <TextBlock Text="Slipped through" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" Foreground="#8890b8" HorizontalAlignment="Center" Margin="0,0,0,6"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBlock Text="&#xEA6C;" FontFamily="{StaticResource TablerIcons}" FontSize="15" Foreground="#60c888" Margin="0,0,5,0" VerticalAlignment="Center"/>
+                                                <TextBlock Text="Clean" FontFamily="Segoe UI" FontSize="12" FontWeight="Bold" Foreground="#60c888" VerticalAlignment="Center"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                                <Border Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="7" Padding="12,16">
+                                    <TextBlock Text="No bypass attempts detected yet."
+                                               FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"
+                                               Foreground="#3a4060" HorizontalAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <!-- ── BLOCKLIST ── -->
+                        <Border Padding="22,20,22,18">
+                            <StackPanel>
+                                <Grid Margin="0,0,0,12">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Center">
+                                        <TextBlock Text="&#xEA26;" FontFamily="{StaticResource TablerIcons}" FontSize="13" Foreground="#6A5CFF" Margin="0,0,6,0" VerticalAlignment="Center"/>
+                                        <TextBlock Text="BLOCKLIST" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#8890b8" VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock Text="Add (PIN)" FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold" Foreground="#8880ff" HorizontalAlignment="Right" VerticalAlignment="Center" Cursor="Hand"
+                                               MouseLeftButtonUp="BlocklistAdd_Click"/>
+                                </Grid>
+                                <ItemsControl x:Name="CategoryChips" Margin="0,0,0,12">
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel/>
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Border Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="99" Padding="12,5" Margin="0,0,5,5">
+                                                <TextBlock Text="{Binding}" FontFamily="Segoe UI" FontSize="11" FontWeight="Bold" Foreground="#7880a8"/>
+                                            </Border>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                </ItemsControl>
+                                <Border Background="#050B15" BorderBrush="#1B1F2C" BorderThickness="1" CornerRadius="5" Padding="12,10">
+                                    <TextBlock x:Name="BlocklistFooterText"
+                                               Text="Rule counts load from the service · domains masked by design"
+                                               FontFamily="Segoe UI" FontSize="11" FontWeight="SemiBold"
+                                               Foreground="#5a6288" HorizontalAlignment="Center"/>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </ScrollViewer>
+            </Border>
+
+        </Grid>
+
+        <!-- ═══════════════════════════════════════════════════════
+             INCIDENT DRILLDOWN MODAL
+             Last child in root Grid = highest z-order
+        ═══════════════════════════════════════════════════════ -->
+        <Grid x:Name="IncidentModal"
+              Grid.Row="0" Grid.RowSpan="5"
+              Visibility="Collapsed"
+              Panel.ZIndex="100"
+              MouseLeftButtonDown="ModalBackdrop_Click">
+
+            <!-- Backdrop -->
+            <Border Background="#CC000000"/>
+
+            <!-- Card — suppress backdrop click bubble -->
+            <Border MouseLeftButtonDown="ModalCard_SuppressClick"
+                    Background="#030D1A"
+                    BorderBrush="#1B1F2C"
+                    BorderThickness="1"
+                    CornerRadius="12"
+                    Padding="24,22"
+                    Width="440"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                <StackPanel>
+
+                    <!-- Header: domain + close -->
+                    <Grid Margin="0,0,0,16">
+                        <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center">
+                            <TextBlock x:Name="ModalDomain"
+                                       FontFamily="Cascadia Code"
+                                       FontSize="16" FontWeight="Bold"
+                                       Foreground="#d8dcf0"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                <TextBlock x:Name="ModalTime"
+                                           FontFamily="Cascadia Code"
+                                           FontSize="10" FontWeight="SemiBold"
+                                           Foreground="#7880a8"/>
+                                <TextBlock Text=" · " FontFamily="Segoe UI" FontSize="10" Foreground="#3a4060"/>
+                                <TextBlock x:Name="ModalRelativeTime"
+                                           FontFamily="Segoe UI"
+                                           FontSize="10" FontWeight="SemiBold"
+                                           Foreground="#3a4060"/>
+                            </StackPanel>
+                        </StackPanel>
+                        <Button HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Content="✕"
+                                FontSize="13"
+                                Foreground="#6870a0"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Cursor="Hand"
+                                Click="ModalCloseBtn_Click"/>
+                    </Grid>
+
+                    <!-- Badges -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,18">
+                        <Border x:Name="ModalCategoryBadge" CornerRadius="4" Padding="10,4" Margin="0,0,8,0">
+                            <TextBlock x:Name="ModalCategoryText"
+                                       FontFamily="Segoe UI" FontSize="11" FontWeight="Bold"/>
+                        </Border>
+                        <Border x:Name="ModalSeverityBadge" CornerRadius="4" Padding="10,4">
+                            <TextBlock x:Name="ModalSeverityText"
+                                       FontFamily="Segoe UI" FontSize="11" FontWeight="Bold"/>
+                        </Border>
+                    </StackPanel>
+
+                    <!-- Divider -->
+                    <Border Height="0.5" Background="#1B1F2C" Margin="0,0,0,16"/>
+
+                    <!-- Info grid -->
+                    <Grid Margin="0,0,0,16">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Grid.Row="0" Grid.Column="0" Text="DEVICE"
+                                   FontFamily="Segoe UI" FontSize="9" FontWeight="Bold"
+                                   Foreground="#3a4060" VerticalAlignment="Center" Margin="0,0,0,12"/>
+                        <TextBlock x:Name="ModalDevice"
+                                   Grid.Row="0" Grid.Column="1"
+                                   FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"
+                                   Foreground="#c0c8e8" VerticalAlignment="Center" Margin="0,0,0,12"/>
+
+                        <TextBlock Grid.Row="1" Grid.Column="0" Text="SOURCE"
+                                   FontFamily="Segoe UI" FontSize="9" FontWeight="Bold"
+                                   Foreground="#3a4060" VerticalAlignment="Center" Margin="0,0,0,12"/>
+                        <TextBlock x:Name="ModalSource"
+                                   Grid.Row="1" Grid.Column="1"
+                                   FontFamily="Cascadia Code" FontSize="11" FontWeight="SemiBold"
+                                   Foreground="#8880ff" VerticalAlignment="Center" Margin="0,0,0,12"/>
+
+                        <TextBlock x:Name="ModalMitreLabel"
+                                   Grid.Row="2" Grid.Column="0" Text="MITRE"
+                                   FontFamily="Segoe UI" FontSize="9" FontWeight="Bold"
+                                   Foreground="#3a4060" VerticalAlignment="Center" Margin="0,0,0,12"/>
+                        <Border x:Name="ModalMitreBadge"
+                                Grid.Row="2" Grid.Column="1"
+                                Background="#0a0620" BorderBrush="#2a1860" BorderThickness="1"
+                                CornerRadius="3" Padding="6,2"
+                                HorizontalAlignment="Left"
+                                Margin="0,0,0,12">
+                            <TextBlock x:Name="ModalMitreText"
+                                       FontFamily="Segoe UI" FontSize="10" FontWeight="Bold"
+                                       Foreground="#9870e0"/>
+                        </Border>
+
+                        <TextBlock Grid.Row="3" Grid.Column="0" Text="BLOCKED BY"
+                                   FontFamily="Segoe UI" FontSize="9" FontWeight="Bold"
+                                   Foreground="#3a4060" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="ModalBlockedBy"
+                                   Grid.Row="3" Grid.Column="1"
+                                   FontFamily="Segoe UI" FontSize="12" FontWeight="SemiBold"
+                                   Foreground="#60c888" VerticalAlignment="Center"/>
+                    </Grid>
+
+                    <!-- Divider -->
+                    <Border Height="0.5" Background="#1B1F2C" Margin="0,0,0,16"/>
+
+                    <!-- Actions -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0"
+                                Background="#06041a" BorderBrush="#3F2D9B" BorderThickness="1"
+                                CornerRadius="7" Padding="0,10" Margin="0,0,6,0" Cursor="Hand"
+                                MouseLeftButtonDown="ModalAction_Click">
+                            <TextBlock Text="Mark Reviewed"
+                                       FontFamily="Segoe UI" FontSize="12" FontWeight="Bold"
+                                       Foreground="#b0a8ff" HorizontalAlignment="Center"/>
+                        </Border>
+                        <Border Grid.Column="1"
+                                Background="#050e08" BorderBrush="#1a4028" BorderThickness="1"
+                                CornerRadius="7" Padding="0,10" Margin="6,0,0,0" Cursor="Hand"
+                                MouseLeftButtonDown="ModalWhitelist_Click">
+                            <TextBlock Text="Add to Whitelist (PIN)"
+                                       FontFamily="Segoe UI" FontSize="12" FontWeight="Bold"
+                                       Foreground="#60c888" HorizontalAlignment="Center"/>
+                        </Border>
+                    </Grid>
+
+                </StackPanel>
+            </Border>
+        </Grid>
+
+    </Grid>
+</Window>

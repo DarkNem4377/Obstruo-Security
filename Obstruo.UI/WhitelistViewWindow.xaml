@@ -1,0 +1,54 @@
+<Window x:Class="Obstruo.UI.WhitelistViewWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Obstruo"
+        Icon="/Resources/obstruo.ico"
+        Width="520" Height="520"
+        MinWidth="520" MinHeight="380"
+        ResizeMode="CanResizeWithGrip"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+    <Border Background="#0D0D14" BorderBrush="#1E1E32" BorderThickness="1" CornerRadius="10">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Title bar -->
+            <Border Grid.Row="0" Background="#12121E" CornerRadius="10,10,0,0"
+                    MouseLeftButtonDown="DragBar_MouseLeftButtonDown">
+                <Grid Height="44">
+                    <TextBlock Text="WHITELIST" FontFamily="Segoe UI" FontSize="12"
+                               FontWeight="Bold" Foreground="#B0A8FF"
+                               VerticalAlignment="Center" Margin="18,0,0,0"/>
+                    <Button Content="✕" Width="44" Height="44"
+                            HorizontalAlignment="Right" FontSize="13"
+                            Foreground="#6870a0" Background="Transparent" BorderThickness="0"
+                            Cursor="Hand" Click="CloseBtn_Click"/>
+                </Grid>
+            </Border>
+
+            <!-- Summary -->
+            <TextBlock x:Name="SummaryText" Grid.Row="1"
+                       FontFamily="Segoe UI" FontSize="12" Foreground="#8B8BA7"
+                       Margin="24,16,24,10" TextWrapping="Wrap"/>
+
+            <!-- Entries -->
+            <ScrollViewer Grid.Row="2" Margin="16,0,16,8" VerticalScrollBarVisibility="Auto">
+                <StackPanel x:Name="EntriesPanel"/>
+            </ScrollViewer>
+
+            <!-- Footer -->
+            <TextBlock x:Name="FooterHint" Grid.Row="3"
+                       Text="A whitelisted domain and all of its subdomains are always allowed."
+                       FontFamily="Segoe UI" FontSize="11" Foreground="#3a4060"
+                       Margin="24,4,24,16" TextWrapping="Wrap"/>
+        </Grid>
+    </Border>
+</Window>
