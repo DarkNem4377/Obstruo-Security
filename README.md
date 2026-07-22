@@ -20,7 +20,7 @@ configuration, blocklist data, and history live in an encrypted local database.
 
 ---
 
-## Features
+## 🛡️ Features
 
 **Content filtering**
 - System-wide blocking across every browser and app — filtering happens below
@@ -61,7 +61,7 @@ configuration, blocklist data, and history live in an encrypted local database.
 - Optional **LAN mode** (off by default) to filter DNS for other devices on the
   local network that point at this machine.
 
-## How it works
+## ⚙️ How it works
 
 Obstruo is a small set of cooperating components:
 
@@ -79,7 +79,7 @@ service-side. All persistent data lives in a **SQLCipher-encrypted database**
 whose key is a random value sealed with Windows DPAPI under the SYSTEM account —
 so a standard (non-administrator) user cannot read or copy it.
 
-## Security & privacy model
+## 🔒 Security & privacy model
 
 Obstruo is built for two distinct situations, and is honest about the difference:
 
@@ -102,7 +102,7 @@ calls; the only outbound request it can make is to a blocklist-feed URL you
 configure. Blocked-domain history stays on the machine and auto-wipes on
 schedule.
 
-## Installation
+## 📦 Installation
 
 Download the latest `Obstruo-vX.Y.Z-win-x64.zip` from the
 [Releases](https://github.com/DarkNem4377/Obstruo-Security/releases) page, extract it, and
@@ -113,7 +113,7 @@ requires administrator approval).
 > machines that don't already trust the certificate. Verify the download against
 > the published `.sha256` before installing.
 
-## Build from source
+## 🔧 Build from source
 
 Requires the **.NET 10 SDK** on Windows (the UI, Installer, and Watchdog target
 Windows).
@@ -137,7 +137,7 @@ stale payload. To trust a self-signed build on your own machine:
 pwsh ./scripts/sign-selfsigned.ps1 -Path ./publish -Trust   # elevated shell
 ```
 
-## Repository layout
+## 🗂️ Repository layout
 
 | Project | Target | Role |
 |---|---|---|
@@ -148,7 +148,7 @@ pwsh ./scripts/sign-selfsigned.ps1 -Path ./publish -Trust   # elevated shell
 | `Obstruo.Shared` | `net10.0` | IPC contracts, enums, logging, domain masking |
 | `Obstruo.Tests` | `net10.0` | xUnit test suite |
 
-## Documentation
+## 📚 Documentation
 
 - [Filtering limitations & threat model](docs/FILTERING-LIMITATIONS.md) — what DNS
   filtering can and cannot catch, and the family vs self-control distinction.
@@ -160,7 +160,7 @@ pwsh ./scripts/sign-selfsigned.ps1 -Path ./publish -Trust   # elevated shell
 - [Reporting a vulnerability](SECURITY.md) — how to disclose a security or
   privacy issue responsibly.
 
-## License
+## 📄 License
 
 Obstruo Security is open source under the **[Apache License 2.0](LICENSE)** — you
 are free to use, modify, and redistribute it, including commercially, subject to
