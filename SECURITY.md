@@ -88,4 +88,4 @@ prior notice. No formal SLA is guaranteed.
 
 ---
 
-© 2026 DarkNem4377. All rights reserved.
+© 2026 DarkNem4377 · Licensed under Apache-2.0.
