@@ -1,3 +1,5 @@
+![Obstruo Security — Windows DNS-layer content filtering, blocked before it loads](readme-assets/welcome-banner.png)
+
 # Obstruo Security
 
 **Windows DNS-layer content filtering and bypass-resistant parental control, by [DarkNem4377](https://github.com/DarkNem4377).**
