@@ -2,6 +2,10 @@
 
 # Obstruo Security
 
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](LICENSE)
+[![Latest release](https://img.shields.io/github/v/release/DarkNem4377/Obstruo-Security)](https://github.com/DarkNem4377/Obstruo-Security/releases/latest)
+[![Platform: Windows 10/11](https://img.shields.io/badge/platform-Windows%2010%2F11-0078D6)](https://github.com/DarkNem4377/Obstruo-Security)
+
 **Windows DNS-layer content filtering and bypass-resistant parental control, by [DarkNem4377](https://github.com/DarkNem4377).**
 
 Obstruo filters the internet at the DNS layer for an entire Windows machine. A
