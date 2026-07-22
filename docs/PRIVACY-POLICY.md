@@ -107,4 +107,4 @@ If the Software's data practices ever change — for example, if a future versio
 
 Questions about this Policy or the Software's data practices: obstruo.software@gmail.com.
 
-Obstruo Security — © 2026 DarkNem4377. All rights reserved.
+Obstruo Security — © 2026 DarkNem4377 · Licensed under Apache-2.0.

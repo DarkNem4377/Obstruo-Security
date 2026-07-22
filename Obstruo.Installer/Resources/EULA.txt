@@ -196,4 +196,4 @@ Nothing in this Agreement excludes, limits, or restricts any statutory rights or
 --------------------------------------------------------------------------
 BY CLICKING "I ACCEPT," YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, UNDERSTAND IT, AND AGREE TO BE BOUND BY ITS TERMS.
 
-Obstruo Security -- © 2026 DarkNem4377. All rights reserved.
+Obstruo Security -- © 2026 DarkNem4377 · Licensed under Apache-2.0.
