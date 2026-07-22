@@ -91,8 +91,10 @@ Obstruo is built for two distinct situations, and is honest about the difference
   Obstruo is deliberate, high-friction resistance rather than an unbreakable
   wall — an administrator can always dismantle software on their own machine.
 
-DNS filtering has inherent limits (a full commercial VPN tunnels around any
-DNS-based filter). Those limits, and the threat model above, are documented in
+The full threat model — adversary, both deployment scenarios, and every
+boundary spelled out — is in [SECURITY-MODEL.md](SECURITY-MODEL.md). DNS
+filtering also has inherent limits (a full commercial VPN tunnels around any
+DNS-based filter); those are documented in
 [docs/FILTERING-LIMITATIONS.md](docs/FILTERING-LIMITATIONS.md).
 
 **Privacy:** Obstruo runs entirely locally. It makes no telemetry or analytics
@@ -153,6 +155,10 @@ pwsh ./scripts/sign-selfsigned.ps1 -Path ./publish -Trust   # elevated shell
 - [Blocklist feed format](docs/BLOCKLIST-FEED.md) — the JSON format for the
   Settings → Blocklist Feed sync.
 - [Recovery](docs/RECOVERY.md) — credential recovery and last-resort removal.
+- [Threat model](SECURITY-MODEL.md) — adversary, deployment scenarios, and
+  security boundaries.
+- [Reporting a vulnerability](SECURITY.md) — how to disclose a security or
+  privacy issue responsibly.
 
 ## License
 
