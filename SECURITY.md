@@ -1,4 +1,4 @@
-# 🔐 Security Policy
+# Security Policy
 
 Obstruo is a privacy-first, **local-only** Windows application. It filters
 content at the DNS layer on the user's own machine — there is no cloud
